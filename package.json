@@ -1,0 +1,39 @@
+{
+  "name": "runtimeexceptionals",
+  "version": "1.0.0",
+  "description": "\"Park finding WebApplication\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "\"vows --spec --isolate\"",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cs310-2015ST1/RuntimeExceptionals.git"
+  },
+  "keywords": [
+    "park",
+    "web",
+    "app"
+  ],
+  "dependencies": {
+    "async": "latest",
+    "assetmanager": "latest",
+    "body-parser": "latest",
+    "meanio": "linnovate/meanio",
+    "mongoose": "latest",
+    "jsonwebtoken": "latest",
+    "npm": "^2.1.0",
+    "passport-facebook": "latest",
+    "passport-local": "latest",
+    "express": "latest",
+    "request": "latest",
+    "errorhandler" :"latest"
+  },
+  "author": "Jongrin Kim, Ha Nguyen, Vincent Chan, Yves Chan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cs310-2015ST1/RuntimeExceptionals/issues"
+  },
+  "homepage": "https://github.com/cs310-2015ST1/RuntimeExceptionals#readme"
+}
