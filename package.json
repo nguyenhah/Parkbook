@@ -28,12 +28,15 @@
     "passport-local": "latest",
     "express": "latest",
     "request": "latest",
-    "errorhandler" :"latest"
+    "errorhandler": "latest"
   },
   "author": "Jongrin Kim, Ha Nguyen, Vincent Chan, Yves Chan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cs310-2015ST1/RuntimeExceptionals/issues"
   },
-  "homepage": "https://github.com/cs310-2015ST1/RuntimeExceptionals#readme"
+  "homepage": "https://github.com/cs310-2015ST1/RuntimeExceptionals#readme",
+  "devDependencies": {
+    "body-parser": "^1.12.4"
+  }
 }

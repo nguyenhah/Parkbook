@@ -1,11 +1,22 @@
 /**
  * Created by vincentchan on 15-06-10.
  */
-var dummy = angular.module("dummy", []);
+var parkbook = angular.module("parkbook", []);
 
-dummy.controller("AppCtrl", function ($http) {
+parkbook.controller("AppCtrl", function ($http) {
     var app = this;
-    $http.get("http://localhost:3000").success(function (products) {
-        app.products = products;
-    })
-})
+    var url = "http://localhost:3000";
+
+    app.savePark = function(newPark) {
+        $http.post(url + "/add", {name:newPark}).success(function() {
+            loadParks();
+        })
+    };
+
+    function loadParks() {
+        $http.get(url).success(function (parks) {
+            app.parks = parks;
+        })
+    }
+    loadParks();
+});

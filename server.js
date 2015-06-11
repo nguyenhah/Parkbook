@@ -4,8 +4,10 @@
 var express = require("express");
 var app = express();
 var cors = require("cors");
+var bodyParser = require("body-parser");
 
 app.use(cors());
+app.use(bodyParser());
 
 var mongoose = require("mongoose");
 
@@ -40,9 +42,19 @@ var arbutusPark = new Park({
 //});
 
 app.get("/", function (req, res) {
-    Product.find(function (err, products) {
-        res.send(products);
+    Park.find(function (err, parks) {
+        res.send(parks);
+    })
+});
+
+app.post("/add", function(req, res) {
+    var name = req.body.name;
+    var park = new Park({name:name});
+
+    park.save(function(err) {
+        res.send();
     })
 });
 
 app.listen(3000);
+console.log("App running on port 3000");
