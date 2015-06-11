@@ -21,7 +21,7 @@
     "assetmanager": "latest",
     "body-parser": "latest",
     "meanio": "linnovate/meanio",
-    "ftp": "latest",
+    "jsftp": "latest",
     "mongoose": "latest",
     "jsonwebtoken": "latest",
     "npm": "^2.1.0",
