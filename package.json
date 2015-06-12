@@ -30,7 +30,8 @@
     "express": "latest",
     "request": "latest",
     "errorhandler": "latest",
-    "xml2js" : "latest"
+    "xml2js" : "latest",
+    "app-root-path": "latest"
   },
   "author": "Jongrin Kim, Ha Nguyen, Vincent Chan, Yves Chan",
   "license": "ISC",
