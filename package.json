@@ -38,6 +38,8 @@
   },
   "homepage": "https://github.com/cs310-2015ST1/RuntimeExceptionals#readme",
   "devDependencies": {
-    "body-parser": "^1.12.4"
+    "app-root-path": "^1.0.0",
+    "body-parser": "^1.12.4",
+    "jsftp": "^1.5.2"
   }
 }

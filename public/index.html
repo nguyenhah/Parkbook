@@ -10,8 +10,9 @@
         <!-- Yves' GMaps , replace bottom code with actual CSS later--> 
   <link href="assets/css/theme.css" rel="stylesheet">
   </head>
-  <body ng-app="parkbook" ng-controller="AppCtrl as app">
+  <body>
 
+  <div ng-app="parkbook" ng-controller="AppCtrl as app">
     <ul>
       <li ng-repeat="park in app.parks">
         {{ park.name }}
@@ -19,13 +20,15 @@
     </ul>
 
     <input type="text" ng-model="app.newPark"/>
+
     <button ng-click="app.savePark(app.newPark)">Save Park</button>
+  </div>
 
     <!-- Yves' Gmaps part -->
     <div id="pointers_map" class="map"></div>
 
 
-    <button ng-click="">Import Data</button>
+    <button ng-click="app.downloadData()">Import Data</button>
 
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>

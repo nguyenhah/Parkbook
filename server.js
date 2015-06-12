@@ -6,6 +6,7 @@ var app = express();
 var cors = require("cors");
 var bodyParser = require("body-parser");
 
+
 app.use(cors());
 app.use(bodyParser());
 
@@ -55,6 +56,7 @@ app.post("/add", function(req, res) {
         res.send();
     })
 });
+
 
 app.listen(3000);
 console.log("App running on port 3000");
