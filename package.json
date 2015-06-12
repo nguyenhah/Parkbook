@@ -29,7 +29,8 @@
     "passport-local": "latest",
     "express": "latest",
     "request": "latest",
-    "errorhandler": "latest"
+    "errorhandler": "latest",
+    "xml2js" : "latest"
   },
   "author": "Jongrin Kim, Ha Nguyen, Vincent Chan, Yves Chan",
   "license": "ISC",
