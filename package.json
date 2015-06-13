@@ -30,8 +30,9 @@
     "express": "latest",
     "request": "latest",
     "errorhandler": "latest",
-    "xml2js" : "latest",
-    "app-root-path": "latest"
+    "xml2js": "latest",
+    "app-root-path": "latest",
+    "cors": "latest"
   },
   "author": "Jongrin Kim, Ha Nguyen, Vincent Chan, Yves Chan",
   "license": "ISC",
@@ -42,6 +43,8 @@
   "devDependencies": {
     "app-root-path": "^1.0.0",
     "body-parser": "^1.12.4",
-    "jsftp": "^1.5.2"
+    "browserify": "^10.2.4",
+    "jsftp": "^1.5.2",
+    "requirejs": "^2.1.18"
   }
 }

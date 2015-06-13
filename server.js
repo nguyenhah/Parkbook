@@ -5,6 +5,8 @@ var express = require("express");
 var app = express();
 var cors = require("cors");
 var bodyParser = require("body-parser");
+var JSFtp = require("jsftp");
+var appRoot = require("app-root-path");
 
 
 app.use(cors());
@@ -13,6 +15,14 @@ app.use(bodyParser());
 var mongoose = require("mongoose");
 
 mongoose.connect('mongodb://pb:pb@ds041992.mongolab.com:41992/parkbook');
+
+var ftp = new JSFtp( {
+    host: "webftp.vancouver.ca",
+    port: 21,
+    user: "anonymous",
+    pass: "anonymous"
+
+});
 
 var Park = mongoose.model('Park', {
     name: String,
@@ -32,16 +42,6 @@ var arbutusPark = new Park({
 });
 
 
-
- //ADD NEW ITEM TO DATABASE VIA MONGOOSE
-//arbutusPark.save(function (err) {
-//    if (err) {
-//        console.log("failed");
-//    } else {
-//        console.log("saved");
-//    }
-//});
-
 app.get("/", function (req, res) {
     Park.find(function (err, parks) {
         res.send(parks);
@@ -56,6 +56,25 @@ app.post("/add", function(req, res) {
         res.send();
     })
 });
+
+var filename = 'parkdata.xml';
+var localpath = appRoot + '/data/temp/' + filename;
+
+app.get("/download", function(req, res) {
+    importData();
+    res.send();
+});
+
+function importData() {
+    ftp.get('opendata/xml/parks_facilities.xml', localpath, function(err) {
+        if (err) {
+            console.error('LOG: There was an error downloading the file [server.js: ftp.get()]');
+        } else {
+            console.log('File copied successfully');
+        }
+
+    });
+}
 
 app.listen(3000);
 console.log("App running on port 3000");
