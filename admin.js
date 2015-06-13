@@ -18,7 +18,7 @@ var filename = 'parkdata.xml';
 var localpath = appRoot + '/data/temp/' + filename;
 
 
-function download() {
+function downloadData() {
     ftp.get('opendata/xml/parks_facilities.xml', localpath, function(err) {
         if (err) {
             console.error('LOG: There was an error downloading the file [admin.js: ftp.get()]');
@@ -27,4 +27,8 @@ function download() {
         }
 
     });
+}
+
+module.exports = {
+    downloadData : downloadData
 };
