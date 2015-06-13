@@ -21,9 +21,12 @@ parkbook.controller("AppCtrl", function ($http) {
     }
     loadParks();
 
+    //this function is called inside HTML
+    //the http call is tagged with "/download" and sent to server.js
+    //server.js calls the app.get() with the "/download" tag
     app.importParks = function() {
         console.log("clicked import");
-        $http.get(url +  "/download").success(function() {
+        $http.get(url + "/download").success(function() {
             console.log("inside success");
         })
 
