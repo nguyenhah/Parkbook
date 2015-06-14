@@ -7,13 +7,30 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 var admin = require("./admin");
 
-
 app.use(cors());
 app.use(bodyParser());
 
 var mongoose = require("mongoose");
 
 mongoose.connect('mongodb://pb:pb@ds041992.mongolab.com:41992/parkbook');
+
+//var parkSchema = new mongoose.Schema({
+//    name: String,
+//    streetNumber: String,
+//    streetName: String,
+//    lat: Number,
+//    lon: Number
+//});
+//
+//var parkModel = mongoose.model('Park', parkSchema);
+//
+//function Park(park) {
+//    this.name = park.name;
+//    this.streetNumber = park.streetNumber;
+//    this.streetName = park.streetName;
+//    this.lat = park.lat;
+//    this.lon = park.lon;
+//}
 
 var Park = mongoose.model('Park', {
     name: String,
@@ -23,14 +40,6 @@ var Park = mongoose.model('Park', {
     lon: Number
 });
 
-
-var arbutusPark = new Park({
-    name: "Arbutus Village",
-    streetNumber: "4202",
-    streetName: "Valley Drive",
-    lat: 49.249783,
-    lon: -123.155250
-});
 
 
 app.get("/", function (req, res) {
@@ -50,8 +59,56 @@ app.post("/add", function(req, res) {
 
 app.get("/download", function(req, res) {
     admin.downloadData();
+    parseData();
     res.send();
+
 });
+
+function parseData() {
+    //put this part in a new mapping function
+    var fs = require('fs'),
+        xml2js = require('xml2js');
+    var filePath = 'data/temp/parkdata.xml';
+    var jsonob;
+
+    try {
+        var fileData = fs.readFileSync(filePath, 'ascii');
+
+        var parser = new xml2js.Parser();
+        parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
+            var jsonObject = JSON.stringify(result);
+
+            var parkArray = result.COVParksFacilities.Park;
+            for (var i=0; i< parkArray.length; i++){
+                var parkName = parkArray[i].Name[0];
+                var streetNumber = parkArray[i].StreetNumber[0];
+                var streetName = parkArray[i].StreetName[0];
+                var destination = parkArray[i].GoogleMapDest[0];
+                var res = destination.split(",");
+                var lat = res[0];
+                var lon = res[1];
+
+                console.log(lat +  ", " + lon);
+
+                var park = new Park({
+                    name:parkName,
+                    streetNumber:streetNumber,
+                    streetName:streetName,
+                    lat:parseFloat(lat),
+                    lon:parseFloat(lon)
+                });
+
+                park.save();
+
+            }
+
+        });
+        console.log("File '" + filePath + "/ was successfully read.\n");
+    } catch (ex) {
+        console.log("Unable to read file '" + filePath + "'.");
+        console.log(ex);
+    }
+}
 
 
 app.listen(3000);
