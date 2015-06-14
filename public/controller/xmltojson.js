@@ -4,7 +4,7 @@
 var fs = require('fs'),
     xml2js = require('xml2js');
 var filePath = 'data/temp/parkdata.xml';
-var parser = new xml2js.Parser();
+
 try {
     var fileData = fs.readFileSync(filePath, 'ascii');
 
