@@ -14,23 +14,6 @@ var mongoose = require("mongoose");
 
 mongoose.connect('mongodb://pb:pb@ds041992.mongolab.com:41992/parkbook');
 
-//var parkSchema = new mongoose.Schema({
-//    name: String,
-//    streetNumber: String,
-//    streetName: String,
-//    lat: Number,
-//    lon: Number
-//});
-//
-//var parkModel = mongoose.model('Park', parkSchema);
-//
-//function Park(park) {
-//    this.name = park.name;
-//    this.streetNumber = park.streetNumber;
-//    this.streetName = park.streetName;
-//    this.lat = park.lat;
-//    this.lon = park.lon;
-//}
 
 var Park = mongoose.model('Park', {
     name: String,
