@@ -69,7 +69,6 @@ function parseData() {
     var fs = require('fs'),
         xml2js = require('xml2js');
     var filePath = 'data/temp/parkdata.xml';
-    var jsonob;
 
     try {
         var fileData = fs.readFileSync(filePath, 'ascii');

@@ -28,6 +28,7 @@ parkbook.controller("AppCtrl", function ($http) {
         console.log("clicked import");
         $http.get(url + "/download").success(function() {
             console.log("inside success");
+            loadParks();
         })
 
     };
