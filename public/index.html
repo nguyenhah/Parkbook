@@ -25,10 +25,14 @@
     <input type="text" ng-model="app.newPark"/>
     <button ng-click="app.savePark(app.newPark)">Save Park</button>
 
+
+
     <div class="row">
       <div class="col-lg-6">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for...">
+          <div id="state-search">
+          <input type="text" class="typeahead" placeholder="Search for...">
+          </div>
       <span class="input-group-btn">
         <button class="btn btn-default" type="button">Go!</button>
       </span>
@@ -44,11 +48,66 @@
   </div>
 
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/gmaps.js"></script>
+    <!--<script src="assets/js/states.js"></script>-->
     <script src="assets/js/mapCommands.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
     <script src="controller/app.js"></script>
+
+
+  <!-- CURRENTLY ONLY WORKS IF HARD SCRIPTED INTO HTML -->
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var substringMatcher = function (strs) {
+        return function findMatches(q, cb) {
+          var matches, substringRegex;
+
+          // an array that will be populated with substring matches
+          matches = [];
+
+          // regex used to determine if a string contains the substring `q`
+          substrRegex = new RegExp(q, 'i');
+
+          // iterate through the pool of strings and for any string that
+          // contains the substring `q`, add it to the `matches` array
+          $.each(strs, function (i, str) {
+            if (substrRegex.test(str)) {
+              matches.push(str);
+            }
+          });
+
+          cb(matches);
+        };
+      };
+
+      var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+        'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+        'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+        'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+        'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+        'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+        'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+        'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+        'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+      ];
+
+      $('#state-search .typeahead').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+              },
+              {
+                name: 'states',
+                source: substringMatcher(states)
+              });
+    });
+  </script>
+
   </body>
 
 </html>
