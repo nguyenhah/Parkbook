@@ -5,8 +5,6 @@
 var JSFtp = require("jsftp");
 var appRoot = require("app-root-path");
 var Park = require('./models/parkModel');
-var parkModel = Park.parkModel;
-
 
 var ftp = new JSFtp( {
     host: "webftp.vancouver.ca",
@@ -31,6 +29,14 @@ function downloadData() {
     });
 }
 
+function clearData() {
+    Park.removeAllParks(function(err) {
+      if (err) {
+        return handleError(err)
+      }
+    })
+}
+
 function parseData() {
     //put this part in a new mapping function
     var fs = require('fs'),
@@ -42,7 +48,7 @@ function parseData() {
 
         var parser = new xml2js.Parser();
         parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
-            var jsonObject = JSON.stringify(result);
+
             var count = 0;
 
             var parkArray = result.COVParksFacilities.Park;
@@ -80,5 +86,6 @@ function parseData() {
 
 module.exports = {
     downloadData : downloadData,
-    parseData : parseData
+    parseData : parseData,
+    clearData : clearData
 };

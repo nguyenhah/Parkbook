@@ -58,5 +58,15 @@ Park.getAllParks = function(callback) {
     })
 };
 
+Park.removeAllParks = function(callback) {
+    parkModel.collection.drop(function(err) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null);
+    })
+};
+
+
 module.exports = Park;
 module.exports.parkModel = parkModel;

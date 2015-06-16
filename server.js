@@ -34,6 +34,7 @@ app.post("/add", function(req, res) {
 
 app.get("/download", function(req, res) {
     admin.downloadData();
+    admin.clearData();
     admin.parseData();
     res.send();
 
@@ -50,7 +51,7 @@ app.get("/search", function(req, res) {
 app.get("/searchall", function(req, res) {
     Park.getAllParks(function (err, parks) {
         if (err) return handleError(err);
-        console.log(parks);
+        console.log(typeof parks);
     });
     res.send();
 });
