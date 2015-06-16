@@ -40,5 +40,23 @@ Park.prototype.save = function() {
     });
 };
 
+Park.getPark = function(name, callback) {
+    parkModel.findOne({name:name}, function(err, park) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, park);
+    })
+};
+
+Park.getAllParks = function(callback) {
+    parkModel.find({}, function(err, parks) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, parks);
+    })
+};
+
 module.exports = Park;
 module.exports.parkModel = parkModel;

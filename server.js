@@ -39,6 +39,22 @@ app.get("/download", function(req, res) {
 
 });
 
+app.get("/search", function(req, res) {
+    Park.getPark("Ebisu Park", function(err, park) {
+        if (err) return handleError(err);
+        console.log(park);
+    });
+    res.send();
+});
+
+app.get("/searchall", function(req, res) {
+    Park.getAllParks(function (err, parks) {
+        if (err) return handleError(err);
+        console.log(parks);
+    });
+    res.send();
+});
+
 
 app.listen(3000);
 console.log("App running on port 3000");

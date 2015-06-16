@@ -33,5 +33,13 @@ parkbook.controller("AppCtrl", function ($http) {
 
     };
 
+    app.findPark = function() {
+      $http.get(url + "/search");
+    };
+
+    app.findAllParks = function() {
+        $http.get(url + "/searchall");
+    };
+
 
 });
