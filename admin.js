@@ -5,6 +5,7 @@
 var JSFtp = require("jsftp");
 var appRoot = require("app-root-path");
 var Park = require('./models/parkModel');
+var jf = require('jsonfile');
 
 var ftp = new JSFtp( {
     host: "webftp.vancouver.ca",
@@ -48,6 +49,11 @@ function parseData() {
 
         var parser = new xml2js.Parser();
         parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
+            var file = 'data/temp/parks.json';
+
+            jf.writeFile(file, result, function(err) {
+                console.log(err)
+            });
 
             var count = 0;
 
