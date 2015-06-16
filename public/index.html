@@ -6,8 +6,11 @@
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title></title>
-        <!-- Yves' GMaps , replace bottom code with actual CSS later--> 
+    <title>Parkbook - Better than Parkplace</title>
+  <!-- Bootstrap Core CSS -->
+  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Yves' GMaps , replace bottom code with actual CSS later-->
   <link href="assets/css/theme.css" rel="stylesheet">
   </head>
   <body>
@@ -20,14 +23,24 @@
     </ul>
 
     <input type="text" ng-model="app.newPark"/>
-
     <button ng-click="app.savePark(app.newPark)">Save Park</button>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
 
 
     <!-- Yves' Gmaps part -->
     <div id="pointers_map" class="map"></div>
 
-    <button ng-click="app.importParks()">Import Data</button>
+    <button class="btn-warning" ng-click="app.importParks()">Import Data</button>
   </div>
 
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
