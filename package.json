@@ -32,7 +32,8 @@
     "errorhandler": "latest",
     "xml2js": "latest",
     "app-root-path": "latest",
-    "cors": "latest"
+    "cors": "latest",
+    "jsonfile": "latest"
   },
   "author": "Jongrin Kim, Ha Nguyen, Vincent Chan, Yves Chan",
   "license": "ISC",
