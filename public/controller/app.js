@@ -15,7 +15,7 @@ parkbook.controller("AppCtrl", function ($http) {
     };
 
     function loadParks() {
-        $http.get(url).success(function (parks) {
+        $http.get(url + "/home").success(function (parks) {
             app.parks = parks;
         })
     }
