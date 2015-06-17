@@ -9,10 +9,12 @@ var bodyParser = require("body-parser");
 var admin = require("./admin");
 var Park = require("./models/parkModel");
 var parkModel = Park.parkModel;
+var appRoot = require("app-root-path");
 
 app.use(cors());
 app.use(bodyParser());
 
+app.use('/', express.static(appRoot + '/public'));
 
 mongoose.connect('mongodb://pb:pb@ds041992.mongolab.com:41992/parkbook');
 
