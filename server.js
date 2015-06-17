@@ -37,6 +37,7 @@ app.get("/home", function (req, res) {
 
 app.post("/add", function(req, res) {
     var name = req.body.name;
+    console.log(req.body);
     var park = new Park({name:name});
 
     park.save(function(err) {
@@ -52,8 +53,10 @@ app.get("/download", function(req, res) {
 
 });
 
-app.get("/search", function(req, res) {
-    Park.getPark("Ebisu Park", function(err, park) {
+app.post("/search:parkName", function(req, res) {
+    var name = req.body.name;
+    console.log(req.body.name);
+    Park.getPark(name, function(err, park) {
         if (err) return handleError(err);
         console.log(park);
     });

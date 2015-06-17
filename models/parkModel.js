@@ -41,7 +41,7 @@ Park.prototype.save = function() {
 };
 
 Park.getPark = function(name, callback) {
-    parkModel.findOne({name:name}, function(err, park) {
+    parkModel.find({name: new RegExp('.*'+name+'.*', "i")}, function(err, park) {
         if (err) {
             return callback(err);
         }

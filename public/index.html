@@ -25,20 +25,28 @@
     <input type="text" ng-model="app.newPark"/>
     <button ng-click="app.savePark(app.newPark)">Save Park</button>
 
-
-
     <div class="row">
       <div class="col-lg-6">
-        <div class="input-group">
-          <div id="state-search">
-          <input type="text" class="typeahead" placeholder="Search for...">
-          </div>
-      <span class="input-group-btn">
-        <button ng-click="app.findAllParks()" class="btn btn-default" type="button">Go!</button>
-      </span>
-        </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-    </div><!-- /.row -->
+        <input class="form-control" type="text" ng-model="app.parkName"/>
+        </div>
+      <div class="col-lg-1">
+        <button ng-click="app.findPark(app.parkName)" class="btn btn-primary" type="button">Search!</button>
+      </div>
+    </div>
+
+
+    <!--<div class="row">-->
+      <!--<div class="col-lg-6">-->
+        <!--<div class="input-group">-->
+          <!--<div id="state-search">-->
+          <!--<input type="text" class="typeahead" placeholder="Search for...">-->
+          <!--</div>-->
+      <!--<span class="input-group-btn">-->
+        <!--<button ng-click="app.findPark()" class="btn btn-default" type="button" >Go!</button>-->
+      <!--</span>-->
+        <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
+      <!--</div>&lt;!&ndash; /.col-lg-6 &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
 
 
     <!-- Yves' Gmaps part -->
