@@ -6,7 +6,7 @@ var parkbook = angular.module("parkbook", []);
 
 parkbook.controller("AppCtrl", function ($http) {
     var app = this;
-    var url = "http://localhost:3000";
+    var url = "https://parkbook.herokuapp.com";
 
     app.savePark = function(newPark) {
         $http.post(url + "/add", {name:newPark}).success(function() {
