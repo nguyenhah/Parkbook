@@ -6,8 +6,8 @@ var parkbook = angular.module("parkbook", []);
 
 parkbook.controller("AppCtrl", function ($http) {
     var app = this;
-    //var url = "http://localhost:3000";
-    var url = "https://parkbook.herokuapp.com";
+    var url = "http://localhost:3000";
+    //var url = "https://parkbook.herokuapp.com";
 
     app.savePark = function(newPark) {
         $http.post(url + "/add", {name:newPark}).success(function() {
@@ -36,9 +36,11 @@ parkbook.controller("AppCtrl", function ($http) {
 
     app.findPark = function(parkName) {
       console.log(parkName);
-      $http.post(url + "/search" + parkName, {name: parkName}).success(function(res) {
-          //$scope.park = res;
-          //park = res;
+      $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
+
+          console.log("inside success of findPark");
+          app.park = park;
+          console.log(park);
       })
     };
 

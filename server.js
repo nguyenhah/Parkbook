@@ -59,8 +59,9 @@ app.post("/search:parkName", function(req, res) {
     Park.getPark(name, function(err, park) {
         if (err) return handleError(err);
         console.log(park);
+        res.send(park);
     });
-    res.send();
+
 });
 
 app.get("/searchall", function(req, res) {

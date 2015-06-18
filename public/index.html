@@ -26,13 +26,14 @@
     <button ng-click="app.savePark(app.newPark)">Save Park</button>
 
     <div class="row">
-      <div class="col-lg-6">
-        <input class="form-control" type="text" ng-model="app.parkName"/>
+        <div class="col-md-6">
+          <input class="form-control" type="text" ng-model="app.parkName"/>
         </div>
-      <div class="col-lg-1">
-        <button ng-click="app.findPark(app.parkName)" class="btn btn-primary" type="button">Search!</button>
-      </div>
+        <div class="col-md-1">
+          <button ng-click="app.findPark(app.parkName)" class="btn btn-primary" type="button">Search!</button>
+        </div>
     </div>
+
 
 
     <!--<div class="row">-->
@@ -50,7 +51,11 @@
 
 
     <!-- Yves' Gmaps part -->
-    <div id="pointers_map" class="map"></div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div id="pointers_map" class="map"></div>
+      </div>
+    </div>
 
     <button class="btn-warning" ng-click="app.importParks()">Import Data</button>
   </div>
