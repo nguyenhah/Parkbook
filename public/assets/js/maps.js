@@ -20,11 +20,11 @@ $(document).ready(function() {
     //google.maps.event.addDomListener(window, 'load', initialize);
 
     function initialize() {
-        var myLatlng = new google.maps.LatLng(46.855141, -96.8372664);
+        var myLatlng = new google.maps.LatLng(49.246292, -123.116226);
         var map_canvas = document.getElementById('map-canvas');
         var map_options = {
             center: myLatlng,
-            zoom: 5,
+            zoom: 12,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         map = new google.maps.Map(map_canvas, map_options);
@@ -65,7 +65,7 @@ $(document).ready(function() {
     }
 
 
-    $('#btnClick').click({lat: 46.855141, lon: -96.8372664 }, addMark);
+    $('#btnClick').click({lat: 49.246292, lon: -123.116226 }, addMark);
 
 });
 
