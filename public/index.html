@@ -33,7 +33,7 @@
       <a href="#top" onclick = $("#menu-close").click(); >Home</a>
     </li>
     <li>
-      <a href="#" onclick = $("#menu-close").click(); >Park Map</a>
+      <a href="#parkmap" onclick = $("#menu-close").click(); >Park Map</a>
     </li>
     <li>
       <a href="#" onclick = $("#menu-close").click(); >Latest Reviews</a>
@@ -58,7 +58,7 @@
         <div class="col-lg-6">
         <input ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>
 
-        <button ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</button>
+        <a href="#parkmap" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
       </div>
         <div class="col-lg-3"></div>
       </div>
@@ -86,9 +86,10 @@
 
 
   <!-- NATIVE GOOGLE MAPS -->
+  <div id="parkmap">
   <div id="map"></div>
   <div data-ng-model="mymarker"></div>
-
+  </div>
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1 text-center">

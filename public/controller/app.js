@@ -41,6 +41,7 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
             };
 
             $scope.mymap = new google.maps.Map(document.getElementById('map'), mapOptions);
+            google.maps.event.addDomListener(window, 'load', loadParks);
         })
     }
     loadParks();
@@ -73,20 +74,36 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
           console.log("inside success of findPark");
           app.parksSearched = park;
 
-          var text = {
-              info: 'test marker info'
-          };
+          function makeInfoWindow(map, infowindow, marker) {
+              return function() {
+                  infowindow.open(map, marker)
+              };
+          }
 
               for (var i = 0; i < park.length; i++) {
-                  $scope.mymarker = new google.maps.Marker({
+                  var infowindow = [];
+                  var marker = [];
+                  var contentString = '<p><b>' + park[i].name + '</b></p>' +
+                      '<p>' + park[i].streetNumber + " " + park[i].streetName + '</p>';
+
+                  infowindow[i] = new google.maps.InfoWindow({content: contentString});
+
+                  marker[i] = new google.maps.Marker({
                       map: $scope.mymap,
                       animation: google.maps.Animation.DROP,
                       position: new google.maps.LatLng(park[i].lat, park[i].lon),
-                      title: text.info
+                      title: park[i].name
                   });
-                  markersArray.push($scope.mymarker);
+
+                  google.maps.event.addListener(marker[i], 'click', makeInfoWindow($scope.mymap, infowindow[i], marker[i]));
+
+                  $scope.mymarker = marker[i];
+
+
+                  markersArray.push(marker[i]);
               }
 
+          $scope.mymap.panTo(markersArray[0].getPosition());
           console.log(park.length);
       })
     };
