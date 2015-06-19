@@ -30,6 +30,7 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
         })
     };
 
+    var pos;
     function loadParks() {
         $http.get(url + "/home").success(function (parks) {
             app.parks = parks;
@@ -42,10 +43,11 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
 
             $scope.mymap = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+
             // Try HTML5 geolocation
             if(navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    var pos = new google.maps.LatLng(position.coords.latitude,
+                    pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
 
                     var infowindow = new google.maps.InfoWindow({
@@ -55,6 +57,8 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
                     });
 
                     $scope.mymap.setCenter(pos);
+
+                    calcRoute();
                 }, function() {
                     handleNoGeolocation(true);
                 });
@@ -62,6 +66,27 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
                 // Browser doesn't support Geolocation
                 handleNoGeolocation(false);
             }
+
+            //Direction routing
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            var directionsService = new google.maps.DirectionsService();
+
+            directionsDisplay.setMap($scope.mymap);
+
+            function calcRoute() {
+                var h2 = new google.maps.LatLng(49.246292, -123.116226);
+                var request = {
+                    origin:pos,
+                    destination:h2,
+                    travelMode: google.maps.TravelMode.WALKING
+                };
+                directionsService.route(request, function(result, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(result);
+                    }
+                });
+            }
+
         })
     }
 
@@ -87,6 +112,9 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
         map.setCenter(options.position);
     }
 
+
+
+
     //this function is called inside HTML
     //the http call is tagged with "/download" and sent to server.js
     //server.js calls the app.get() with the "/download" tag
@@ -98,6 +126,8 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
         })
 
     };
+
+
 
     var markersArray = [];
     function clearOverlays() {
