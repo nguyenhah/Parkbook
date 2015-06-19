@@ -9,6 +9,14 @@ $(document).ready(function() {
         $("#sidebar-wrapper").toggleClass("active");
     });
 
+    // scroll on Enter key
+    $("#searchBar").keyup(function(event){
+        if(event.keyCode == 13){
+            $("#findParks").click();
+        }
+    });
+
+
 // Opens the sidebar menu
     $("#menu-toggle").click(function (e) {
         e.preventDefault();

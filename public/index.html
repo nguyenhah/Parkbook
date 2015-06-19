@@ -56,9 +56,9 @@
       <div class="container">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-        <input ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>
+        <input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>
 
-        <a href="#parkmap" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
+        <a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
       </div>
         <div class="col-lg-3"></div>
       </div>
