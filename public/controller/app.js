@@ -58,8 +58,15 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
     };
 
     var markersArray = [];
+    function clearOverlays() {
+        for (var i = 0; i < markersArray.length; i++) {
+            markersArray[i].setMap(null);
+        }
+        markersArray.length = 0;
+    }
 
     app.findPark = function(parkName) {
+      clearOverlays();
       console.log(parkName);
       $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
 
@@ -70,15 +77,6 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
               info: 'test marker info'
           };
 
-          //function clearOverlays() {
-          //    for (var i = 0; i < markersArray.length; i++) {
-          //        markersArray[i].setMap(null);
-          //    }
-          //    markersArray.length = 0;
-          //}
-
-          //clearOverlays();
-          $scope.addMarker = function () {
               for (var i = 0; i < park.length; i++) {
                   $scope.mymarker = new google.maps.Marker({
                       map: $scope.mymap,
@@ -86,9 +84,8 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
                       position: new google.maps.LatLng(park[i].lat, park[i].lon),
                       title: text.info
                   });
-                  //markersArray.push($scope.mymarker);
+                  markersArray.push($scope.mymarker);
               }
-          };
 
           console.log(park.length);
       })
