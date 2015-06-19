@@ -43,6 +43,9 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
 
             $scope.mymap = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+            google.maps.event.addDomListener(window, 'load', loadParks);
+
+
 
             // Try HTML5 geolocation
             if(navigator.geolocation) {
@@ -53,7 +56,7 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
                     var infowindow = new google.maps.InfoWindow({
                         map: $scope.mymap,
                         position: pos,
-                        content: 'Location found using HTML5.'
+                        content: 'Your Location'
                     });
 
                     $scope.mymap.setCenter(pos);
@@ -66,26 +69,6 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
                 // Browser doesn't support Geolocation
                 handleNoGeolocation(false);
             }
-
-            //Direction routing
-            //var directionsDisplay = new google.maps.DirectionsRenderer();
-            //var directionsService = new google.maps.DirectionsService();
-            //
-            //directionsDisplay.setMap($scope.mymap);
-            //
-            //function calcRoute() {
-            //    var h2 = new google.maps.LatLng(latitude, longitude);
-            //    var request = {
-            //        origin:pos,
-            //        destination:h2,
-            //        travelMode: google.maps.TravelMode.WALKING
-            //    };
-            //    directionsService.route(request, function(result, status) {
-            //        if (status == google.maps.DirectionsStatus.OK) {
-            //            directionsDisplay.setDirections(result);
-            //        }
-            //    });
-            //}
 
         })
     }
@@ -150,18 +133,31 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
           console.log("inside success of findPark");
           app.parksSearched = park;
 
-          var text = {
-              info: 'test marker info'
-          };
+          function makeInfoWindow(map, infowindow, marker) {
+              return function() {
+                  infowindow.open(map, marker)
+              };
+          }
 
               for (var i = 0; i < park.length; i++) {
-                  mymarker = new google.maps.Marker({
+
+                  var infowindow = [];
+                  var marker = [];
+
+                  var contentString = '<p><b>' + park[i].name + '</b></p>' +
+                      '<p>' + park[i].streetNumber + " " + park[i].streetName + '</p>';
+
+                  infowindow[i] = new google.maps.InfoWindow({content: contentString});
+
+                  marker[i] = new google.maps.Marker({
+
                       map: $scope.mymap,
                       animation: google.maps.Animation.DROP,
                       position: new google.maps.LatLng(park[i].lat, park[i].lon),
-                      title: text.info
+                      title: park[i].name
                   });
-                  google.maps.event.addListener(mymarker, "click", function (event) {
+
+                  google.maps.event.addListener(marker[i], "click", function () {
                        latitude = this.position.lat();
                        longitude = this.position.lng();
                       //alert(this.position);
@@ -170,9 +166,15 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
                       console.log(pos);
                       calcRoute();
                   }); //end addListener
-                  markersArray.push($scope.mymarker);
+
+                  google.maps.event.addListener(marker[i], 'click', makeInfoWindow($scope.mymap, infowindow[i], marker[i]));
+
+                //  $scope.mymarker = marker[i];
+
+                  markersArray.push(marker[i]);
               }
 
+          $scope.mymap.panTo(markersArray[0].getPosition());
           console.log(park.length);
       })
     };
