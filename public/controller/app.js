@@ -39,7 +39,7 @@ parkbook.controller("AppCtrl", function ($http) {
       $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
 
           console.log("inside success of findPark");
-          app.park = park;
+          app.parksSearched = park;
           console.log(park);
       })
     };
