@@ -41,9 +41,51 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
             };
 
             $scope.mymap = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            // Try HTML5 geolocation
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = new google.maps.LatLng(position.coords.latitude,
+                        position.coords.longitude);
+
+                    var infowindow = new google.maps.InfoWindow({
+                        map: $scope.mymap,
+                        position: pos,
+                        content: 'Location found using HTML5.'
+                    });
+
+                    $scope.mymap.setCenter(pos);
+                }, function() {
+                    handleNoGeolocation(true);
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
         })
     }
+
     loadParks();
+
+    /*
+    Geolocation error handler
+     */
+    function handleNoGeolocation(errorFlag) {
+        if (errorFlag) {
+            var content = 'Error: The Geolocation service failed.';
+        } else {
+            var content = 'Error: Your browser doesn\'t support geolocation.';
+        }
+
+        var options = {
+            map: map,
+            position: new google.maps.LatLng(49.246292, -123.116226),
+            content: content
+        };
+
+        var infowindow = new google.maps.InfoWindow(options);
+        map.setCenter(options.position);
+    }
 
     //this function is called inside HTML
     //the http call is tagged with "/download" and sent to server.js
