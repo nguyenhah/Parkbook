@@ -40,7 +40,7 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
 
-            $scope.mymap = new google.maps.Map(document.getElementById('map-2'), mapOptions);
+            $scope.mymap = new google.maps.Map(document.getElementById('map'), mapOptions);
         })
     }
     loadParks();
