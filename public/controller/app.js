@@ -30,7 +30,7 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
         })
     };
 
-    var pos;
+
     function loadParks() {
         $http.get(url + "/home").success(function (parks) {
             app.parks = parks;
@@ -58,7 +58,7 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
 
                     $scope.mymap.setCenter(pos);
 
-                    calcRoute();
+
                 }, function() {
                     handleNoGeolocation(true);
                 });
@@ -68,27 +68,29 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
             }
 
             //Direction routing
-            var directionsDisplay = new google.maps.DirectionsRenderer();
-            var directionsService = new google.maps.DirectionsService();
-
-            directionsDisplay.setMap($scope.mymap);
-
-            function calcRoute() {
-                var h2 = new google.maps.LatLng(49.246292, -123.116226);
-                var request = {
-                    origin:pos,
-                    destination:h2,
-                    travelMode: google.maps.TravelMode.WALKING
-                };
-                directionsService.route(request, function(result, status) {
-                    if (status == google.maps.DirectionsStatus.OK) {
-                        directionsDisplay.setDirections(result);
-                    }
-                });
-            }
+            //var directionsDisplay = new google.maps.DirectionsRenderer();
+            //var directionsService = new google.maps.DirectionsService();
+            //
+            //directionsDisplay.setMap($scope.mymap);
+            //
+            //function calcRoute() {
+            //    var h2 = new google.maps.LatLng(latitude, longitude);
+            //    var request = {
+            //        origin:pos,
+            //        destination:h2,
+            //        travelMode: google.maps.TravelMode.WALKING
+            //    };
+            //    directionsService.route(request, function(result, status) {
+            //        if (status == google.maps.DirectionsStatus.OK) {
+            //            directionsDisplay.setDirections(result);
+            //        }
+            //    });
+            //}
 
         })
     }
+
+
 
     loadParks();
 
@@ -128,8 +130,11 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
     };
 
 
-
+    var pos;
     var markersArray = [];
+    var mymarker;
+    var latitude;
+    var longitude;
     function clearOverlays() {
         for (var i = 0; i < markersArray.length; i++) {
             markersArray[i].setMap(null);
@@ -150,12 +155,21 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
           };
 
               for (var i = 0; i < park.length; i++) {
-                  $scope.mymarker = new google.maps.Marker({
+                  mymarker = new google.maps.Marker({
                       map: $scope.mymap,
                       animation: google.maps.Animation.DROP,
                       position: new google.maps.LatLng(park[i].lat, park[i].lon),
                       title: text.info
                   });
+                  google.maps.event.addListener(mymarker, "click", function (event) {
+                       latitude = this.position.lat();
+                       longitude = this.position.lng();
+                      //alert(this.position);
+                      console.log(latitude);
+                      console.log(longitude);
+                      console.log(pos);
+                      calcRoute();
+                  }); //end addListener
                   markersArray.push($scope.mymarker);
               }
 
@@ -167,6 +181,24 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
         $http.get(url + "/searchall");
     };
 
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    var directionsService = new google.maps.DirectionsService();
 
+
+    function calcRoute() {
+        directionsDisplay.setMap($scope.mymap);
+        var h2 = new google.maps.LatLng(latitude, longitude);
+        console.log(h2);
+        var request = {
+            origin:pos,
+            destination:h2,
+            travelMode: google.maps.TravelMode.WALKING
+        };
+        directionsService.route(request, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(result);
+            }
+        });
+    }
 
 });
