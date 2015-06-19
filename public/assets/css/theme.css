@@ -1,9 +1,9 @@
 /* Main CSS file*/
 
-#map-canvas {
+
+#map {
   height: 300px;
-  margin: 0;
-  padding: 0;
+
 }
 
 /* Typeahead theme */

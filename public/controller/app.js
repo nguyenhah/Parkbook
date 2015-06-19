@@ -19,7 +19,7 @@ parkbook.directive('ngEnter', function () {
     };
 });
 
-parkbook.controller("AppCtrl", function ($http) {
+parkbook.controller("AppCtrl", function ($scope, $http) {
     var app = this;
     var url = "http://localhost:3000";
     //var url = "https://parkbook.herokuapp.com";
@@ -33,6 +33,14 @@ parkbook.controller("AppCtrl", function ($http) {
     function loadParks() {
         $http.get(url + "/home").success(function (parks) {
             app.parks = parks;
+
+            var mapOptions = {
+                zoom: 12,
+                center: new google.maps.LatLng(49.246292, -123.116226),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            $scope.mymap = new google.maps.Map(document.getElementById('map-2'), mapOptions);
         })
     }
     loadParks();
@@ -49,13 +57,40 @@ parkbook.controller("AppCtrl", function ($http) {
 
     };
 
+    var markersArray = [];
+
     app.findPark = function(parkName) {
       console.log(parkName);
       $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
 
           console.log("inside success of findPark");
           app.parksSearched = park;
-          console.log(park);
+
+          var text = {
+              info: 'test marker info'
+          };
+
+          //function clearOverlays() {
+          //    for (var i = 0; i < markersArray.length; i++) {
+          //        markersArray[i].setMap(null);
+          //    }
+          //    markersArray.length = 0;
+          //}
+
+          //clearOverlays();
+          $scope.addMarker = function () {
+              for (var i = 0; i < park.length; i++) {
+                  $scope.mymarker = new google.maps.Marker({
+                      map: $scope.mymap,
+                      animation: google.maps.Animation.DROP,
+                      position: new google.maps.LatLng(park[i].lat, park[i].lon),
+                      title: text.info
+                  });
+                  //markersArray.push($scope.mymarker);
+              }
+          };
+
+          console.log(park.length);
       })
     };
 

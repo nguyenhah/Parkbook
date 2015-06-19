@@ -180,9 +180,9 @@ hr.small {
 
 /* Map */
 
-.map {
-    height: 400px;
-}
+/*.map {*/
+    /*height: 400px;*/
+/*}*/
 
 @media(max-width:768px) {
     .map {

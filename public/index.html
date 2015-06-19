@@ -58,7 +58,7 @@
         <div class="col-lg-6">
         <input ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>
 
-        <button ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</button>
+        <button ng-click="app.findPark(app.parkName); addMarker()" class="btn btn-dark btn-lg" type="button">Find Parks</button>
       </div>
         <div class="col-lg-3"></div>
       </div>
@@ -86,7 +86,8 @@
 
 
   <!-- NATIVE GOOGLE MAPS -->
-  <div id="map-canvas"></div>
+  <div id="map-2"></div>
+  <div data-ng-model="mymarker"></div>
 
   <div class="container">
     <div class="row">
@@ -130,7 +131,7 @@
 <script src="assets/js/jquery-1.11.3.min.js"></script>
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/maps.js"></script>
+<!--<script src="assets/js/maps.js"></script>-->
 <script src="assets/js/states.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="assets/js/typeahead.js"></script>
