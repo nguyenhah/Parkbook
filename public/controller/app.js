@@ -112,10 +112,9 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
 
     };
 
-
+    var prev_infowindow =false;
     var pos;
     var markersArray = [];
-    var mymarker;
     var latitude;
     var longitude;
     function clearOverlays() {
@@ -135,6 +134,10 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
 
           function makeInfoWindow(map, infowindow, marker) {
               return function() {
+                  if( prev_infowindow ) {
+                      prev_infowindow.close();
+                  }
+                  prev_infowindow = infowindow;
                   infowindow.open(map, marker)
               };
           }
