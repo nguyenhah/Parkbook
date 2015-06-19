@@ -4,6 +4,21 @@
 var parkbook = angular.module("parkbook", []);
 
 
+// Adding new directive for ngEnter
+parkbook.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+
 parkbook.controller("AppCtrl", function ($http) {
     var app = this;
     var url = "http://localhost:3000";
@@ -47,6 +62,7 @@ parkbook.controller("AppCtrl", function ($http) {
     app.findAllParks = function() {
         $http.get(url + "/searchall");
     };
+
 
 
 });

@@ -56,7 +56,7 @@
       <div class="container">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-        <input class="form-control" type="text" ng-model="app.parkName"/>
+        <input ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>
 
         <button ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</button>
       </div>
@@ -88,6 +88,14 @@
   <!-- NATIVE GOOGLE MAPS -->
   <div id="map-canvas"></div>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 text-center">
+        <h3>Park Results</h3>
+        <hr class="small">
+      </div>
+    </div>
+  </div>
   <table class="table">
     <thead>
     <tr>
