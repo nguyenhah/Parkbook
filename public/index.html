@@ -8,17 +8,53 @@
 
   <title>Parkbook - Better than Parkplace</title>
   <!-- Bootstrap Core CSS -->
-  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- Yves' GMaps , replace bottom code with actual CSS later-->
   <link href="assets/css/theme.css" rel="stylesheet">
+
+  <!-- Main theme override -->
+  <link href="assets/css/parkbooktheme.css" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 
-<header>
+<!-- Navigation -->
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+    <li class="sidebar-brand">
+      <a href="#top"  onclick = $("#menu-close").click(); >ParkBook</a>
+    </li>
+    <li>
+      <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+    </li>
+    <li>
+      <a href="#" onclick = $("#menu-close").click(); >Park Map</a>
+    </li>
+    <li>
+      <a href="#" onclick = $("#menu-close").click(); >Latest Reviews</a>
+    </li>
+    <li>
+      <a href="#" onclick = $("#menu-close").click(); >Login</a>
+    </li>
+    <li>
+      <a href="#" onclick = $("#menu-close").click(); >Register</a>
+    </li>
+  </ul>
+</nav>
 
-  <h1>ParkBook</h1>
 
+<header id="top" class="header">
+    <div class="text-vertical-center">
+        <h1>ParkBook</h1>
+        <h3>Better than Parkplace</h3>
+        <br>
+        <a href="#search" class="btn btn-dark btn-lg">Find Parks</a>
+    </div>
 </header>
 
 
@@ -89,6 +125,7 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="assets/js/typeahead.js"></script>
 <script src="controller/app.js"></script>
+<script src="assets/js/navigation.js"></script>
 
 
 </body>
