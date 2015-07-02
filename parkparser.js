@@ -22,7 +22,7 @@ var localpath = appRoot + '/data/temp/' + filename;
 function downloadData() {
     ftp.get('opendata/xml/parks_facilities.xml', localpath, function(err) {
         if (err) {
-            console.error('LOG: There was an error downloading the file [admin.js: ftp.get()]');
+            console.error('LOG: There was an error downloading the file [parkparser.js: ftp.get()]');
         } else {
             console.log('File copied successfully');
         }

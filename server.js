@@ -6,7 +6,7 @@ var app = express();
 var mongoose = require("mongoose");
 var cors = require("cors");
 var bodyParser = require("body-parser");
-var admin = require("./admin");
+var parkparser = require("./parkparser");
 var Park = require("./models/parkModel");
 var parkModel = Park.parkModel;
 
@@ -64,9 +64,9 @@ app.post("/register", function(req, res) {
 
 
 app.get("/download", function(req, res) {
-    admin.downloadData();
-    admin.clearData();
-    admin.parseData();
+    parkparser.downloadData();
+    parkparser.clearData();
+    parkparser.parseData();
     res.send();
 
 });

@@ -21,8 +21,8 @@ parkbook.directive('ngEnter', function () {
 
 parkbook.controller("AppCtrl", function ($scope, $http) {
     var app = this;
-    var url = "http://localhost:3000";
-    //var url = "https://parkbook.herokuapp.com";
+    //var url = "http://localhost:3000";
+    var url = "https://parkbook.herokuapp.com";
 
     app.savePark = function(newPark) {
         $http.post(url + "/add", {name:newPark}).success(function() {
@@ -30,6 +30,30 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
         })
     };
 
+    // Try HTML5 geolocation
+    function checkLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                pos = new google.maps.LatLng(position.coords.latitude,
+                    position.coords.longitude);
+
+                var infowindow = new google.maps.InfoWindow({
+                    map: $scope.mymap,
+                    position: pos,
+                    content: 'Your Location'
+                });
+
+                $scope.mymap.setCenter(pos);
+
+
+            }, function () {
+                handleNoGeolocation(true);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleNoGeolocation(false);
+        }
+    }
 
     function loadParks() {
         $http.get(url + "/home").success(function (parks) {
@@ -44,36 +68,9 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
             $scope.mymap = new google.maps.Map(document.getElementById('map'), mapOptions);
 
             google.maps.event.addDomListener(window, 'load', loadParks);
-
-
-
-            // Try HTML5 geolocation
-            if(navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    pos = new google.maps.LatLng(position.coords.latitude,
-                        position.coords.longitude);
-
-                    var infowindow = new google.maps.InfoWindow({
-                        map: $scope.mymap,
-                        position: pos,
-                        content: 'Your Location'
-                    });
-
-                    $scope.mymap.setCenter(pos);
-
-
-                }, function() {
-                    handleNoGeolocation(true);
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleNoGeolocation(false);
-            }
-
+            checkLocation();
         })
     }
-
-
 
     loadParks();
 
@@ -124,6 +121,7 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
         markersArray.length = 0;
     }
 
+
     app.findPark = function(parkName) {
       clearOverlays();
       console.log(parkName);
@@ -171,9 +169,6 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
                   }); //end addListener
 
                   google.maps.event.addListener(marker[i], 'click', makeInfoWindow($scope.mymap, infowindow[i], marker[i]));
-
-                //  $scope.mymarker = marker[i];
-
                   markersArray.push(marker[i]);
               }
 
