@@ -50,3 +50,6 @@ User.addReview = function(name, review, callback) {
         callback(null, doc);
     });
 };
+
+module.exports = User;
+module.exports.userModel = userModel;

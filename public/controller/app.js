@@ -21,8 +21,8 @@ parkbook.directive('ngEnter', function () {
 
 parkbook.controller("AppCtrl", function ($scope, $http) {
     var app = this;
-    //var url = "http://localhost:3000";
-    var url = "https://parkbook.herokuapp.com";
+    var url = "http://localhost:3000";
+    //var url = "https://parkbook.herokuapp.com";
 
     app.savePark = function(newPark) {
         $http.post(url + "/add", {name:newPark}).success(function() {

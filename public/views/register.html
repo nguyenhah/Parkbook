@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!-- Mobile Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Parkbook - Better than Parkplace</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Main theme override -->
+    <link href="../assets/css/parkbooktheme.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+</head>
+<body ng-app="parkbook" ng-controller="RegCtrl as app">
+
+<!-- Navigation -->
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand">
+            <a href="#top"  onclick = $("#menu-close").click(); >ParkBook</a>
+        </li>
+        <li>
+            <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+        </li>
+        <li>
+            <a href="#parkmap" onclick = $("#menu-close").click(); >Park Map</a>
+        </li>
+        <li>
+            <a href="#" onclick = $("#menu-close").click(); >Latest Reviews</a>
+        </li>
+        <li>
+            <a href="#" onclick = $("#menu-close").click(); >Login</a>
+        </li>
+        <li>
+            <a href="#" onclick = $("#menu-close").click(); >Register</a>
+        </li>
+    </ul>
+</nav>
+
+
+<!--<header id="top" class="header">-->
+    <!--<div class="text-vertical-center">-->
+        <!--<h1>ParkBook</h1>-->
+        <!--<h3>Better than Parkplace</h3>-->
+        <!--<br>-->
+        <!--<div class="container">-->
+            <!--<div class="col-lg-3"></div>-->
+            <!--<div class="col-lg-6">-->
+                <!--<input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>-->
+
+                <!--<a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>-->
+            <!--</div>-->
+            <!--<div class="col-lg-3"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</header>-->
+
+
+
+<div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h3>Register</h3>
+                <hr class="small">
+            </div>
+        </div>
+    </div>
+
+    <!-- SAVE A PARK NAME -->
+
+    <!--<input type="text" ng-model="app.newPark"/>-->
+    <!--<button ng-click="app.savePark(app.newPark)">Save Park</button>-->
+
+    <input id="username" type="text" placeholder="username" ng-model="app.userName" />
+    <input id="userpassword" type="password" placeholder="password" ng-model="app.userPassword" />
+    <input id="useremail" type="text" placeholder="email" ng-model="app.userEmail" />
+
+    <button class="btn-warning" ng-click="app.registerUser(app.userName, app.userPassword, app.userEmail)">Register</button>
+
+</div>
+
+<script src="../assets/js/jquery-1.11.3.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../controller/register.js"></script>
+<script src="../assets/js/navigation.js"></script>
+
+</body>
+
+</html>

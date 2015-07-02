@@ -49,10 +49,14 @@ app.post("/add", function(req, res) {
     })
 });
 
-app.post("/register", function(req, res) {
+app.post("/views/register2", function(req, res) {
     var name = req.body.name;
     var password = req.body.password;
     var email = req.body.email;
+
+    console.log(req.body.name);
+    console.log(req.body.password);
+    console.log(req.body.email);
 
     var user = new User({name:name, password: password, email: email});
 
