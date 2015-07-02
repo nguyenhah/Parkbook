@@ -9,6 +9,10 @@ var bodyParser = require("body-parser");
 var admin = require("./admin");
 var Park = require("./models/parkModel");
 var parkModel = Park.parkModel;
+
+var User = require("./models/usermodel");
+var userModel = User.userModel;
+
 var appRoot = require("app-root-path");
 
 //deployment to heroku
@@ -44,6 +48,20 @@ app.post("/add", function(req, res) {
         res.send();
     })
 });
+
+app.post("/register", function(req, res) {
+    var name = req.body.name;
+    var password = req.body.password;
+    var email = req.body.email;
+
+    var user = new User({name:name, password: password, email: email});
+
+    user.save(function(err) {
+        res.send()
+    })
+
+});
+
 
 app.get("/download", function(req, res) {
     admin.downloadData();
