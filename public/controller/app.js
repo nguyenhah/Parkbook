@@ -121,58 +121,63 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
         markersArray.length = 0;
     }
 
+    //Make Info windows for Maps
+    function makeInfoWindow(map, infowindow, marker) {
+        return function() {
+            if( prev_infowindow ) {
+                prev_infowindow.close();
+            }
+            prev_infowindow = infowindow;
+            infowindow.open(map, marker)
+        };
+    }
 
+    //Make the markers for maps
+    function setMarkers(parkObjects) {
+        for (var i = 0; i < parkObjects.length; i++) {
+
+            var infowindow = [];
+            var marker = [];
+
+            var contentString = '<p><b>' + parkObjects[i].name + '</b></p>' +
+                '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>';
+
+            infowindow[i] = new google.maps.InfoWindow({content: contentString});
+
+            marker[i] = new google.maps.Marker({
+
+                map: $scope.mymap,
+                animation: google.maps.Animation.DROP,
+                position: new google.maps.LatLng(parkObjects[i].lat, parkObjects[i].lon),
+                title: parkObjects[i].name
+            });
+
+            google.maps.event.addListener(marker[i], "click", function () {
+                latitude = this.position.lat();
+                longitude = this.position.lng();
+                //alert(this.position);
+                console.log(latitude);
+                console.log(longitude);
+                console.log(pos);
+                calcRoute();
+            }); //end addListener
+
+            google.maps.event.addListener(marker[i], 'click', makeInfoWindow($scope.mymap, infowindow[i], marker[i]));
+            markersArray.push(marker[i]);
+        }
+    }
+
+    //Find parks based on the user's search
     app.findPark = function(parkName) {
-      clearOverlays();
-      console.log(parkName);
-      $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
+        clearOverlays();
+        console.log(parkName);
+        $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
 
           console.log("inside success of findPark");
           app.parksSearched = park;
 
-          function makeInfoWindow(map, infowindow, marker) {
-              return function() {
-                  if( prev_infowindow ) {
-                      prev_infowindow.close();
-                  }
-                  prev_infowindow = infowindow;
-                  infowindow.open(map, marker)
-              };
-          }
-
-              for (var i = 0; i < park.length; i++) {
-
-                  var infowindow = [];
-                  var marker = [];
-
-                  var contentString = '<p><b>' + park[i].name + '</b></p>' +
-                      '<p>' + park[i].streetNumber + " " + park[i].streetName + '</p>';
-
-                  infowindow[i] = new google.maps.InfoWindow({content: contentString});
-
-                  marker[i] = new google.maps.Marker({
-
-                      map: $scope.mymap,
-                      animation: google.maps.Animation.DROP,
-                      position: new google.maps.LatLng(park[i].lat, park[i].lon),
-                      title: park[i].name
-                  });
-
-                  google.maps.event.addListener(marker[i], "click", function () {
-                       latitude = this.position.lat();
-                       longitude = this.position.lng();
-                      //alert(this.position);
-                      console.log(latitude);
-                      console.log(longitude);
-                      console.log(pos);
-                      calcRoute();
-                  }); //end addListener
-
-                  google.maps.event.addListener(marker[i], 'click', makeInfoWindow($scope.mymap, infowindow[i], marker[i]));
-                  markersArray.push(marker[i]);
-              }
-
-          $scope.mymap.panTo(markersArray[0].getPosition());
+            setMarkers(park);
+            $scope.mymap.panTo(markersArray[0].getPosition());
           console.log(park.length);
       })
     };
