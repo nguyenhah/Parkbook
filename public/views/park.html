@@ -11,12 +11,59 @@
     <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
 
+    <!-- Yves' GMaps , replace bottom code with actual CSS later-->
+    <link href="../assets/css/theme.css" rel="stylesheet">
+
     <!-- Main theme override -->
     <link href="../assets/css/parkbooktheme.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 </head>
-<body>
+<body ng-app="parkbook" ng-controller="ParkCtrl as app">
+<!-- Navigation -->
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand">
+            <a href="#top"  onclick = $("#menu-close").click(); >ParkBook</a>
+        </li>
+        <li>
+            <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+        </li>
+        <li>
+            <a href="#parkmap" onclick = $("#menu-close").click(); >Park Map</a>
+        </li>
+        <li>
+            <a href="#" onclick = $("#menu-close").click(); >Latest Reviews</a>
+        </li>
+        <li>
+            <a href="#" onclick = $("#menu-close").click(); >Login</a>
+        </li>
+        <li>
+            <a href="#" onclick = $("#menu-close").click(); >Register</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 text-center">
+            <h3 ng-init="app.loadName()"></h3>
+            <hr class="small">
+        </div>
+    </div>
+</div>
+
+<input id="parkname" type="text" placeholder="parkname" ng-model="app.parkName" />
+<button class="btn-warning" ng-click="app.loadPark(app.parkName)">Show Park</button>
+
+<!-- Scripts -->
+<script src="../assets/js/jquery-1.11.3.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../controller/parkcontrol.js"></script>
+<script src="../assets/js/navigation.js"></script>
 
 </body>
 </html>

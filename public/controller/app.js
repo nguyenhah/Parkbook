@@ -141,7 +141,7 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
 
             var contentString = '<p><b>' + parkObjects[i].name + '</b></p>' +
                 '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>' +
-                '<p><a href="views/park.html">Park profile goes here</a></p>';
+                '<p><a href="#' + parkObjects[i]._id + '">' + "Park profile goes here" +'</a></p>';
 
             infowindow[i] = new google.maps.InfoWindow({content: contentString});
 
@@ -206,5 +206,12 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
             }
         });
     }
+
+    app.goToPark = function(parkID) {
+        console.log("going to park");
+        $http.get(url + "/views/park.html", {_id:parkID}).success(function() {
+            console.log("inside success of go to park");
+        })
+    };
 
 });
