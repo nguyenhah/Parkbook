@@ -66,7 +66,6 @@ app.post("/views/register2", function(req, res) {
 
 });
 
-
 app.get("/download", function(req, res) {
     parkparser.downloadData();
     parkparser.clearData();
@@ -74,6 +73,13 @@ app.get("/download", function(req, res) {
     res.send();
 
 });
+
+app.get("/views/park2", function(req, res) {
+    res.send();
+
+});
+
+
 
 app.post("/search:parkName", function(req, res) {
     var name = req.body.name;
