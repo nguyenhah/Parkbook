@@ -140,7 +140,8 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
             var marker = [];
 
             var contentString = '<p><b>' + parkObjects[i].name + '</b></p>' +
-                '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>';
+                '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>' +
+                '<p><a href="views/park.html">Park profile goes here</a></p>';
 
             infowindow[i] = new google.maps.InfoWindow({content: contentString});
 
