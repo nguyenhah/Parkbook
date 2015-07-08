@@ -1,0 +1,24 @@
+
+<div ng-controller="RegCtrl as app">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h3>Register</h3>
+                <hr class="small">
+            </div>
+        </div>
+    </div>
+
+    <!-- SAVE A PARK NAME -->
+
+    <!--<input type="text" ng-model="app.newPark"/>-->
+    <!--<button ng-click="app.savePark(app.newPark)">Save Park</button>-->
+
+    <input id="username" type="text" placeholder="username" ng-model="app.userName" />
+    <input id="userpassword" type="password" placeholder="password" ng-model="app.userPassword" />
+    <input id="useremail" type="text" placeholder="email" ng-model="app.userEmail" />
+
+    <button class="btn-warning" ng-click="app.registerUser(app.userName, app.userPassword, app.userEmail)">Register</button>
+
+</div>

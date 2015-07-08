@@ -1,7 +1,17 @@
 /**
  * Created by vincentchan on 15-06-10.
  */
-var parkbook = angular.module("parkbook", []);
+var parkbook = angular.module("parkbook", [
+    'ui.router'
+])
+    .config(function ($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('register', {
+                url: '/register',
+                templateUrl: 'views/register2.html',
+                controller: 'RegCtrl'
+            })
+    });
 
 
 // Adding new directive for ngEnter
@@ -213,5 +223,20 @@ parkbook.controller("AppCtrl", function ($scope, $http) {
             console.log("inside success of go to park");
         })
     };
+
+});
+
+
+parkbook.controller("RegCtrl", function ($http) {
+    var app = this;
+    var url = "http://localhost:3000";
+    //var url = "https://parkbook.herokuapp.com";
+
+    app.registerUser = function(userName, userPassword, userEmail) {
+        $http.post(url + "/views/register2", {name:userName, password: userPassword, email: userEmail}).success(function() {
+            console.log("registering" + userName);
+        })
+    };
+
 
 });
