@@ -4,8 +4,8 @@
 
 var parkcontrol = angular.module("parkbook");
 
-parkcontrol.controller("ParkCtrl", ['$scope','$http','park', function ($scope, $http, park) {
-    console.log(park + "inside ParkCtrl");
+parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', function ($scope, $http, $stateParams , park) {
+    console.log(park + " inside ParkCtrl");
     $scope.name = park.name;
     $scope.address = park.streetNumber + " " + park.streetName;
 
