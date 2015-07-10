@@ -10,6 +10,12 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
     var url = "http://localhost:3000";
     //var url = "https://parkbook.herokuapp.com";
 
+    $scope.refresh = function(){
+        $http.get("/abd").success(function(response){
+
+        })
+    }
+
     app.savePark = function(newPark) {
         $http.post(url + "/add", {name:newPark}).success(function() {
             loadParks();
@@ -40,6 +46,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
             handleNoGeolocation(false);
         }
     }
+
 
     function loadParks() {
         $http.get(url + "/home").success(function (parks) {
