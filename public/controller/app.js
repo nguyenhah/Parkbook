@@ -8,6 +8,11 @@ var parkbook = angular.module("parkbook", [
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
+            .state('home', {
+                url: '/',
+                templateUrl: 'views/home.html',
+                controller: 'AppCtrl'
+            })
             .state('register', {
                 url: '/register',
                 templateUrl: 'views/register2.html',
@@ -54,6 +59,42 @@ parkbook.directive('ngEnter', function () {
                 event.preventDefault();
             }
         });
+    };
+});
+
+//window.FB = {
+//    XFBML: {
+//        parse: function (elem) {
+//            var pre = document.createElement('pre');
+//            pre.textContent = elem.innerHTML;
+//            document.getElementById('fb-comment-box').innerHTML =
+//                pre.outerHTML;
+//        }
+//    }
+//};
+
+parkbook.directive('dynFbCommentBox', function () {
+    function createHTML(href, numposts, colorscheme) {
+        return '<div class="fb-comments" ' +
+            'data-href="' + href + '" ' +
+            'data-numposts="' + numposts + '" ' +
+            'data-colorsheme="' + colorscheme + '">' +
+            '</div>';
+    }
+
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function postLink(scope, elem, attrs) {
+            attrs.$observe('pageHref', function (newValue) {
+                var href        = newValue;
+                var numposts    = attrs.numposts    || 5;
+                var colorscheme = attrs.colorscheme || 'light';
+
+                elem.html(createHTML(href, numposts, colorscheme));
+                //FB.XFBML.parse(elem[0]);
+            });
+        }
     };
 });
 
