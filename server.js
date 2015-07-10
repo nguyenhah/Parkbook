@@ -39,6 +39,16 @@ app.get("/home", function (req, res) {
     });
 });
 
+//This is for the dynamic park linking
+app.get("/loadpark", function (req, res) {
+    var name = req;
+    Park.getPark(name, function(err, park) {
+        if (err) return handleError(err);
+        console.log(park);
+        res.send(park);
+    });
+});
+
 app.post("/add", function(req, res) {
     var name = req.body.name;
     console.log(req.body);
