@@ -95,7 +95,7 @@ app.post("/search:parkName", function(req, res) {
 app.get("/searchall", function(req, res) {
     Park.getAllParks(function (err, parks) {
         if (err) return handleError(err);
-        console.log(typeof parks);
+        console.log(parks);
     });
     res.send();
 });

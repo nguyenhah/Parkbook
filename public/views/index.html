@@ -42,7 +42,7 @@
       <a href="#" onclick = $("#menu-close").click(); >Login</a>
     </li>
     <li>
-      <a href="#" onclick = $("#menu-close").click(); >Register</a>
+      <a href="#/register" onclick = $("#menu-close").click(); >Register</a>
     </li>
   </ul>
 </nav>
@@ -113,7 +113,7 @@
     <tr ng-repeat="park in app.parksSearched">
       <td>{{ park.name }}</td>
       <td>{{ park.streetNumber + " " + park.streetName }}</td>
-      <td><a href="#{{park._id}}">Click to go to park {{park.name}}</a></td>
+      <td><a ui-sref="park">Click to go to park {{park.name}}</a></td>
     </tr>
 
 

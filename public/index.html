@@ -113,7 +113,7 @@
     <tr ng-repeat="park in app.parksSearched">
       <td>{{ park.name }}</td>
       <td>{{ park.streetNumber + " " + park.streetName }}</td>
-      <td><div id="{{park._id}}"><a href="/views/park.html" ng-click="app.goToPark(app.parkID)">Click to go to {{park.name}}</a></div></td>
+      <td><div><a ui-sref="park">Click to go to {{park.name}}</a></div></td>
     </tr>
 
 
@@ -138,6 +138,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
 <script src="assets/js/typeahead.js"></script>
 <script src="controller/app.js"></script>
+<script src="controller/parkcontrol.js"></script>
 <script src="assets/js/navigation.js"></script>
 
 </body>
