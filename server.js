@@ -40,14 +40,25 @@ app.get("/home", function (req, res) {
 });
 
 //This is for the dynamic park linking
-app.get("/loadpark", function (req, res) {
-    var name = req;
-    Park.getPark(name, function(err, park) {
-        if (err) return handleError(err);
-        console.log(park);
+app.get("/loadpark/:parkName", function (req, res) {
+    var parkname = req.params.parkName;
+    console.log(parkname + " inside server");
+    parkModel.find({name:parkname}, function (err, park) {
         res.send(park);
     });
 });
+
+
+//app.get("/loadpark/:parkName", function(req, res) {
+//    var name = req.params.parkName;
+//    console.log(req.params.parkName + " inside server");
+//    Park.getPark(name, function(err, park) {
+//        if (err) return handleError(err);
+//        console.log(park);
+//        res.send(park);
+//    });
+//});
+
 
 app.post("/add", function(req, res) {
     var name = req.body.name;
@@ -99,7 +110,6 @@ app.post("/search:parkName", function(req, res) {
         console.log(park);
         res.send(park);
     });
-
 });
 
 app.get("/searchall", function(req, res) {
