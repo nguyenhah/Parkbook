@@ -43,8 +43,8 @@ app.get("/home", function (req, res) {
 app.get("/loadpark/:parkName", function (req, res) {
     var parkname = req.params.parkName;
     console.log(parkname + " inside server");
-    parkModel.find({name:parkname}, function (err, park) {
-        res.send(park);
+    parkModel.find({name:parkname}, function (err, response) {
+        res.send(response);
     });
 });
 

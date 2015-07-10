@@ -5,8 +5,9 @@
 var parkcontrol = angular.module("parkbook");
 
 parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', function ($scope, $http, $stateParams , park) {
-    console.log(park + " inside ParkCtrl");
-    $scope.name = park.name;
-    $scope.address = park.streetNumber + " " + park.streetName;
+    console.log(park);
+    var parkInfo = park.data[0];
+    $scope.name = parkInfo.name;
+    $scope.address = parkInfo.streetNumber + " " + parkInfo.streetName;
 
 }]);

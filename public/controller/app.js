@@ -2,7 +2,7 @@
  * Created by vincentchan on 15-06-10.
  */
 var parkbook = angular.module("parkbook", [
-    'ui.router',
+    'ui.router'
 ])
     .config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
         $urlRouterProvider.otherwise('/');
@@ -20,15 +20,22 @@ var parkbook = angular.module("parkbook", [
                 templateUrl:'views/park2.html',
                 controller:'ParkCtrl',
                 resolve: {
-                    park:['$http','$stateParams', function($http, $stateParams){
+                    park:
+                        ['$http','$stateParams', function($http, $stateParams){
                         //this is just the get all parks from server RESTFUL API
-                        return $http.get('http://localhost:3000/loadpark/' + $stateParams.parkName, {name:$stateParams.parkName}).then(function(response){
+                        return $http.get('http://localhost:3000/loadpark/' + $stateParams.parkName, {name:$stateParams.parkName}).success(function(response){
                             console.log($stateParams);
                             console.log($stateParams.parkName + " inside app.js");
-                            console.log(response + " inside app.js");
                             return response;
                         })
                     }]
+                    //    ['$http', function($http){
+                    //        //this is just the get all parks from server RESTFUL API
+                    //        return $http.get('http://localhost:3000/home').then(function(response){
+                    //            console.log(response);
+                    //            return response.data[0];
+                    //        })
+                    //    }]
                 }
             })
     }]);
