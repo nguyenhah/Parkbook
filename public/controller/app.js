@@ -2,16 +2,33 @@
  * Created by vincentchan on 15-06-10.
  */
 var parkbook = angular.module("parkbook", [
-    'ui.router'
+    'ui.router',
 ])
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
+        $urlRouterProvider.otherwise('/');
+
         $stateProvider
             .state('register', {
                 url: '/register',
                 templateUrl: 'views/register2.html',
                 controller: 'RegCtrl'
             })
-    });
+            //resolving passes certain variables intomthe controller, which you inject as a dependency to use
+            .state('park',{
+                url:'/park',
+                templateUrl:'views/park2.html',
+                controller:'ParkCtrl',
+                resolve: {
+                    park:['$http', function($http){
+                        //this is just the get all parks from server RESTFUL API
+                        return $http.get('http://localhost:3000/home').then(function(response){
+                            console.log(response.data[0]);
+                            return response.data[0];
+                        })
+                    }]
+                }
+            })
+    }]);
 
 
 // Adding new directive for ngEnter
@@ -239,4 +256,26 @@ parkbook.controller("RegCtrl", function ($http) {
     };
 
 
+
 });
+
+parkbook.controller("ParkCtrl", ['$scope',function ($scope, $http) {
+    var results;
+    var url = "http://localhost:3000";
+    //var url = "https://parkbook.herokuapp.com";
+
+    //app.loadPark = function(parkName) {
+    //    $http.get(url + "/views/park2", {name:parkName}).success(function() {
+    //        console.log("loading" + parkName);
+    //    })
+    //};
+
+    loadFirst = function() {
+        $http.get(url + "/searchall").success(function(parks) {
+            $scope.title = parks[0].name;
+            console.log(parks);
+        });
+    };
+
+
+}]);
