@@ -58,6 +58,15 @@ Park.getAllParks = function(callback) {
     })
 };
 
+Park.getRandomPark = function(callback) {
+    parkModel.findOne({name: "Arbutus"}, function(err, park) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, park);
+    })
+};
+
 Park.removeAllParks = function(callback) {
     parkModel.collection.drop(function(err) {
         if (err) {

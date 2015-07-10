@@ -5,6 +5,7 @@
 
   <!-- Mobile Meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="fb:app_id" content="485003794998932"/>
 
   <title>Parkbook - Better than Parkplace</title>
   <!-- Bootstrap Core CSS -->
@@ -59,6 +60,7 @@
         <input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>
 
         <a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
+          <a href="#parkmap" id="findRandomPark" ng-click="app.findRandomPark()" class="btn btn-dark btn-lg" type="button">I'm Feeling Adventurous</a>
       </div>
         <div class="col-lg-3"></div>
       </div>

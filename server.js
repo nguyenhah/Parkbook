@@ -120,6 +120,14 @@ app.get("/searchall", function(req, res) {
     res.send();
 });
 
+app.get("/adventure", function(req, res) {
+    Park.getRandomPark(function (err, park) {
+        if (err) return handleError(err);
+        console.log(park);
+        res.send(park);
+    })
+});
+
 server.listen(port, function() {
     console.log("Node app is running on port:" + port);
 });

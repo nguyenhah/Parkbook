@@ -180,6 +180,10 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
         $http.get(url + "/searchall");
     };
 
+    app.findRandomPark = function() {
+        $http.get(url + "/adventure");
+    };
+
     var directionsDisplay = new google.maps.DirectionsRenderer();
     var directionsService = new google.maps.DirectionsService();
 
