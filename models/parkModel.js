@@ -59,7 +59,7 @@ Park.getAllParks = function(callback) {
 };
 
 Park.getRandomPark = function(callback) {
-    parkModel.findOne({name: "Arbutus"}, function(err, park) {
+    parkModel.find({}, function(err, park) {
         if (err) {
             return callback(err);
         }

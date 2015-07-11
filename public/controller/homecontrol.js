@@ -175,7 +175,17 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
     };
 
     $scope.findRandomPark = function() {
-        $http.get(url + "/adventure");
+        $http.post(url + "/adventure", {name: "Arbutus Village Park"}).success(function(parks) {
+            clearOverlays();
+
+            $scope.allParks = parks;
+            var randNum = Math.floor((Math.random() * parks.length));
+            var randPark = [parks[randNum]];
+
+            setMarkers(randPark);
+            $scope.mymap.panTo(markersArray[0].getPosition());
+
+        });
     };
 
     var directionsDisplay = new google.maps.DirectionsRenderer();
