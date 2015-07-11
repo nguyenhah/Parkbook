@@ -1,5 +1,6 @@
 
 <header id="top" class="header">
+
     <div class="text-vertical-center">
         <h1>ParkBook</h1>
         <h3>Better than Parkplace</h3>
@@ -9,8 +10,8 @@
             <div class="col-lg-6">
                 <input id="searchBar" ng-enter="findPark(parkName)" class="form-control" type="text" ng-model="parkName"/>
 
-                <a href="#parkmap" id="findParks" ng-click="findPark(parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
-                <a href="#parkmap"  ng-click="findRandomPark()" class="btn btn-dark btn-lg" type="button">I'm Feeling Adventurous</a>
+                <a id="findParks" ng-click="findPark(parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
+                <a id="findAdventure" ng-click="findRandomPark()" class="btn btn-dark btn-lg" type="button">I'm Feeling Adventurous</a>
             </div>
             <div class="col-lg-3"></div>
         </div>
@@ -57,3 +58,29 @@
 
     </table>
 </div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#findParks").click(function () {
+            //$(this).animate(function(){
+            $('html, body').animate({
+                scrollTop: $("#parkmap").offset().top
+            }, 1000);
+            //});
+        });
+        $("#findAdventure").click(function () {
+            //$(this).animate(function(){
+            $('html, body').animate({
+                scrollTop: $("#parkmap").offset().top
+            }, 1000);
+            //});
+        });
+
+        $("#searchBar").keyup(function(event){
+            if(event.keyCode == 13){
+                $("#findParks").click();
+            }
+        });
+    });
+</script>
