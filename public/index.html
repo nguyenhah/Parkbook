@@ -21,7 +21,7 @@
 
 </head>
 
-<body ng-app="parkbook" ng-controller="AppCtrl">
+<body ng-app="parkbook">
 
 <!-- Navigation -->
 <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
@@ -144,8 +144,8 @@
 
   <!--</table>-->
 
-<div ui-view></div>
-<button class="btn-warning" ng-click="app.importParks()">Import Data</button>
+<div ui-view class></div>
+<button class="btn-warning" ng-click="importParks()">Import Data</button>
 
 <script src="https://maps.google.com/maps/api/js?sensor=true"></script>
 <script src="assets/js/jquery-1.11.3.min.js"></script>
