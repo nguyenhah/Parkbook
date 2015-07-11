@@ -179,8 +179,9 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
             clearOverlays();
 
             $scope.allParks = parks;
-            var randNum = Math.floor((Math.random() * parks.length));
+            var randNum = Math.floor((Math.random() * parks.length - 1));
             var randPark = [parks[randNum]];
+            $scope.parksSearched = randPark;
 
             setMarkers(randPark);
             $scope.mymap.panTo(markersArray[0].getPosition());
