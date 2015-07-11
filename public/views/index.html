@@ -113,7 +113,7 @@
     <tr ng-repeat="park in app.parksSearched">
       <td>{{ park.name }}</td>
       <td>{{ park.streetNumber + " " + park.streetName }}</td>
-      <td><a ui-sref="park/{{park._id}}" ng-click="refresh()">Click to go to park {{park.name}}</a></td>
+      <td><a ui-sref="park/{{park._id}}" ng-click="updatePage()">Click to go to park {{park.name}}</a></td>
     </tr>
 
 

@@ -6,17 +6,11 @@
 var homecontrol = angular.module("parkbook");
 
 homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
-    var app = this;
+    //var app = this;
     var url = "http://localhost:3000";
     //var url = "https://parkbook.herokuapp.com";
 
-    $scope.refresh = function(){
-        $http.get("/abd").success(function(response){
-
-        })
-    }
-
-    app.savePark = function(newPark) {
+    $scope.savePark = function(newPark) {
         $http.post(url + "/add", {name:newPark}).success(function() {
             loadParks();
         })
@@ -50,7 +44,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
 
     function loadParks() {
         $http.get(url + "/home").success(function (parks) {
-            app.parks = parks;
+            $scope.parks = parks;
 
             var mapOptions = {
                 zoom: 12,
@@ -93,7 +87,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
     //this function is called inside HTML
     //the http call is tagged with "/download" and sent to server.js
     //server.js calls the app.get() with the "/download" tag
-    app.importParks = function() {
+    $scope.importParks = function() {
         console.log("clicked import");
         $http.get(url + "/download").success(function() {
             console.log("inside success");
@@ -162,13 +156,13 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
     }
 
     //Find parks based on the user's search
-    app.findPark = function(parkName) {
+    $scope.findPark = function(parkName) {
         clearOverlays();
         console.log(parkName);
         $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
 
             console.log("inside success of findPark");
-            app.parksSearched = park;
+            $scope.parksSearched = park;
 
             setMarkers(park);
             $scope.mymap.panTo(markersArray[0].getPosition());
@@ -176,11 +170,11 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
         })
     };
 
-    app.findAllParks = function() {
+    $scope.findAllParks = function() {
         $http.get(url + "/searchall");
     };
 
-    app.findRandomPark = function() {
+    $scope.findRandomPark = function() {
         $http.get(url + "/adventure");
     };
 
@@ -204,7 +198,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
         });
     }
 
-    app.goToPark = function(parkID) {
+    $scope.goToPark = function(parkID) {
         console.log("going to park");
         $http.get(url + "/views/park.html", {_id:parkID}).success(function() {
             console.log("inside success of go to park");

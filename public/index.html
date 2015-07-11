@@ -20,7 +20,8 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 </head>
-<body ng-app="parkbook" ng-controller="AppCtrl as app">
+
+<body ng-app="parkbook" ng-controller="AppCtrl">
 
 <!-- Navigation -->
 <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
@@ -49,27 +50,24 @@
 </nav>
 
 
-<header id="top" class="header">
-    <div class="text-vertical-center">
-        <h1>ParkBook</h1>
-        <h3>Better than Parkplace</h3>
-        <br>
-      <div class="container">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-        <input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>
+<!--<header id="top" class="header">-->
+    <!--<div class="text-vertical-center">-->
+        <!--<h1>ParkBook</h1>-->
+        <!--<h3>Better than Parkplace</h3>-->
+        <!--<br>-->
+      <!--<div class="container">-->
+        <!--<div class="col-lg-3"></div>-->
+        <!--<div class="col-lg-6">-->
+        <!--<input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>-->
 
-        <a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
-          <a href="#parkmap" id="findRandomPark" ng-click="app.findRandomPark()" class="btn btn-dark btn-lg" type="button">I'm Feeling Adventurous</a>
-      </div>
-        <div class="col-lg-3"></div>
-      </div>
-    </div>
-</header>
+        <!--<a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>-->
+          <!--<a href="#parkmap" id="findRandomPark" ng-click="app.findRandomPark()" class="btn btn-dark btn-lg" type="button">I'm Feeling Adventurous</a>-->
+      <!--</div>-->
+        <!--<div class="col-lg-3"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+<!--</header>-->
 
-
-
-<div>
 
   <!-- DISPLAY ALL PARKS IN LIST -->
 
@@ -77,58 +75,77 @@
   <!--<li ng-repeat="park in app.parks">-->
   <!--{{ park.name }}-->
   <!--</li>-->
-  <!--</ul>-->
-
-
-  <!-- SAVE A PARK NAME -->
-
-  <!--<input type="text" ng-model="app.newPark"/>-->
-  <!--<button ng-click="app.savePark(app.newPark)">Save Park</button>-->
 
 
 
-  <!-- NATIVE GOOGLE MAPS -->
-  <div id="parkmap">
-  <div id="map"></div>
-  <div data-ng-model="mymarker"></div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-10 col-lg-offset-1 text-center">
-        <h3>Park Results</h3>
-        <hr class="small">
-      </div>
-    </div>
-  </div>
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>&nbsp;</th>
-    </tr>
-    </thead>
+<!--<header id="top" class="header">-->
+    <!--<div class="text-vertical-center">-->
+        <!--<h1>ParkBook</h1>-->
+        <!--<h3>Better than Parkplace</h3>-->
+        <!--<br>-->
+      <!--<div class="container">-->
+        <!--<div class="col-lg-3"></div>-->
+        <!--<div class="col-lg-6">-->
+        <!--<input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>-->
+
+        <!--<a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>-->
+      <!--</div>-->
+        <!--<div class="col-lg-3"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+<!--</header>-->
 
 
-    <tbody>
-
-    <tr ng-repeat="park in app.parksSearched">
-      <td>{{ park.name }}</td>
-      <td>{{ park.streetNumber + " " + park.streetName }}</td>
-      <td><div><a ui-sref="park({parkName:park.name})">Click to go to {{park.name}}</a></div></td>
-    </tr>
 
 
-    </tbody>
 
 
-  </table>
+  <!--&lt;!&ndash; SAVE A PARK NAME &ndash;&gt;-->
+
+  <!--&lt;!&ndash;<input type="text" ng-model="app.newPark"/>&ndash;&gt;-->
+  <!--&lt;!&ndash;<button ng-click="app.savePark(app.newPark)">Save Park</button>&ndash;&gt;-->
 
 
-  <button class="btn-warning" ng-click="app.importParks()">Import Data</button>
+
+  <!--&lt;!&ndash; NATIVE GOOGLE MAPS &ndash;&gt;-->
+  <!--<div id="parkmap">-->
+  <!--<div id="map"></div>-->
+  <!--<div data-ng-model="mymarker"></div>-->
+  <!--</div>-->
+  <!--<div class="container">-->
+    <!--<div class="row">-->
+      <!--<div class="col-lg-10 col-lg-offset-1 text-center">-->
+        <!--<h3>Park Results</h3>-->
+        <!--<hr class="small">-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<table class="table">-->
+    <!--<thead>-->
+    <!--<tr>-->
+      <!--<th>Name</th>-->
+      <!--<th>Address</th>-->
+      <!--<th>&nbsp;</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+
+
+    <!--<tbody>-->
+
+    <!--<tr ng-repeat="park in app.parksSearched">-->
+      <!--<td>{{ park.name }}</td>-->
+      <!--<td>{{ park.streetNumber + " " + park.streetName }}</td>-->
+      <!--<td><div><a ui-sref="park({parkName:park.name})">Click to go to {{park.name}}</a></div></td>-->
+    <!--</tr>-->
+
+
+    <!--</tbody>-->
+
+
+  <!--</table>-->
+
   <div ui-view></div>
-
-</div>
+<button class="btn-warning" ng-click="app.importParks()">Import Data</button>
 
 <script src="https://maps.google.com/maps/api/js?sensor=true"></script>
 <script src="assets/js/jquery-1.11.3.min.js"></script>
@@ -143,7 +160,6 @@
 <script src="controller/homecontrol.js"></script>
 <script src="controller/parkcontrol.js"></script>
 <script src="assets/js/navigation.js"></script>
-
 </body>
 
 </html>

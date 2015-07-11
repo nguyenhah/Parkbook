@@ -1,0 +1,83 @@
+<!-- Navigation -->
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand">
+            <a href="#top"  onclick = $("#menu-close").click(); >ParkBook</a>
+        </li>
+        <li>
+            <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+        </li>
+        <li>
+            <a href="#parkmap" onclick = $("#menu-close").click(); >Park Map</a>
+        </li>
+        <li>
+            <a href="#" onclick = $("#menu-close").click(); >Latest Reviews</a>
+        </li>
+        <li>
+            <a href="#" onclick = $("#menu-close").click(); >Login</a>
+        </li>
+        <li>
+            <a href="#/register" onclick = $("#menu-close").click(); >Register</a>
+        </li>
+    </ul>
+</nav>
+
+<header id="top" class="header">
+    <div class="text-vertical-center">
+        <h1>ParkBook</h1>
+        <h3>Better than Parkplace</h3>
+        <br>
+        <div class="container">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <input id="searchBar" ng-enter="findPark(parkName)" class="form-control" type="text" ng-model="parkName"/>
+
+                <a href="#parkmap" id="findParks" ng-click="findPark(parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+</header>
+
+
+
+<div>
+    <!-- NATIVE GOOGLE MAPS -->
+    <div id="parkmap">
+        <div id="map"></div>
+        <div data-ng-model="mymarker"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h3>Park Results</h3>
+                <hr class="small">
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+
+        <tr ng-repeat="park in parksSearched">
+            <td>{{ park.name }}</td>
+            <td>{{ park.streetNumber + " " + park.streetName }}</td>
+            <td><div><a ui-sref="park({parkName:park.name})">Click to go to {{park.name}}</a></div></td>
+        </tr>
+
+
+        </tbody>
+
+
+    </table>
+</div>
