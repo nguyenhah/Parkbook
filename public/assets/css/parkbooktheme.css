@@ -161,20 +161,11 @@ hr.small {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    padding-top: 23rem;
+    padding-bottom: 23rem;
+
 }
 
-
-.callout {
-    display: table;
-    width: 100%;
-    height: 400px;
-    color: #fff;
-    background: url(../../../../bootstrap%20stuff/startbootstrap-stylish-portfolio-1.0.3/img/callout.jpg) no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-}
 
 
 
