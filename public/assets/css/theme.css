@@ -2,11 +2,12 @@
 
 
 #map {
-  height: 300px;
+  height: 50vh;
 }
 
 #map-park-page {
-  height: 400px;
+  height: 50vh;
+  width: 50vw;
 }
 
 /* Typeahead theme */

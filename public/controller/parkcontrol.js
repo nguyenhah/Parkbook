@@ -51,11 +51,18 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', func
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        $scope.mymap2 = new google.maps.Map(document.getElementById('map'), mapOptions);
+        $scope.mymap2 = new google.maps.Map(document.getElementById('map-park-page'), mapOptions);
+        //google.maps.event.addDomListener(window, 'load', initialize);
+        //google.maps.event.addDomListener(window, "resize", function() {
+        //    var center = $scope.mymap2.getCenter();
+        //    google.maps.event.trigger($scope.mymap2, "resize");
+        //    $scope.mymap2.setCenter(center);
+        //});
 
         google.maps.event.addDomListener(window, 'load', loadPark);
         checkLocation();
         setMarker();
+        $scope.mymap2.panTo(parkCenter);
     }
 
     loadPark();
