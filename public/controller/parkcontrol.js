@@ -67,6 +67,7 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', func
 
     loadPark();
 
+
     /*
      Geolocation error handler
      */
@@ -135,7 +136,8 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', func
             calcRoute();
         }); //end addListener
 
-        google.maps.event.addListener(marker, 'click', makeInfoWindow($scope.mymap2, infowindow, marker));
+        //google.maps.event.addListener(marker, 'click', makeInfoWindow($scope.mymap2, infowindow, marker));
+        infowindow.open($scope.mymap2, marker)
     }
 
     var directionsDisplay = new google.maps.DirectionsRenderer();
