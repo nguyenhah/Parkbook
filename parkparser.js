@@ -67,13 +67,41 @@ function parseData() {
                 var lat = res[0];
                 var lon = res[1];
 
+                var facilityType="";
+                try {
+                    var facility = parkArray[i].Facilities[0].Facility;
+                    //Fix the comma at the End
+                    for (var j= 0; j<facility.length; j++){
+                        facilityType += facility[j].FacilityType[0] + ", ";
+                    }
+                    console.log("Trying to add facility");
+                }
+                catch(err){
+                    console.log("no facilities");
+                    facilityType="None";
+                }
+
+
+                var washroom = parkArray[i].Facilities[0].Washroom[0];
+                var washroomLocation = "";
+                try {
+                    washroomLocation = washroom.Location[0];
+                    console.log("Trying to add washroom");
+                }
+                catch(err){
+                    console.log("no washrooms");
+                    washroomLocation = "None";
+                }
+
 
                 var park = new Park({
                     name:parkName,
                     streetNumber:streetNumber,
                     streetName:streetName,
                     lat:parseFloat(lat),
-                    lon:parseFloat(lon)
+                    lon:parseFloat(lon),
+                    facilityType: facilityType,
+                    washroom: washroomLocation
                 });
 
                 park.save();
