@@ -51,15 +51,14 @@ function parseData() {
             for (var j = 0; j < facility.length; j++) {
                 facilityType[j] = facility[j].FacilityType[0];
             }
-            console.log("Trying to add facility");
         }
         catch (err) {
             console.log("no facilities");
-            facilityType[0] = "No facilities";
+            facilityType[0] = "No facilities found";
         }
-        finally {
-            return facilityType;
-        }
+
+        return facilityType;
+
     }
 
     function getFeatures(parkEntry) {
@@ -69,15 +68,14 @@ function parseData() {
             for (var j = 0; j < specialFeature.length; j++) {
                 features[j] = specialFeature[j];
             }
-            console.log("Trying to add feature");
         }
         catch (err) {
             console.log("no facilities");
-            features[0] = "No Features";
+            features[0] = "No features found";
         }
-        finally {
-            return features;
-        }
+
+        return features;
+
     }
 
     function getWashroomLocation(parkEntry) {
@@ -87,15 +85,14 @@ function parseData() {
             for (var p = 0; p < washroom.length; p++) {
                 washroomLocation[p] = washroom[p].Location[0];
             }
-            console.log("Trying to add washroom");
         }
         catch (err) {
             console.log("no washrooms");
-            washroomLocation[0] = "No washrooms";
+            washroomLocation[0] = "No washrooms found";
         }
-        finally {
-            return washroomLocation;
-        }
+
+        return washroomLocation;
+
     }
 
     try {
