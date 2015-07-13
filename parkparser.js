@@ -44,6 +44,57 @@ function parseData() {
         xml2js = require('xml2js');
     var filePath = 'data/temp/parkdata.xml';
 
+    function getFacility(parkEntry) {
+        var facilityType = [];
+        try {
+            var facility = parkEntry.Facilities[0].Facility;
+            for (var j = 0; j < facility.length; j++) {
+                facilityType[j] = facility[j].FacilityType[0];
+            }
+        }
+        catch (err) {
+            console.log("no facilities");
+            facilityType[0] = "No facilities found";
+        }
+
+        return facilityType;
+
+    }
+
+    function getFeatures(parkEntry) {
+        var features = [];
+        try {
+            var specialFeature = parkEntry.Facilities[0].SpecialFeature;
+            for (var j = 0; j < specialFeature.length; j++) {
+                features[j] = specialFeature[j];
+            }
+        }
+        catch (err) {
+            console.log("no facilities");
+            features[0] = "No features found";
+        }
+
+        return features;
+
+    }
+
+    function getWashroomLocation(parkEntry) {
+        var washroomLocation = [];
+        try {
+            var washroom = parkEntry.Facilities[0].Washroom;
+            for (var p = 0; p < washroom.length; p++) {
+                washroomLocation[p] = washroom[p].Location[0];
+            }
+        }
+        catch (err) {
+            console.log("no washrooms");
+            washroomLocation[0] = "No washrooms found";
+        }
+
+        return washroomLocation;
+
+    }
+
     try {
         var fileData = fs.readFileSync(filePath, 'ascii');
 
@@ -58,51 +109,29 @@ function parseData() {
             var count = 0;
 
             var parkArray = result.COVParksFacilities.Park;
-            for (var i=0; i< parkArray.length; i++){
-                var parkName = parkArray[i].Name[0];
-                var streetNumber = parkArray[i].StreetNumber[0];
-                var streetName = parkArray[i].StreetName[0];
-                var destination = parkArray[i].GoogleMapDest[0];
+            for (var i=0; i< parkArray.length; i++) {
+                var parkEntry = parkArray[i];
+                var parkName = parkEntry.Name[0];
+                var streetNumber = parkEntry.StreetNumber[0];
+                var streetName = parkEntry.StreetName[0];
+                var destination = parkEntry.GoogleMapDest[0];
                 var res = destination.split(",");
                 var lat = res[0];
                 var lon = res[1];
 
-                var facilityType= [];
-                try {
-                    var facility = parkArray[i].Facilities[0].Facility;
-                    //Fix the comma at the End
-                    for (var j= 0; j<facility.length; j++){
-                        facilityType[j] = facility[j].FacilityType[0];
-                    }
-                    console.log("Trying to add facility");
-                }
-                catch(err){
-                    console.log("no facilities");
-                    facilityType = "None";
-                }
-
-                var washroomLocation= [];
-                try {
-                var washroom = parkArray[i].Facilities[0].Washroom;
-                    for (var p=0; p<washroom.length; p++) {
-                        washroomLocation[p] = washroom[p].Location[0];
-                    }
-                    console.log("Trying to add washroom");
-                }
-                catch(err){
-                    console.log("no washrooms");
-                    washroomLocation[0] = "No washrooms";
-                }
-
+                var facilityType = getFacility(parkEntry);
+                var features = getFeatures(parkEntry);
+                var washroomLocation = getWashroomLocation(parkEntry);
 
                 var park = new Park({
-                    name:parkName,
-                    streetNumber:streetNumber,
-                    streetName:streetName,
-                    lat:parseFloat(lat),
-                    lon:parseFloat(lon),
+                    name: parkName,
+                    streetNumber: streetNumber,
+                    streetName: streetName,
+                    lat: parseFloat(lat),
+                    lon: parseFloat(lon),
                     facilityType: facilityType,
-                    washroomLocation: washroomLocation
+                    washroomLocation: washroomLocation,
+                    features: features
                 });
 
                 park.save();

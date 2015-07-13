@@ -1,5 +1,5 @@
 
-<div ng-controller="RegCtrl as app">
+<div>
 
     <div class="container">
         <div class="row">
@@ -15,10 +15,10 @@
     <!--<input type="text" ng-model="app.newPark"/>-->
     <!--<button ng-click="app.savePark(app.newPark)">Save Park</button>-->
 
-    <input id="username" type="text" placeholder="username" ng-model="app.userName" />
-    <input id="userpassword" type="password" placeholder="password" ng-model="app.userPassword" />
-    <input id="useremail" type="text" placeholder="email" ng-model="app.userEmail" />
+    <input id="username" type="text" placeholder="username" ng-model="userName" />
+    <input id="userpassword" type="password" placeholder="password" ng-model="userPassword" />
+    <input id="useremail" type="text" placeholder="email" ng-model="userEmail" />
 
-    <button class="btn-warning" ng-click="app.registerUser(app.userName, app.userPassword, app.userEmail)">Register</button>
+    <button class="btn-warning" ng-click="registerUser(userName, userPassword, userEmail)">Register</button>
 
 </div>

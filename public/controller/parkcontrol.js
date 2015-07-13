@@ -4,13 +4,14 @@
 
 var parkcontrol = angular.module("parkbook");
 
-parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', function ($scope, $http, $stateParams , park) {
+parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', function ($scope, $http, $stateParams , park, $location) {
     console.log(park);
     var parkInfo = park.data[0];
     $scope.name = parkInfo.name;
     $scope.address = parkInfo.streetNumber + " " + parkInfo.streetName;
     $scope.facilityTypes = parkInfo.facilityType;
     $scope.washroomLocations = parkInfo.washroomLocation;
+    $scope.features = parkInfo.features;
 
 
     var prev_infowindow =false;
@@ -26,15 +27,6 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', func
                     position.coords.longitude);
                 parkCenter = new google.maps.LatLng(parkInfo.lat,
                     parkInfo.lon);
-
-                //var infowindow = new google.maps.InfoWindow({
-                //    map: $scope.mymap2,
-                //    position: pos,
-                //    content: 'Your Location'
-                //});
-
-                //$scope.mymap2.setCenter(parkCenter);
-
 
             }, function () {
                 handleNoGeolocation(true);
@@ -54,12 +46,6 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', func
         };
 
         $scope.mymap2 = new google.maps.Map(document.getElementById('map-park-page'), mapOptions);
-        //google.maps.event.addDomListener(window, 'load', initialize);
-        //google.maps.event.addDomListener(window, "resize", function() {
-        //    var center = $scope.mymap2.getCenter();
-        //    google.maps.event.trigger($scope.mymap2, "resize");
-        //    $scope.mymap2.setCenter(center);
-        //});
 
         google.maps.event.addDomListener(window, 'load', loadPark);
         checkLocation();
@@ -161,4 +147,7 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', func
         });
     }
 
+    $scope.getLocation = function() {
+        return $location.absUrl();
+    }
 }]);
