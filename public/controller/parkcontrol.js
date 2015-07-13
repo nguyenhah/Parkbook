@@ -11,6 +11,7 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park', func
     $scope.address = parkInfo.streetNumber + " " + parkInfo.streetName;
     $scope.facilityTypes = parkInfo.facilityType;
     $scope.washroomLocations = parkInfo.washroomLocation;
+    $scope.features = parkInfo.features;
 
 
     var prev_infowindow =false;

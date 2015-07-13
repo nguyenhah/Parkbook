@@ -35,16 +35,22 @@
     <div class="container">
         <div class="row">
             <h2> General Information </h2>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h3>Facilities</h3>
                 <ul ng-repeat="facility in facilityTypes track by $index">
                     <li> {{facility}} </li>
                 </ul>
             </div>
-            <div class="col-md-3">
-                <h3>Washroom</h3>
+            <div class="col-md-2">
+                <h3>Washroom Locations</h3>
                 <ul ng-repeat="washroom in washroomLocations track by $index">
                     <li> {{washroom}} </li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h3>Features</h3>
+                <ul ng-repeat="feature in features track by $index">
+                    <li> {{feature}} </li>
                 </ul>
             </div>
             <div class="col-md-6">
