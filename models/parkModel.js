@@ -36,7 +36,7 @@ Park.prototype.save = function() {
         lat: this.lat,
         lon: this.lon,
         facilityType: this.facilityType,
-        washroom: this.washroom
+        washroomLocation: this.washroomLocation
     };
     var newPark = new parkModel(park);
     newPark.save(function(err) {
