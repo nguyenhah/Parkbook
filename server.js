@@ -123,7 +123,6 @@ app.get("/searchall", function(req, res) {
 app.post("/adventure", function(req, res) {
     Park.getRandomPark(function (err, park) {
         if (err) return handleError(err);
-        console.log(park);
         res.send(park);
     });
 });
