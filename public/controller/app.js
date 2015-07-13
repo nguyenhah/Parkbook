@@ -8,7 +8,7 @@ var parkbook = angular.module("parkbook", [
         $urlRouterProvider.otherwise('/');
 
         //var url = "http:localhost:3000";
-        var url = "http://parkbook.herokuapp.com";
+        var url = "https://parkbook.herokuapp.com";
 
 
         $stateProvider
