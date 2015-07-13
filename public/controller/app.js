@@ -7,6 +7,10 @@ var parkbook = angular.module("parkbook", [
     parkbook.config(['$urlRouterProvider', '$stateProvider', 'ezfbProvider', function ($urlRouterProvider, $stateProvider, ezfbProvider) {
         $urlRouterProvider.otherwise('/');
 
+        //var url = "http:localhost:3000";
+        var url = "http://parkbook.herokuapp.com";
+
+
         $stateProvider
             .state('home', {
                 url: '/',
@@ -27,7 +31,7 @@ var parkbook = angular.module("parkbook", [
                     park:
                         ['$http','$stateParams', function($http, $stateParams){
                         //get park from server RESTFUL API
-                        return $http.get('http://localhost:3000/loadpark/' + $stateParams.parkName, {name:$stateParams.parkName}).success(function(response){
+                        return $http.get(url + '/loadpark/' + $stateParams.parkName, {name:$stateParams.parkName}).success(function(response){
                             console.log($stateParams);
                             console.log($stateParams.parkName + " inside app.js");
                             return response;
