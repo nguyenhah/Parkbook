@@ -10,8 +10,8 @@ var parkSchema = new mongoose.Schema({
     streetName: String,
     lat: Number,
     lon: Number,
-    facilityType: String,
-    washroom: String
+    facilityType: [String],
+    washroomLocation: [String]
 },
     {collection: 'parks'});
 
@@ -25,7 +25,7 @@ function Park(park){
     this.lat = park.lat;
     this.lon = park.lon;
     this.facilityType = park.facilityType;
-    this.washroom = park.washroom;
+    this.washroomLocation = park.washroomLocation;
 }
 
 Park.prototype.save = function() {

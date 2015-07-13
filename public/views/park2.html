@@ -1,5 +1,5 @@
 
-<div >
+<div>
     <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
@@ -25,19 +25,36 @@
         <p>{{address}}</p>
     </div>
 
-    <div class="fb-like" data-href="http://localhost:3000/#/park/{{name}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></center>
+        <div class="fb-like" data-href="http://localhost:3000/#/park/{{name}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></center>
     <br>
-            <!--<div id="map-park-page"></div>-->
-         <div id="map-park-page"></div>
-
+        <div class="row">
+            <div id="map-park-page"></div>
+        </div>
     <br>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Facilities</h3>
+                <ul ng-repeat="facility in facilityTypes">
+                    <li> {{facility}} </li>
+                </ul>
+                <h3>Washroom</h3>
+                <ul ng-repeat="washroom in washroomLocations">
+                    <li> {{washroom}} </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h3>Reviews</h3>
+                <div class="fb-comment-box"
+                     dyn-fb-comment-box
+                     page-href="http://localhost:3000/#/park/{{name}}"
+                     numposts="5">
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <center><div class="fb-comment-box"
-             dyn-fb-comment-box
-             page-href="http://localhost:3000/#/park/{{name}}"
-             numposts="5">
-    </div></center>
 
     <div id="fb-root"></div>
 </div>
