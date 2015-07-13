@@ -37,37 +37,6 @@ var parkbook = angular.module("parkbook", [
             });
 
         ezfbProvider.setInitParams({
-            appId: '386469651480295'
+            appId: '485003794998932'
         });
     }]);
-
-
-//We can make this a new JS by specifying it as a directive
-// Adding new directive for ngEnter
-parkbook.directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.$eval(attrs.ngEnter);
-                });
-
-                event.preventDefault();
-            }
-        });
-    };
-});
-
-//This can be refactored as well as it's own controller
-parkbook.controller("RegCtrl", function ($http) {
-    var app = this;
-    var url = "http://localhost:3000";
-    //var url = "https://parkbook.herokuapp.com";
-
-    app.registerUser = function(userName, userPassword, userEmail) {
-        $http.post(url + "/views/register2", {name:userName, password: userPassword, email: userEmail}).success(function() {
-            console.log("registering" + userName);
-        })
-    };
-
-});

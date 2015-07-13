@@ -128,7 +128,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', function ($scope, $http) {
 
             var contentString = '<p><b>' + parkObjects[i].name + '</b></p>' +
                 '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>' +
-                '<p><a href="#/park/' + parkObjects[i].name + '">' + "Park profile goes here" +'</a></p>';
+                '<p><a href="#/park/' + parkObjects[i].name + '">' + "View this park!" +'</a></p>';
 
             infowindow[i] = new google.maps.InfoWindow({content: contentString});
 

@@ -4,7 +4,7 @@
 
 var parkcontrol = angular.module("parkbook");
 
-parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', function ($scope, $http, $stateParams , park, $location, $route) {
+parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', function ($scope, $http, $stateParams , park, $location) {
     console.log(park);
     var parkInfo = park.data[0];
     $scope.name = parkInfo.name;
@@ -146,31 +146,6 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
             }
         });
     }
-
-    $scope.pluginOn = true;
-    $scope.rendering = false;
-
-    $scope.goto = function (dirTag) {
-        $location.path('/' + dirTag);
-    };
-
-    $scope.isActive = function (dirTag) {
-        return ($location.path() === '/' + dirTag);
-    };
-
-    $scope.rendered = function () {
-        $scope.rendering = false;
-    };
-
-    $scope.$watch('pluginOn', function (newVal, oldVal) {
-        if (newVal !== oldVal) {
-            $scope.rendering = true;
-        }
-    });
-
-    $scope.$on('$routeChangeSuccess', function () {
-        $scope.rendering = true;
-    });
 
     $scope.getLocation = function() {
         return $location.absUrl();
