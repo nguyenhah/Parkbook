@@ -5,6 +5,20 @@
   height: 50vh;
 }
 
+.text-horizontal-center h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 4.5em;
+  font-weight: 700;
+}
+
+.text-horizontal-center p {
+  margin: 0;
+  padding: 0;
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
 #map-park-page {
   height: 50vh;
   width: 50vw;

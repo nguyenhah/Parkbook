@@ -20,22 +20,24 @@
             }
         });
     </script>
-    <h3>{{name}}</h3>
-    <p>{{address}}</p>
-    <div>
-        <div class="fb-like" data-href="http://localhost:3000/#/park/{{name}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-        <div>
-            <!--<div id="map-park-page"></div>-->
-            <div id="map-park-page"></div>
-        </div>
+    <center><div class="text-horizontal-center">
+        <h3>{{name}}</h3>
+        <p>{{address}}</p>
     </div>
-    <div>
-        <div class="fb-comment-box"
+
+    <div class="fb-like" data-href="http://localhost:3000/#/park/{{name}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></center>
+    <br>
+            <!--<div id="map-park-page"></div>-->
+         <div id="map-park-page"></div>
+
+    <br>
+
+
+    <center><div class="fb-comment-box"
              dyn-fb-comment-box
              page-href="http://localhost:3000/#/park/{{name}}"
              numposts="5">
-        </div>
-    </div>
+    </div></center>
 
     <div id="fb-root"></div>
 </div>
