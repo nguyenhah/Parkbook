@@ -46,7 +46,12 @@
       <a href="#" onclick = $("#menu-close").click(); >Login</a>
     </li>
     <li>
-      <a href="#/admin" onclick = $("#menu-close").click(); >Register</a>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        Admin <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <a href="#" ng-controller="AppCtrl" ng-click="importParks()">Import Data</a>
+      </ul>
     </li>
   </ul>
 </nav>
@@ -155,7 +160,7 @@
 <!--<script src="assets/js/maps.js"></script>-->
 <script src="assets/js/states.js"></script>
 <script src="bower_components/angular/angular.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+<script src="assets/js/angular-ui-router.min.js"></script>
 <script src="assets/js/navigation.js"></script>
 <script src="assets/js/typeahead.js"></script>
 <script src="controller/app.js"></script>
@@ -163,7 +168,7 @@
 <script src="controller/directive.js"></script>
 <script src="controller/parkcontrol.js"></script>
 <script src="controller/registercontrol.js"></script>
-<script src="https://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
+<script src="assets/js/angular-easyfb.min.js"></script>
 </body>
 
 </html>

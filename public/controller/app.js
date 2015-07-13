@@ -31,7 +31,7 @@ var parkbook = angular.module("parkbook", [
                     park:
                         ['$http','$stateParams', function($http, $stateParams){
                         //get park from server RESTFUL API
-                        return $http.get(url + '/loadpark/' + $stateParams.parkName, {name:$stateParams.parkName}).success(function(response){
+                        return $http.get('/loadpark/' + $stateParams.parkName, {name:$stateParams.parkName}).success(function(response){
                             console.log($stateParams);
                             console.log($stateParams.parkName + " inside app.js");
                             return response;
