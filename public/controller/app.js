@@ -7,8 +7,8 @@ var parkbook = angular.module("parkbook", [
     parkbook.config(['$urlRouterProvider', '$stateProvider', 'ezfbProvider', function ($urlRouterProvider, $stateProvider, ezfbProvider) {
         $urlRouterProvider.otherwise('/');
 
-        //var url = "http:localhost:3000";
-        var url = "https://parkbook.herokuapp.com";
+        var url = "http:localhost:3000";
+        //var url = "https://parkbook.herokuapp.com";
 
 
         $stateProvider
@@ -37,6 +37,22 @@ var parkbook = angular.module("parkbook", [
                             return response;
                         })
                     }]
+                }
+            })
+            .state('admin',{
+                url:'/admin',
+                templateUrl:'views/admin.html',
+                controller:'AdminCtrl',
+                resolve: {
+                    admin:
+                        ['$http','$stateParams', function($http, $stateParams){
+                            //get park from server RESTFUL API
+                            return $http.get(url + '/loadpark/' + $stateParams.parkName, {name:$stateParams.parkName}).success(function(response){
+                                console.log($stateParams);
+                                console.log($stateParams.parkName + " inside app.js");
+                                return response;
+                            })
+                        }]
                 }
             });
 
