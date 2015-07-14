@@ -7,8 +7,8 @@ var parkbook = angular.module("parkbook", [
     parkbook.config(['$urlRouterProvider', '$stateProvider', 'ezfbProvider', function ($urlRouterProvider, $stateProvider, ezfbProvider) {
         $urlRouterProvider.otherwise('/');
 
-        var url = "http:localhost:3000";
-        //var url = "https://parkbook.herokuapp.com";
+        //var url = "http:localhost:3000";
+        var url = "https://parkbook.herokuapp.com";
 
 
         $stateProvider
