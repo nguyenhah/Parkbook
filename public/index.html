@@ -45,14 +45,15 @@
     <li>
       <a href="#" onclick = $("#menu-close").click(); >Login</a>
     </li>
-    <li>
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        Admin <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <a href="#" ng-controller="AppCtrl" ng-click="importParks()">Import Data</a>
-      </ul>
-    </li>
+    <!--<li>-->
+      <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">-->
+        <!--Admin <span class="caret"></span>-->
+      <!--</a>-->
+      <!--<ul class="dropdown-menu">-->
+        <!--<a href="#" ng-controller="AppCtrl" ng-click="importParks()">Import Data</a>-->
+      <!--</ul>-->
+    <!--</li>-->
+    <li ui-view="admin"></li>
   </ul>
 </nav>
 
@@ -151,7 +152,7 @@
 
   <!--</table>-->
 
-<div ui-view class></div>
+<div ui-view></div>
 
 <script src="https://maps.google.com/maps/api/js?sensor=true"></script>
 <script src="assets/js/jquery-1.11.3.min.js"></script>
@@ -168,6 +169,7 @@
 <script src="controller/directive.js"></script>
 <script src="controller/parkcontrol.js"></script>
 <script src="controller/registercontrol.js"></script>
+<script src="controller/admincontrol.js"></script>
 <script src="assets/js/angular-easyfb.min.js"></script>
 </body>
 

@@ -4,7 +4,7 @@
 
 var parkbook = angular.module("parkbook");
 
-parkbook.controller("AdminCtrl", ['$http', '$scope','admin', function ($http, $scope, admin) {
+parkbook.controller("AdminCtrl", ['$http', '$scope', function ($http, $scope) {
     var url = "http://localhost:3000";
     //var url = "https://parkbook.herokuapp.com";
 
