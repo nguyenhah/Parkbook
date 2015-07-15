@@ -81,7 +81,36 @@ var parkbook = angular.module("parkbook", [
                     },
                     "admin": {
                         templateUrl: 'views/admin.html',
-                        controller: 'AdminCtrl'
+                        controller: 'AdminCtrl',
+                        resolve: {
+                            admin:
+                                ['ezfb', function(ezfb) {
+                                    return ezfb.getLoginStatus(function (response) {
+                                        if (response.status === 'connected') {
+                                            console.log("inside connected");
+                                            var uid = response.authResponse.userID;
+                                            var accessToken = response.authResponse.accessToken;
+                                            console.log(accessToken);
+
+                                            //Don't need this
+                                            //return ezfb.api('/me', function(resp) {
+                                            //    console.log(resp);
+                                            //    return resp;
+                                            //});
+
+                                        } else if (response.status === 'not_authorized') {
+                                            // logged in but not authenticaed to app
+                                            console.log("inside not authorized");
+                                            console.log(response);
+
+                                        } else {
+                                            // not logged in
+                                            console.log("inside default");
+                                        }
+                                    });
+
+                                }]
+                        }
                     }
                 }
             });
