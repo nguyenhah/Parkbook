@@ -93,7 +93,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
             console.log("inside success");
             loadParks();
         })
-
     };
 
     var prev_infowindow =false;
@@ -126,11 +125,29 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
             var infowindow = [];
             var marker = [];
 
-            var contentString = '<p><b>' + parkObjects[i].name + '</b></p>' +
-                '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>' +
-                '<p><a href="#/park/' + parkObjects[i].name + '">' + "View this park!" +'</a></p>';
+            //var contentString = '<p><b>' + parkObjects[i].name + '</b></p>' +
+            //    '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>' +
+            //    '<p><a href="#/park/' + parkObjects[i].name + '">' + "View this park!" +'</a></p>' +
+            //    '<p id="routeHere"><a href>' + "route to here!" +'</a></p>';
 
-            infowindow[i] = new google.maps.InfoWindow({content: contentString});
+            var $infoWindowContent = $([
+                '<div class="infoWindowContent">',
+                '<p><b>' + parkObjects[i].name + '</b></p>',
+                '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>',
+                '<p><button href="#/park/' + parkObjects[i].name + '">' + "View this park!" +'</button></p>',
+                '<button class="routeHere">Route to here</button>',
+                '</div>'
+            ].join(''));
+            $infoWindowContent.find(".routeHere").on('click', function() {
+                console.log("whats up my man");
+                calcRoute();
+            });
+
+            infowindow[i] = new google.maps.InfoWindow();
+            infowindow[i].setContent($infoWindowContent.get(0));
+
+            //infowindow[i] = new google.maps.InfoWindow({content: contentString});
+
 
             marker[i] = new google.maps.Marker({
 
@@ -147,7 +164,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
                 console.log(latitude);
                 console.log(longitude);
                 console.log(pos);
-                calcRoute();
+                //calcRoute();
             }); //end addListener
 
             google.maps.event.addListener(marker[i], 'click', makeInfoWindow($scope.mymap, infowindow[i], marker[i]));
