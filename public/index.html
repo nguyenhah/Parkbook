@@ -43,65 +43,70 @@
     <li>
       <a href="#" onclick = $("#menu-close").click(); >Latest Reviews</a>
     </li>
-    <li>
-      <a href="#" onclick = $("#menu-close").click(); >Login</a>
-    </li>
+    <div ng-controller="FacebookCtrl">
+      <li>
+        <a href="#" onclick = $("#menu-close").click(); ng-click="logout()" ng-if="loginStatus.status == 'connected'">Logout</a>
+      </li>
+      <li>
+        <a href="#" onclick = $("#menu-close").click(); ng-click="login()" ng-if="!loginStatus || loginStatus.status != 'connected'">Login</a>
+      </li>
+    </div>
     <!--<li>-->
-      <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">-->
-        <!--Admin <span class="caret"></span>-->
-      <!--</a>-->
-      <!--<ul class="dropdown-menu">-->
-        <!--<a href="#" ng-controller="AppCtrl" ng-click="importParks()">Import Data</a>-->
-      <!--</ul>-->
+    <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">-->
+    <!--Admin <span class="caret"></span>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu">-->
+    <!--<a href="#" ng-controller="AppCtrl" ng-click="importParks()">Import Data</a>-->
+    <!--</ul>-->
     <!--</li>-->
     <li ui-view="admin"></li>
   </ul>
 </nav>
 
 <!--<header id="top" class="header">-->
-    <!--<div class="text-vertical-center">-->
-        <!--<h1>ParkBook</h1>-->
-        <!--<h3>Better than Parkplace</h3>-->
-        <!--<br>-->
-      <!--<div class="container">-->
-        <!--<div class="col-lg-3"></div>-->
-        <!--<div class="col-lg-6">-->
-        <!--<input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>-->
+<!--<div class="text-vertical-center">-->
+<!--<h1>ParkBook</h1>-->
+<!--<h3>Better than Parkplace</h3>-->
+<!--<br>-->
+<!--<div class="container">-->
+<!--<div class="col-lg-3"></div>-->
+<!--<div class="col-lg-6">-->
+<!--<input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>-->
 
-        <!--<a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>-->
-          <!--<a href="#parkmap" id="findRandomPark" ng-click="app.findRandomPark()" class="btn btn-dark btn-lg" type="button">I'm Feeling Adventurous</a>-->
-      <!--</div>-->
-        <!--<div class="col-lg-3"></div>-->
-      <!--</div>-->
-    <!--</div>-->
+<!--<a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>-->
+<!--<a href="#parkmap" id="findRandomPark" ng-click="app.findRandomPark()" class="btn btn-dark btn-lg" type="button">I'm Feeling Adventurous</a>-->
+<!--</div>-->
+<!--<div class="col-lg-3"></div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</header>-->
 
 
 
-  <!-- DISPLAY ALL PARKS IN LIST -->
+<!-- DISPLAY ALL PARKS IN LIST -->
 
-  <!--<ul>-->
-  <!--<li ng-repeat="park in app.parks">-->
-  <!--{{ park.name }}-->
-  <!--</li>-->
+<!--<ul>-->
+<!--<li ng-repeat="park in app.parks">-->
+<!--{{ park.name }}-->
+<!--</li>-->
 
 
 
 <!--<header id="top" class="header">-->
-    <!--<div class="text-vertical-center">-->
-        <!--<h1>ParkBook</h1>-->
-        <!--<h3>Better than Parkplace</h3>-->
-        <!--<br>-->
-      <!--<div class="container">-->
-        <!--<div class="col-lg-3"></div>-->
-        <!--<div class="col-lg-6">-->
-        <!--<input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>-->
+<!--<div class="text-vertical-center">-->
+<!--<h1>ParkBook</h1>-->
+<!--<h3>Better than Parkplace</h3>-->
+<!--<br>-->
+<!--<div class="container">-->
+<!--<div class="col-lg-3"></div>-->
+<!--<div class="col-lg-6">-->
+<!--<input id="searchBar" ng-enter="app.findPark(app.parkName)" class="form-control" type="text" ng-model="app.parkName"/>-->
 
-        <!--<a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>-->
-      <!--</div>-->
-        <!--<div class="col-lg-3"></div>-->
-      <!--</div>-->
-    <!--</div>-->
+<!--<a href="#parkmap" id="findParks" ng-click="app.findPark(app.parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>-->
+<!--</div>-->
+<!--<div class="col-lg-3"></div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</header>-->
 
 
@@ -109,49 +114,49 @@
 
 
 
-  <!--&lt;!&ndash; SAVE A PARK NAME &ndash;&gt;-->
+<!--&lt;!&ndash; SAVE A PARK NAME &ndash;&gt;-->
 
-  <!--&lt;!&ndash;<input type="text" ng-model="app.newPark"/>&ndash;&gt;-->
-  <!--&lt;!&ndash;<button ng-click="app.savePark(app.newPark)">Save Park</button>&ndash;&gt;-->
-
-
-
-  <!--&lt;!&ndash; NATIVE GOOGLE MAPS &ndash;&gt;-->
-  <!--<div id="parkmap">-->
-  <!--<div id="map"></div>-->
-  <!--<div data-ng-model="mymarker"></div>-->
-  <!--</div>-->
-  <!--<div class="container">-->
-    <!--<div class="row">-->
-      <!--<div class="col-lg-10 col-lg-offset-1 text-center">-->
-        <!--<h3>Park Results</h3>-->
-        <!--<hr class="small">-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<table class="table">-->
-    <!--<thead>-->
-    <!--<tr>-->
-      <!--<th>Name</th>-->
-      <!--<th>Address</th>-->
-      <!--<th>&nbsp;</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
+<!--&lt;!&ndash;<input type="text" ng-model="app.newPark"/>&ndash;&gt;-->
+<!--&lt;!&ndash;<button ng-click="app.savePark(app.newPark)">Save Park</button>&ndash;&gt;-->
 
 
-    <!--<tbody>-->
 
-    <!--<tr ng-repeat="park in app.parksSearched">-->
-      <!--<td>{{ park.name }}</td>-->
-      <!--<td>{{ park.streetNumber + " " + park.streetName }}</td>-->
-      <!--<td><div><a ui-sref="park({parkName:park.name})">Click to go to {{park.name}}</a></div></td>-->
-    <!--</tr>-->
+<!--&lt;!&ndash; NATIVE GOOGLE MAPS &ndash;&gt;-->
+<!--<div id="parkmap">-->
+<!--<div id="map"></div>-->
+<!--<div data-ng-model="mymarker"></div>-->
+<!--</div>-->
+<!--<div class="container">-->
+<!--<div class="row">-->
+<!--<div class="col-lg-10 col-lg-offset-1 text-center">-->
+<!--<h3>Park Results</h3>-->
+<!--<hr class="small">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<table class="table">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th>Name</th>-->
+<!--<th>Address</th>-->
+<!--<th>&nbsp;</th>-->
+<!--</tr>-->
+<!--</thead>-->
 
 
-    <!--</tbody>-->
+<!--<tbody>-->
+
+<!--<tr ng-repeat="park in app.parksSearched">-->
+<!--<td>{{ park.name }}</td>-->
+<!--<td>{{ park.streetNumber + " " + park.streetName }}</td>-->
+<!--<td><div><a ui-sref="park({parkName:park.name})">Click to go to {{park.name}}</a></div></td>-->
+<!--</tr>-->
 
 
-  <!--</table>-->
+<!--</tbody>-->
+
+
+<!--</table>-->
 
 <div ui-view></div>
 
@@ -171,6 +176,7 @@
 <script src="controller/homecontrol.js"></script>
 <script src="controller/directive.js"></script>
 <script src="controller/parkcontrol.js"></script>
+<script src="controller/facebookcontrol.js"></script>
 <script src="controller/registercontrol.js"></script>
 <script src="controller/admincontrol.js"></script>
 <script src="assets/js/angular-easyfb.min.js"></script>
