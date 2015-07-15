@@ -234,12 +234,20 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
         console.log(parkName);
         $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
 
-            console.log("inside success of findPark");
+            //if (park.length == 0) {
+            //    alert("Sorry! We couldn't find a park named " + parkName);
+            //    return;
+            //}
+
             $scope.parksSearched = park;
 
-            setMarkers(park);
-            $scope.mymap.panTo(markersArray[0].getPosition());
-            console.log(park.length);
+            try {
+                setMarkers(park);
+                $scope.mymap.panTo(markersArray[0].getPosition());
+            } catch(err) {
+                alert("Sorry! We couldn't find a park named " + parkName);
+            }
+
         })
     };
 
