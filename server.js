@@ -10,6 +10,9 @@ var parkparser = require("./parkparser");
 var Park = require("./models/parkModel");
 var parkModel = Park.parkModel;
 
+var Rating = require("./models/ratingmodel");
+var ratingModel = Rating.ratingModel;
+
 var User = require("./models/usermodel");
 var userModel = User.userModel;
 
@@ -58,6 +61,27 @@ app.get("/loadpark/:parkName", function (req, res) {
 //        res.send(park);
 //    });
 //});
+
+//This method needs an object {name:name,rating:[number],numRates:1}
+app.get("/addRating/:name/:rating", function(req, res) {
+    var query = req.params.name;
+    console.log(req.params);
+    try {
+        console.log("in Try");
+        ratingModel.update({name: req.params.name}, {$push:{rating: req.params.rating}}, {upsert: true}, function (err, doc) {
+            if (err) return res.send(500, {error: err});
+            return res.send("succesfully saved");
+        });
+    } catch (err) {
+        console.log("in catch");
+        var userRating = new Rating({name:req.params.name,
+        rating:[req.params.rating]});
+    console.log(userRating);
+        userRating.save(function(err) {
+            res.send();
+        });
+    }
+});
 
 
 app.post("/add", function(req, res) {

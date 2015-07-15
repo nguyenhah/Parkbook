@@ -48,32 +48,14 @@ Rating.getRating = function(name, callback) {
     })
 };
 
-Rating.addRating = function(name, callback) {
+Rating.addRating = function(name,rate, callback) {
     var userRating = Rating.find(name);
     try {
         if (userRating ){};
-    }
-
-};
-
-Park.getRandomPark = function(callback) {
-    parkModel.find({}, function(err, park) {
-        if (err) {
-            return callback(err);
-        }
-        callback(null, park);
-    })
-};
-
-Park.removeAllParks = function(callback) {
-    parkModel.collection.drop(function(err) {
-        if (err) {
-            return callback(err);
-        }
-        callback(null);
-    })
+    } catch(err){}
 };
 
 
-module.exports = Park;
-module.exports.parkModel = parkModel;
+
+module.exports = Rating;
+module.exports.ratingModel = ratingModel;
