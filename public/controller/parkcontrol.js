@@ -41,6 +41,7 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
     function loadPark() {
         var mapOptions = {
             zoom: 12,
+            scrollwheel: false,
             center: new google.maps.LatLng(49.246292, -123.116226),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };

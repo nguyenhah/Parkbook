@@ -47,6 +47,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
 
             var mapOptions = {
                 zoom: 12,
+                scrollwheel: false,
                 center: new google.maps.LatLng(49.246292, -123.116226),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
@@ -71,7 +72,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
         }
 
         var options = {
-            map: map,
+            map: mymap,
             position: new google.maps.LatLng(49.246292, -123.116226),
             content: content
         };

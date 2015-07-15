@@ -40,21 +40,20 @@ Rating.prototype.save = function() {
 };
 
 Rating.getRating = function(name, callback) {
-    ratingModel.find({name: name}, function(err, park) {
+    ratingModel.find({name: name}, function(err, rating) {
         if (err) {
             return callback(err);
         }
-        callback(null, park);
+        callback(null, rating);
     })
 };
 
-Rating.addRating = function(callback) {
-    parkModel.find({}, function(err, parks) {
-        if (err) {
-            return callback(err);
-        }
-        callback(null, parks);
-    })
+Rating.addRating = function(name, callback) {
+    var userRating = Rating.find(name);
+    try {
+        if (userRating ){};
+    }
+
 };
 
 Park.getRandomPark = function(callback) {
