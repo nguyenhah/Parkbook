@@ -4,9 +4,9 @@
 
 var parkbook = angular.module("parkbook");
 
-parkbook.controller("AdminCtrl", ['$http', '$scope', function ($http, $scope) {
-    //var url = "http://localhost:3000";
-    var url = "https://parkbook.herokuapp.com";
+parkbook.controller("AdminCtrl", ['$http', '$scope','admin', function ($http, $scope, admin) {
+    var url = "http://localhost:3000";
+    //var url = "https://parkbook.herokuapp.com";
 
     //this function is called inside HTML
     //the http call is tagged with "/download" and sent to server.js
