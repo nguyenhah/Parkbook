@@ -25,17 +25,18 @@ var parkbook = angular.module("parkbook", [
                         resolve: {
                             admin:
                                 ['ezfb', function(ezfb) {
-                                     return ezfb.getLoginStatus(function (response) {
+                                      return ezfb.getLoginStatus(function (response) {
                                         if (response.status === 'connected') {
                                             console.log("inside connected");
                                             var uid = response.authResponse.userID;
                                             var accessToken = response.authResponse.accessToken;
                                             console.log(accessToken);
 
-                                            ezfb.api('/me', function(resp) {
-                                                console.log(resp);
-                                                return resp;
-                                            });
+                                            //Don't need this
+                                            //return ezfb.api('/me', function(resp) {
+                                            //    console.log(resp);
+                                            //    return resp;
+                                            //});
 
                                         } else if (response.status === 'not_authorized') {
                                             // logged in but not authenticaed to app

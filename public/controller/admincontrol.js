@@ -8,6 +8,15 @@ parkbook.controller("AdminCtrl", ['$http', '$scope','admin', function ($http, $s
     var url = "http://localhost:3000";
     //var url = "https://parkbook.herokuapp.com";
 
+    $scope.isAdmin = false;
+
+    if (admin.authResponse.userID == "10153064665261475" ||
+        admin.authResponse.userID == "10103635220276328") {
+        $scope.isAdmin = true;
+    }
+
+    console.log(typeof admin.authResponse.userID);
+
     //this function is called inside HTML
     //the http call is tagged with "/download" and sent to server.js
     //server.js calls the app.get() with the "/download" tag
