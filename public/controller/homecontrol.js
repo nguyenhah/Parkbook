@@ -131,18 +131,16 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
             //    '<p id="routeHere"><a href>' + "route to here!" +'</a></p>';
 
             var $infoWindowContent = $([
-                '<center><div class="infoWindowContent">',
+                '<div class="infoWindowContent">',
                 '<p><b>' + parkObjects[i].name + '</b></p>',
                 '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>',
                 //'<a class="viewPark">' +
                 //'<button class="btn-success" href="#/park/' + parkObjects[i].name + '">' + "View this park!" + '</button></a>',
                 //'<a href="www.google.com" class="btn btn-info" role="button">',
-                '<form action="#/park/' + parkObjects[i].name + '">',
-                '<input style="background-color:lightcoral" type="submit" value="View this park!"></form>',
-                '<br>',
-                '<p class= "routeHere">',
-                    '<button class="btn-success">Route to here</button></p>',
-                '</div></center>'
+                '<p><form action="#/park/' + parkObjects[i].name + '">',
+                '<input type="submit" value="View this park!"></form></p>',
+                    '<p><button class="routeHere">Route to here</button></p>',
+                '</div>'
             ].join(''));
             $infoWindowContent.find(".routeHere").on('click', function() {
                 console.log("whats up my man");
