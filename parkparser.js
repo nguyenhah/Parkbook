@@ -109,9 +109,11 @@ function parseData() {
             var count = 0;
 
             var parkArray = result.COVParksFacilities.Park;
+            console.log(parkArray);
             for (var i=0; i< parkArray.length; i++) {
                 var parkEntry = parkArray[i];
                 var parkName = parkEntry.Name[0];
+                var parkID = parkEntry.$.ID;
                 var streetNumber = parkEntry.StreetNumber[0];
                 var streetName = parkEntry.StreetName[0];
                 var destination = parkEntry.GoogleMapDest[0];
@@ -125,6 +127,7 @@ function parseData() {
 
                 var park = new Park({
                     name: parkName,
+                    parkID: parkID,
                     streetNumber: streetNumber,
                     streetName: streetName,
                     lat: parseFloat(lat),

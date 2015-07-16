@@ -5,9 +5,9 @@
         <h3>{{name}}</h3>
         <p>{{address}}</p>
         <!--<input id="input-id">-->
-        <div ng-controller="RatingCtrl">
+        <div>
             <div star-rating data-ng-model="rating1" max="10" on-rating-selected="rateFunction(rating)"></div>
-            <div><strong>Rating 1:</strong> {{rating1}}</div>
+            <div><strong>Rating:</strong> {{rating1}}</div>
         </div>
     </div>
         <div class="fb-like" data-href="{{getLocation()}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></center>

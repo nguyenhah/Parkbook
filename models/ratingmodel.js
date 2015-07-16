@@ -9,7 +9,7 @@
 var mongoose = require('mongoose');
 
 var ratingSchema = new mongoose.Schema({
-        name: String,
+        ID: String,
         rating: [Number],
         numRates: Number
     },
@@ -19,14 +19,14 @@ var ratingModel = mongoose.model('Rating', ratingSchema);
 
 //Constructor
 function Rating(rating){
-    this.name = rating.name;
+    this.ID = rating.ID;
     this.rating = rating.rating;
     this.numRates = rating.numRates;
 }
 
 Rating.prototype.save = function() {
     var rating = {
-        name: this.name,
+        ID: this.ID,
         rating: this.rating,
         numRates: this.numRates
     };
@@ -39,8 +39,8 @@ Rating.prototype.save = function() {
     });
 };
 
-Rating.getRating = function(name, callback) {
-    ratingModel.find({name: name}, function(err, park) {
+Rating.getRating = function(ID, callback) {
+    ratingModel.find({ID: ID}, function(err, park) {
         if (err) {
             return callback(err);
         }
@@ -48,8 +48,8 @@ Rating.getRating = function(name, callback) {
     })
 };
 
-Rating.addRating = function(name,rate, callback) {
-    var userRating = Rating.find(name);
+Rating.addRating = function(ID,rate, callback) {
+    var userRating = Rating.find(ID);
     try {
         if (userRating ){};
     } catch(err){}

@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 
 var parkSchema = new mongoose.Schema({
     name: String,
+    parkID: String,
     streetNumber: String,
     streetName: String,
     lat: Number,
@@ -21,6 +22,7 @@ var parkModel = mongoose.model('Park', parkSchema);
 //Constructor
 function Park(park){
     this.name = park.name;
+    this.parkID = park.parkID;
     this.streetNumber = park.streetNumber;
     this.streetName = park.streetName;
     this.lat = park.lat;
@@ -33,6 +35,7 @@ function Park(park){
 Park.prototype.save = function() {
     var park = {
         name: this.name,
+        parkID: this.parkID,
         streetNumber: this.streetNumber,
         streetName: this.streetName,
         lat: this.lat,

@@ -63,17 +63,17 @@ app.get("/loadpark/:parkName", function (req, res) {
 //});
 
 //This method needs an object {name:name,rating:[number],numRates:1}
-app.get("/addRating/:name/:rating", function(req, res) {
+app.get("/addRating/:id/:rating", function(req, res) {
     console.log(req.params);
     try {
         console.log("in Try");
-        ratingModel.update({name: req.params.name}, {$push:{rating: req.params.rating}}, {upsert: true}, function (err, doc) {
+        ratingModel.update({ID: req.params.id}, {$push:{rating: req.params.rating}}, {upsert: true}, function (err, doc) {
             if (err) return res.send(500, {error: err});
             return res.send("succesfully saved");
         });
     } catch (err) {
         console.log("in catch");
-        var userRating = new Rating({name:req.params.name,
+        var userRating = new Rating({ID:req.params.id,
             rating:[req.params.rating],
             numRates: 1});
         console.log(userRating);
@@ -83,10 +83,10 @@ app.get("/addRating/:name/:rating", function(req, res) {
     }
 });
 
-app.get("/getRating/:name", function(req, res) {
-    var name = req.params.name;
-    console.log(name);
-    Rating.getRating(name, function(err, rating) {
+app.get("/getRating/:id", function(req, res) {
+    var ID = req.params.id;
+    console.log(ID);
+    Rating.getRating(ID, function(err, rating) {
         if (err) return handleError(err);
         //console.log(rating);
         res.send(rating);

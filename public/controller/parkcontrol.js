@@ -4,7 +4,20 @@
 
 var parkcontrol = angular.module("parkbook");
 
-parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', function ($scope, $http, $stateParams , park, $location) {
+
+parkcontrol.factory('myService', function($http) {
+
+    var getData = function(parkName) {
+        console.log(parkName);
+
+        return $http({method:"GET", url:"/getRating/" + parkName}).then(function(result){
+            return result.data;
+        });
+    };
+    return { getData: getData };
+});
+
+parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', 'myService', function ($scope, $http, $stateParams , park, $location, myService) {
     console.log(park);
     var parkInfo = park.data[0];
     $scope.name = parkInfo.name;
@@ -12,6 +25,30 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
     $scope.facilityTypes = parkInfo.facilityType;
     $scope.washroomLocations = parkInfo.washroomLocation;
     $scope.features = parkInfo.features;
+
+
+
+    getAverage($scope, myService);
+    $scope.rating1 = 1;
+    $scope.isReadonly = true;
+    $scope.rateFunction = function(rating) {
+        console.log("Rating selected: " + rating);
+    };
+
+
+    function getAverage($scope, myService) {
+        var myDataPromise = myService.getData($scope.name);
+        myDataPromise.then(function(result) {  // this is only run after $http completes
+            $scope.data = result;
+            var sum = 0;
+            for (var i = 0; i < result[0].rating.length; i++) {
+                sum += result[0].rating[i];
+            }
+            sum = sum / result[0].rating.length;
+            console.log($scope.data[0].rating[0]);
+            $scope.rating1 = sum;
+        });
+    }
 
 
     var prev_infowindow =false;
@@ -152,3 +189,42 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
         return $location.absUrl();
     }
 }]);
+
+parkcontrol.directive("starRating", function() {
+    return {
+        restrict : "EA",
+        template : "<ul class='rating' ng-class='{readonly: readonly}'>" +
+        "  <li ng-repeat='star in stars' ng-class='star' ng-click='toggle($index)'>" +
+        "    <i class='fa fa-star'></i>" + //&#9733
+        "  </li>" +
+        "</ul>",
+        scope : {
+            ratingValue : "=ngModel",
+            max : "=?", //optional: default is 5
+            onRatingSelected : "&?",
+            readonly: "=?"
+        },
+        link : function(scope, elem, attrs) {
+            if (scope.max == undefined) { scope.max = 5; }
+            function updateStars() {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({
+                        filled : i < scope.ratingValue
+                    });
+                }
+            };
+            scope.toggle = function(index) {
+                if (scope.readonly == undefined || scope.readonly == false){
+                    scope.ratingValue = index + 1;
+                    scope.onRatingSelected({
+                        rating: index + 1
+                    });
+                }
+            };
+            scope.$watch("ratingValue", function(oldVal, newVal) {
+                if (newVal) { updateStars(); }
+            });
+        }
+    };
+});
