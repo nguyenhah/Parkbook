@@ -30,7 +30,7 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
 
 
     getAverage($scope, myService);
-    $scope.rating1 = 1;
+    $scope.rating1 = {};
     $scope.isReadonly = true;
     $scope.rateFunction = function(rating) {
         console.log("Rating selected: " + rating);
@@ -42,12 +42,16 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
         myDataPromise.then(function(result) {  // this is only run after $http completes
             $scope.data = result;
             var sum = 0;
-            for (var i = 0; i < result[0].rating.length; i++) {
-                sum += result[0].rating[i];
+            try {
+                for (var i = 0; i < result[0].rating.length; i++) {
+                    sum += result[0].rating[i];
+                }
+                sum = sum / result[0].rating.length;
+                console.log($scope.data[0].rating[0]);
+                $scope.rating1 = sum;
+            } catch (err) {
+                $scope.rating1 = "No ratings yet";
             }
-            sum = sum / result[0].rating.length;
-            console.log($scope.data[0].rating[0]);
-            $scope.rating1 = sum;
         });
     }
 
