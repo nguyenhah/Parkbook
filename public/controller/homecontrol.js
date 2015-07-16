@@ -15,6 +15,15 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
         })
     };
 
+    var originalMapOptions = {
+        zoom: 12,
+        scrollwheel: false,
+        center: new google.maps.LatLng(49.246292, -123.116226),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    homeMap = new google.maps.Map(document.getElementById('map'), originalMapOptions);
+
     // Try HTML5 geolocation
     function checkLocation() {
         if (navigator.geolocation) {
@@ -179,6 +188,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
     //Find parks based on the user's search
     $scope.findPark = function(parkName) {
         clearOverlays();
+        directionsDisplay.setMap(homeMap);
         console.log(parkName);
         $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
 
@@ -200,10 +210,12 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
     };
 
     $scope.findAllParks = function() {
+        directionsDisplay.setMap(homeMap);
         $http.get(url + "/searchall");
     };
 
     $scope.findRandomPark = function() {
+        directionsDisplay.setMap(homeMap);
         $http.post(url + "/adventure", {name: "Arbutus Village Park"}).success(function(parks) {
             clearOverlays();
 
@@ -217,6 +229,12 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
 
         });
     };
+
+    ////var map = location_arr[LOCATION_ARR_MAP_OBJECT];
+    //var rendererOptions = {
+    //    map: $scope.mymap
+    //};
+
 
     var directionsDisplay = new google.maps.DirectionsRenderer();
     var directionsService = new google.maps.DirectionsService();
