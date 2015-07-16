@@ -40,11 +40,11 @@ Rating.prototype.save = function() {
 };
 
 Rating.getRating = function(name, callback) {
-    ratingModel.find({name: name}, function(err, rating) {
+    ratingModel.find({name: name}, function(err, park) {
         if (err) {
             return callback(err);
         }
-        callback(null, rating);
+        callback(null, park);
     })
 };
 

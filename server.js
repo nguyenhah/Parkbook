@@ -64,7 +64,6 @@ app.get("/loadpark/:parkName", function (req, res) {
 
 //This method needs an object {name:name,rating:[number],numRates:1}
 app.get("/addRating/:name/:rating", function(req, res) {
-    var query = req.params.name;
     console.log(req.params);
     try {
         console.log("in Try");
@@ -75,12 +74,23 @@ app.get("/addRating/:name/:rating", function(req, res) {
     } catch (err) {
         console.log("in catch");
         var userRating = new Rating({name:req.params.name,
-        rating:[req.params.rating]});
-    console.log(userRating);
+            rating:[req.params.rating],
+            numRates: 1});
+        console.log(userRating);
         userRating.save(function(err) {
             res.send();
         });
     }
+});
+
+app.get("/getRating/:name", function(req, res) {
+    var name = req.params.name;
+    console.log(name);
+    Rating.getRating(name, function(err, rating) {
+        if (err) return handleError(err);
+        //console.log(rating);
+        res.send(rating);
+    });
 });
 
 
