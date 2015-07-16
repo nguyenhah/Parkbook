@@ -93,9 +93,9 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
         var infowindow;
         var marker;
 
-        var contentString = '<p><b>' + parkInfo.name + '</b></p>' +
+        var contentString = '<center><p><b>' + parkInfo.name + '</b></p>' +
             '<p>' + parkInfo.streetNumber + " " + parkInfo.streetName + '</p>' +
-            '<p>"Click on the pin to go here!"</p>';
+            '<p>"Click on the pin to go here!"</p></center>';
 
         parkCenter = new google.maps.LatLng(parkInfo.lat,
             parkInfo.lon);
