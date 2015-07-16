@@ -5,45 +5,58 @@
 var ratingcontrol = angular.module("parkbook");
 
 ratingcontrol.controller("RatingCtrl", ['$http','$scope', function($http, $scope) {
-    $scope.rating1 = helperFunction();
+    $scope.rating1 = getAverage();
     $scope.isReadonly = true;
     $scope.rateFunction = function(rating) {
         console.log("Rating selected: " + rating);
     };
 
-    //function getAverage() {
-    //    var sum = 0;
-    //    $http.get("/getRating/vincent").success(function(object) {
-    //        console.log("inside getAverage");
-    //        console.log(object[0]);
-    //        for (var i=0;i < object[0].rating.length;i++){
-    //            sum += object[0].rating[i];
-    //            console.log(sum);
-    //        }
-    //        console.log(sum/2);
-    //        return sum
-    //    });
-    //    console.log("outside of get request: " + sum);
-    //
-    //}
+    function getAverage() {
+        var ra;
+        $http.get("/getRating/vincent").success(function(object) {
+            //for (var i=0;i < object[0].rating.length;i++){
+            //    sum += object[0].rating[i];
+            //    console.log(sum);
+            //}
+            //console.log(sum/2);
 
-    function getAverage(_callback) {
-        _callback();
-    }
+            ra = object;
 
-    function helperFunction() {
-        getAverage(function() {
-            var sum = 0;
-            $http.get("/getRating/vincent").success(function(object) {
-                for (var i = 0; i < object[0].rating.length; i++) {
-                    sum += object[0].rating[i];
-                    console.log(sum + "inside request");
-                }
-            });
+        });
+        var sum = 0;
+        for (var i=0;i < object[0].rating.length;i++){
+            sum += object[0].rating[i];
             console.log(sum);
-            return sum
-        })
+        }
+
+
+
+        console.log("outside of get request: " + sum);
+
+        return sum/2;
+
     }
+
+    //function getAverage(_callback) {
+    //    _callback();
+    //}
+    //
+    //function helperFunction() {
+    //    var sum = 0;
+    //    getAverage(function() {
+    //
+    //        $http.get("/getRating/vincent").success(function(object) {
+    //            for (var i = 0; i < object[0].rating.length; i++) {
+    //                sum += object[0].rating[i];
+    //                console.log(sum + "inside request");
+    //            }
+    //        });
+    //        return sum;
+    //    });
+    //
+    //    console.log(sum);
+    //    return sum.promise;
+    //}
 
 }]);
 ratingcontrol.directive("starRating", function() {

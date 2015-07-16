@@ -143,12 +143,8 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
                 '<div class="infoWindowContent">',
                 '<p><b>' + parkObjects[i].name + '</b></p>',
                 '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>',
-                //'<a class="viewPark">' +
-                //'<button class="btn-success" href="#/park/' + parkObjects[i].name + '">' + "View this park!" + '</button></a>',
-                //'<a href="www.google.com" class="btn btn-info" role="button">',
-                '<p><form action="#/park/' + parkObjects[i].name + '">',
-                '<input type="submit" value="View this park!"></form></p>',
-                    '<p><button class="routeHere">Route to here</button></p>',
+                '<p><a class="btn btn-dark" href="#/park/' + parkObjects[i].name + '">' + "View this park!" +'</a></p>',
+                '<button class="btn btn-dark routeHere">Route to here</button>',
                 '</div>'
             ].join(''));
             $infoWindowContent.find(".routeHere").on('click', function() {
@@ -216,7 +212,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
 
     $scope.findRandomPark = function() {
         directionsDisplay.setMap(homeMap);
-        $http.post(url + "/adventure", {name: "Arbutus Village Park"}).success(function(parks) {
+        $http.post(url + "/adventure").success(function(parks) {
             clearOverlays();
 
             $scope.allParks = parks;
