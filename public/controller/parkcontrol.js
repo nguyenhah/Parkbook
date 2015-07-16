@@ -17,9 +17,10 @@ parkcontrol.factory('myService', function($http) {
     return { getData: getData };
 });
 
+var parkInfo;
 parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', 'myService', function ($scope, $http, $stateParams , park, $location, myService) {
     console.log(park);
-    var parkInfo = park.data[0];
+    parkInfo = park.data[0];
     $scope.name = parkInfo.name;
     $scope.address = parkInfo.streetNumber + " " + parkInfo.streetName;
     $scope.facilityTypes = parkInfo.facilityType;
@@ -190,7 +191,7 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
     }
 }]);
 
-parkcontrol.directive("starRating", function() {
+parkcontrol.directive("starRating", function($http) {
     return {
         restrict : "EA",
         template : "<ul class='rating' ng-class='{readonly: readonly}'>" +
@@ -217,13 +218,14 @@ parkcontrol.directive("starRating", function() {
             scope.toggle = function(index) {
                 if (scope.readonly == undefined || scope.readonly == false){
                     scope.ratingValue = index + 1;
-                    scope.onRatingSelected({
-                        rating: index + 1
-                    });
+                    scope.onRatingSelected({rating: index + 1});
+                    $http.get('/addRating/'+ parkInfo.name + '/' + scope.ratingValue);
                 }
             };
             scope.$watch("ratingValue", function(oldVal, newVal) {
-                if (newVal) { updateStars(); }
+                if (newVal) {
+                    updateStars();
+                }
             });
         }
     };
