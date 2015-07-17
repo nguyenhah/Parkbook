@@ -8,6 +8,7 @@ var userSchema = new mongoose.Schema({
     password: String,
     email: String,
     flag: String,
+    fbID: String,
     reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
     },
     { collection: 'users' });
@@ -19,6 +20,7 @@ function User(user) {
     this.password = user.password;
     this.email = user.email;
     this.flag = user.flag;
+    this.fbID = user.fbID;
     this.reviews = user.reviews;
 }
 
@@ -28,6 +30,7 @@ User.prototype.save = function() {
         password: this.password,
         email: this.email,
         flag: this.flag,
+        fbID: this.fbID,
         reviews: this.reviews
     };
     var newUser = new userModel(user);
