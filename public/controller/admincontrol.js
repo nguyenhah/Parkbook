@@ -4,21 +4,39 @@
 
 var parkbook = angular.module("parkbook");
 
-parkbook.controller("AdminCtrl", ['$http', '$scope','admin', function ($http, $scope, admin) {
+
+parkbook.factory('authService', function($http) {
+
+    var getData = function(authID) {
+
+        return $http({method:"GET", url:"/auth" + authID}).then(function(result){
+            return result.data;
+        });
+    };
+    return { getData: getData };
+});
+
+parkbook.controller("AdminCtrl", ['$http', '$scope','admin', 'authService', function ($http, $scope, admin, authService) {
     var url = "http://localhost:3000";
     //var url = "https://parkbook.herokuapp.com";
 
     $scope.isAdmin = false;
 
-    try {
-        if (admin.authResponse.userID == "10153064665261475" ||
-            admin.authResponse.userID == "10104285495863838") {
-            $scope.isAdmin = true;
+    authenticate($scope, authService);
+
+    function authenticate($scope, authService) {
+        try {
+            var myDataPromise = authService.getData(admin.authResponse.userID);
+            myDataPromise.then(function (result) {
+                $scope.data = result;
+                if (result.fbID == admin.authResponse.userID) {
+                    $scope.isAdmin = true;
+                }
+            });
+        } catch (err) {
+            console.log("user not logged in");
         }
-        console.log(admin.authResponse.userID);
-    } catch (err) {
-        console.log("this user is not an admin");
-    };
+    }
 
     //this function is called inside HTML
     //the http call is tagged with "/download" and sent to server.js
@@ -27,7 +45,6 @@ parkbook.controller("AdminCtrl", ['$http', '$scope','admin', function ($http, $s
         console.log("clicked import");
         $http.get(url + "/download").success(function() {
             console.log("inside success");
-            //loadParks();
         })
 
     };

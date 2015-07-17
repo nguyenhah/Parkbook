@@ -7,8 +7,8 @@ parkbook.controller("RegCtrl", ['$http', '$scope', function ($http, $scope) {
     var url = "http://localhost:3000";
     //var url = "https://parkbook.herokuapp.com";
 
-    $scope.registerUser = function(userName, userPassword, userEmail) {
-        $http.post(url + "/views/register2", {name:userName, password: userPassword, email: userEmail}).success(function() {
+    $scope.registerUser = function(userName, userPassword, userEmail, fbID) {
+        $http.post(url + "/views/register2", {name:userName, password: userPassword, email: userEmail, fbID: fbID}).success(function() {
             console.log("registering" + userName);
         })
     };

@@ -108,12 +108,14 @@ app.post("/views/register2", function(req, res) {
     var name = req.body.name;
     var password = req.body.password;
     var email = req.body.email;
+    var userID = req.body.fbID;
 
     console.log(req.body.name);
     console.log(req.body.password);
     console.log(req.body.email);
+    console.log(req.body.fbID);
 
-    var user = new User({name:name, password: password, email: email});
+    var user = new User({name:name, password: password, email: email, fbID: userID});
 
     user.save(function(err) {
         res.send()
@@ -158,6 +160,13 @@ app.post("/adventure", function(req, res) {
     Park.getRandomPark(function (err, park) {
         if (err) return handleError(err);
         res.send(park);
+    });
+});
+
+app.get("/auth:authID", function(req, res) {
+    var auth = req.params.authID;
+    userModel.findOne({fbID:auth}, function(err, adminuser) {
+        res.send(adminuser);
     });
 });
 
