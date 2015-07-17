@@ -69,12 +69,23 @@ app.get("/addRating/:id/:rating/:fbid", function(req, res) {
         var hasRated = true;
         ratingModel.findOne({ID: req.params.id}, function(err, rating) {
             try {
-                if (rating.users.indexOf(req.params.id) == -1) {
-                    hasRated = false;
-                }
+                if (rating.users.indexOf(req.params.fbid) != -1) {
 
-                console.log(res);
-                res.send(true);
+                    console.log(res);
+                    res.send(true);
+                } else {
+
+                    hasRated = false;
+                    ratingModel.update({ID: req.params.id}, {
+                        $push: {
+                            rating: req.params.rating,
+                            users: req.params.fbid
+                        }
+                    }, {upsert: true}, function (err, doc) {
+                        if (err) return res.send(500, {error: err});
+                        return res.send("succesfully saved");
+                    });
+                }
             } catch (error) {
                     ratingModel.update({ID: req.params.id}, {
                         $push: {
