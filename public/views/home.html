@@ -8,8 +8,9 @@
         <div class="container">
             <div class="col-lg-3"></div>
             <div class="col-lg-6">
-
-                <input id="searchBar" type="text" ng-model="parkName" placeholder="Enter Park Names" typeahead="name for name in getLocation($viewValue) | limitTo:5" typeahead-loading="loadingLocations" class="form-control">
+                <div class="custom-typeahead">
+                    <input id="searchBar" type="text" ng-model="parkName" placeholder="Enter a park name..." typeahead="name for name in getLocation($viewValue)" typeahead-loading="loadingLocations" class="form-control">
+                </div>
                 <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
 
                 <a id="findParks" ng-click="findPark(parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
