@@ -5,7 +5,7 @@
 
 var homecontrol = angular.module("parkbook");
 
-homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, $http, ezfb) {
+homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', function ($scope, $http, ezfb, limitToFilter) {
 
     $scope.savePark = function(newPark) {
         $http.post("/add", {name:newPark}).success(function() {
@@ -20,10 +20,10 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
     $scope.getLocation = function(parkName) {
         return $http.get('/loadpark/' + parkName, {name:parkName}).then(function(response){
             console.log(response.data);
-            return response.data.map(function(item){
+            return limitToFilter(response.data.map(function(item){
                 console.log(item.name);
-                return item.name;
-            });
+                return (item.name);
+            }), 10);
         });
     };
 
