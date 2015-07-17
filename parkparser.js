@@ -49,7 +49,6 @@ function getFacility(parkEntry) {
         }
     }
     catch (err) {
-      //  console.log("no facilities");
         facilityType[0] = "No facilities found";
     }
 
@@ -66,7 +65,6 @@ function getFeatures(parkEntry) {
         }
     }
     catch (err) {
-       // console.log("no facilities");
         features[0] = "No features found";
     }
 
@@ -83,7 +81,6 @@ function getWashroomLocation(parkEntry) {
         }
     }
     catch (err) {
-     //   console.log("no washrooms");
         washroomLocation[0] = "No washrooms found";
     }
 
@@ -152,47 +149,18 @@ function parseData() {
 
 
     try {
-        //var fileData = fs.readFileSync(filePath, 'ascii');
-        //
-        //var parser = new xml2js.Parser();
-        //parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
 
         var file = 'data/temp/parks.json';
         var results = xmltoJSON(filePath);
-            //jf.writeFile(file, result, function(err) {
-            //    console.log(err)
-            //});
+
         writeFileLocal(file, results);
         var count = 0;
-        //console.log(results);
+
         var parkArray = results.COVParksFacilities.Park;
-            //console.log(parkArray);
+
             for (var i=0; i< parkArray.length; i++) {
                 var parkEntry = parkArray[i];
-                //var parkName = parkEntry.Name[0];
-                //var parkID = parkEntry.$.ID;
-                //var streetNumber = parkEntry.StreetNumber[0];
-                //var streetName = parkEntry.StreetName[0];
-                //var destination = parkEntry.GoogleMapDest[0];
-                //var res = destination.split(",");
-                //var lat = res[0];
-                //var lon = res[1];
-                //
-                //var facilityType = getFacility(parkEntry);
-                //var features = getFeatures(parkEntry);
-                //var washroomLocation = getWashroomLocation(parkEntry);
-                //
-                //var park = new Park({
-                //    name: parkName,
-                //    parkID: parkID,
-                //    streetNumber: streetNumber,
-                //    streetName: streetName,
-                //    lat: parseFloat(lat),
-                //    lon: parseFloat(lon),
-                //    facilityType: facilityType,
-                //    washroomLocation: washroomLocation,
-                //    features: features
-                //});
+
                 var park = createPark(parkEntry);
                 park.save();
                 count++;
@@ -200,7 +168,6 @@ function parseData() {
             }
             console.log("Added " + count + " parks");
 
-        //});
         console.log("File '" + filePath + "/ was successfully read.\n");
     } catch (ex) {
         console.log("Unable to read file '" + filePath + "'.");

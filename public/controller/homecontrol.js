@@ -155,7 +155,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
                 '</div>'
             ].join(''));
             $infoWindowContent.find(".routeHere").on('click', function() {
-                console.log("whats up my man");
                 calcRoute();
             });
 
@@ -186,12 +185,20 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
 
     //Find parks based on the user's search
     $scope.findPark = function(parkName) {
+
+        if (parkName == undefined) {
+            alert("Please enter a park name!");
+            return;
+        }
+
         clearOverlays();
         directionsDisplay.setMap(homeMap);
         console.log(parkName);
         $http.post("/search" + parkName, {name: parkName}).success(function(park) {
 
             $scope.parksSearched = park;
+
+
 
             try {
                 setMarkers(park);
@@ -225,7 +232,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
     };
 
     $scope.findClosestPark = function() {
-        console.log("ssup jr");
         directionsDisplay.setMap(homeMap);
 
             var parkLat = [];
