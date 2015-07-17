@@ -7,10 +7,6 @@ var parkbook = angular.module("parkbook", [
     parkbook.config(['$urlRouterProvider', '$stateProvider', 'ezfbProvider', function ($urlRouterProvider, $stateProvider, ezfbProvider) {
         $urlRouterProvider.otherwise('/');
 
-        var url = "http://localhost:3000";
-        //var url = "https://parkbook.herokuapp.com";
-
-
         $stateProvider
             .state('home', {
                 url: '/',
@@ -70,7 +66,7 @@ var parkbook = angular.module("parkbook", [
                         resolve: {
                             park: ['$http', '$stateParams', function ($http, $stateParams) {
                                 //get park from server RESTFUL API
-                                return $http.get(url + '/loadpark/' + $stateParams.parkName, {name: $stateParams.parkName}).success(function (response) {
+                                return $http.get('/loadpark/' + $stateParams.parkName, {name: $stateParams.parkName}).success(function (response) {
                                     console.log($stateParams);
                                     console.log($stateParams.parkName + " inside app.js");
                                     return response;
@@ -92,12 +88,6 @@ var parkbook = angular.module("parkbook", [
                                             var accessToken = response.authResponse.accessToken;
                                             console.log(accessToken);
 
-                                            //Don't need this
-                                            //return ezfb.api('/me', function(resp) {
-                                            //    console.log(resp);
-                                            //    return resp;
-                                            //});
-
                                         } else if (response.status === 'not_authorized') {
                                             // logged in but not authenticaed to app
                                             console.log("inside not authorized");
@@ -114,20 +104,6 @@ var parkbook = angular.module("parkbook", [
                     }
                 }
             });
-            //    templateUrl:'views/park2.html',
-            //    controller:'ParkCtrl',
-            //    resolve: {
-            //        park:
-            //            ['$http','$stateParams', function($http, $stateParams){
-            //            //get park from server RESTFUL API
-            //            return $http.get('/loadpark/' + $stateParams.parkName, {name:$stateParams.parkName}).success(function(response){
-            //                console.log($stateParams);
-            //                console.log($stateParams.parkName + " inside app.js");
-            //                return response;
-            //            })
-            //        }]
-            //    }
-            //});
 
 
         ezfbProvider.setInitParams({

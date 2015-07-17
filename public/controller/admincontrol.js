@@ -17,8 +17,6 @@ parkbook.factory('authService', function($http) {
 });
 
 parkbook.controller("AdminCtrl", ['$http', '$scope','admin', 'authService', function ($http, $scope, admin, authService) {
-    var url = "http://localhost:3000";
-    //var url = "https://parkbook.herokuapp.com";
 
     $scope.isAdmin = false;
 
@@ -43,7 +41,7 @@ parkbook.controller("AdminCtrl", ['$http', '$scope','admin', 'authService', func
     //server.js calls the app.get() with the "/download" tag
     $scope.importParks = function() {
         console.log("clicked import");
-        $http.get(url + "/download").success(function() {
+        $http.get("/download").success(function() {
             console.log("inside success");
         })
 

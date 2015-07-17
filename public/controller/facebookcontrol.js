@@ -5,8 +5,6 @@
 var facebookcontrol = angular.module("parkbook");
 
 facebookcontrol.controller("FacebookCtrl", ['$scope','$http','ezfb', function ($scope, $http, ezfb) {
-    var url = "http://localhost:3000";
-    // url = "https://parkbook.herokuapp.com";
 
     updateLoginStatus(updateApiMe);
 

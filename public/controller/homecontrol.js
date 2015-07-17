@@ -6,11 +6,9 @@
 var homecontrol = angular.module("parkbook");
 
 homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, $http, ezfb) {
-    var url = "http://localhost:3000";
-    // url = "https://parkbook.herokuapp.com";
 
     $scope.savePark = function(newPark) {
-        $http.post(url + "/add", {name:newPark}).success(function() {
+        $http.post("/add", {name:newPark}).success(function() {
             loadParks();
         })
     };
@@ -29,22 +27,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
         });
     };
 
-    //$scope.getLocation = function(val) {
-    //    return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
-    //        params: {
-    //            address: val,
-    //            sensor: false
-    //        }
-    //    }).then(function(response){
-    //        console.log(response.data);
-    //        return response.data.results.map(function(item){
-    //            console.log(item.formatted_address);
-    //            return item.formatted_address;
-    //        });
-    //    });
-    //};
-
-    //
     var originalMapOptions = {
         zoom: 12,
         scrollwheel: false,
@@ -81,7 +63,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
 
 
     function loadParks() {
-        $http.get(url + "/home").success(function (parks) {
+        $http.get("/home").success(function (parks) {
             $scope.parks = parks;
 
             var mapOptions = {
@@ -128,7 +110,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
     //server.js calls the app.get() with the "/download" tag
     $scope.importParks = function() {
         console.log("clicked import");
-        $http.get(url + "/download").success(function() {
+        $http.get("/download").success(function() {
             console.log("inside success");
             loadParks();
         })
@@ -164,11 +146,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
             var infowindow = [];
             var marker = [];
 
-            //var contentString = '<p><b>' + parkObjects[i].name + '</b></p>' +
-            //    '<p>' + parkObjects[i].streetNumber + " " + parkObjects[i].streetName + '</p>' +
-            //    '<p><a href="#/park/' + parkObjects[i].name + '">' + "View this park!" +'</a></p>' +
-            //    '<p id="routeHere"><a href>' + "route to here!" +'</a></p>';
-
             var $infoWindowContent = $([
                 '<div class="infoWindowContent">',
                 '<p><b>' + parkObjects[i].name + '</b></p>',
@@ -185,9 +162,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
             infowindow[i] = new google.maps.InfoWindow();
             infowindow[i].setContent($infoWindowContent.get(0));
 
-            //infowindow[i] = new google.maps.InfoWindow({content: contentString});
-
-
             marker[i] = new google.maps.Marker({
 
                 map: $scope.mymap,
@@ -203,7 +177,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
                 console.log(latitude);
                 console.log(longitude);
                 console.log(pos);
-                //calcRoute();
             }); //end addListener
 
             google.maps.event.addListener(marker[i], 'click', makeInfoWindow($scope.mymap, infowindow[i], marker[i]));
@@ -216,12 +189,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
         clearOverlays();
         directionsDisplay.setMap(homeMap);
         console.log(parkName);
-        $http.post(url + "/search" + parkName, {name: parkName}).success(function(park) {
-
-            //if (park.length == 0) {
-            //    alert("Sorry! We couldn't find a park named " + parkName);
-            //    return;
-            //}
+        $http.post("/search" + parkName, {name: parkName}).success(function(park) {
 
             $scope.parksSearched = park;
 
@@ -237,12 +205,12 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
 
     $scope.findAllParks = function() {
         directionsDisplay.setMap(homeMap);
-        $http.get(url + "/searchall");
+        $http.get("/searchall");
     };
 
     $scope.findRandomPark = function() {
         directionsDisplay.setMap(homeMap);
-        $http.post(url + "/adventure").success(function(parks) {
+        $http.post("/adventure").success(function(parks) {
             clearOverlays();
 
             $scope.allParks = parks;
@@ -268,14 +236,12 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
             var closestPark = [];
 
 
-
-
             function onPositionUpdate(position)
             {
                 currentLat = position.coords.latitude;
                 currentLon = position.coords.longitude;
 
-                $http.get(url + "/home").success(function(parks) {
+                $http.get("/home").success(function(parks) {
                     clearOverlays();
                     console.log("ssup jr2");
                     console.log(parks[3]);
@@ -284,7 +250,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
                         parkLon[w] = parks[w].lon;
                         distanceToParks[w] = $scope.getDistance(currentLat, currentLon, parkLat[w], parkLon[w]);
                     }
-                    //console.log(currentLat, currentLon);
+
                     console.log(parkLat[3], parkLon[3]);
                     console.log(distanceToParks[5], distanceToParks[6]);
 
@@ -295,7 +261,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
                     $scope.parksSearched = closestPark;
 
                     setMarkers(closestPark);
-                    //setMarkers(closestPark[0].lat)
                     $scope.mymap.panTo(markersArray[0].getPosition());
 
 
@@ -349,7 +314,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
 
     $scope.goToPark = function(parkID) {
         console.log("going to park");
-        $http.get(url + "/views/park.html", {_id:parkID}).success(function() {
+        $http.get("/views/park.html", {_id:parkID}).success(function() {
             console.log("inside success of go to park");
         })
     };

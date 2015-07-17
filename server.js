@@ -46,26 +46,12 @@ app.get("/home", function (req, res) {
 app.get("/loadpark/:parkName", function (req, res) {
     var parkname = req.params.parkName;
     console.log(parkname + " inside server");
-    //parkModel.find({name:parkname}, function (err, response) {
-    //    res.send(response);
-    //});
     Park.getPark(parkname, function(err, park) {
         if (err) return handleError(err);
         console.log(park);
         res.send(park);
     });
 });
-
-
-//app.get("/loadpark/:parkName", function(req, res) {
-//    var name = req.params.parkName;
-//    console.log(req.params.parkName + " inside server");
-//    Park.getPark(name, function(err, park) {
-//        if (err) return handleError(err);
-//        console.log(park);
-//        res.send(park);
-//    });
-//});
 
 //This method needs an object {name:name,rating:[number],numRates:1}
 app.get("/addRating/:id/:rating", function(req, res) {
