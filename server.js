@@ -61,14 +61,30 @@ app.get("/loadpark/:parkName", function (req, res) {
 /*
 Given a park name and a rating for that park, add it to the rating database
  */
-app.get("/addRating/:id/:rating", function(req, res) {
+app.get("/addRating/:id/:rating/:fbid", function(req, res) {
     console.log(req.params);
     try {
         console.log("in Try");
-        ratingModel.update({ID: req.params.id}, {$push:{rating: req.params.rating}}, {upsert: true}, function (err, doc) {
-            if (err) return res.send(500, {error: err});
-            return res.send("succesfully saved");
+        var hasRated = true;
+        ratingModel.findOne({ID: req.params.id}, function(err, rating) {
+            if (rating.users.indexOf(req.params.id) == -1) {
+                hasRated = false;
+            }
         });
+
+        if (hasRated) {
+            res.send(true);
+        } else {
+            ratingModel.update({ID: req.params.id}, {
+                $push: {
+                    rating: req.params.rating,
+                    users: req.params.fbid
+                }
+            }, {upsert: true}, function (err, doc) {
+                if (err) return res.send(500, {error: err});
+                return res.send("succesfully saved");
+            });
+        }
     } catch (err) {
         console.log("in catch");
         var userRating = new Rating({ID:req.params.id,

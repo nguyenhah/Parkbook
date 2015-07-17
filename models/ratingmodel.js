@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 
 var ratingSchema = new mongoose.Schema({
         ID: String,
+        users: [String],
         rating: [Number],
         numRates: Number
     },
@@ -20,6 +21,7 @@ var ratingModel = mongoose.model('Rating', ratingSchema);
 //Constructor
 function Rating(rating){
     this.ID = rating.ID;
+    this.users = rating.users;
     this.rating = rating.rating;
     this.numRates = rating.numRates;
 }
@@ -30,6 +32,7 @@ Saves a rating to the rating database
 Rating.prototype.save = function() {
     var rating = {
         ID: this.ID,
+        users: this.users,
         rating: this.rating,
         numRates: this.numRates
     };

@@ -6,7 +6,8 @@ var parkcontrol = angular.module("parkbook");
 
 
 var parkInfo;
-parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', 'myService', function ($scope, $http, $stateParams , park, $location, myService) {
+var fbid;
+parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', 'myService', 'admin', function ($scope, $http, $stateParams , park, $location, myService, admin) {
     console.log(park);
     parkInfo = park.data[0];
     $scope.name = parkInfo.name;
@@ -15,6 +16,11 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
     $scope.washroomLocations = parkInfo.washroomLocation;
     $scope.features = parkInfo.features;
 
+    try {
+        fbid = admin.authResponse.userID;
+    } catch (err) {
+        fbid = -1;
+    }
 
     getAverage($scope, myService);
     $scope.rating1 = {};
@@ -226,12 +232,22 @@ parkcontrol.directive("starRating", function($http) {
                         filled : i < scope.ratingValue
                     });
                 }
-            };
+            }
             scope.toggle = function(index) {
                 if (scope.readonly == undefined || scope.readonly == false){
                     scope.ratingValue = index + 1;
                     scope.onRatingSelected({rating: index + 1});
-                    $http.get('/addRating/'+ parkInfo.name + '/' + scope.ratingValue);
+                    console.log(fbid);
+                    if (fbid == -1) {
+                        alert("Please login to rate!");
+                    } else {
+                        $http.get('/addRating/' + parkInfo.name + '/' + scope.ratingValue + '/' + fbid)
+                            .success(function(res) {
+                                if (res) {
+                                    alert("You have already rated this park!");
+                                }
+                            });
+                    }
                 }
             };
             scope.$watch("ratingValue", function(oldVal, newVal) {
