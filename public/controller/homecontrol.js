@@ -15,6 +15,36 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
         })
     };
 
+    //typeahead
+
+    $scope.selected = undefined;
+
+    $scope.getLocation = function(parkName) {
+        return $http.get('/loadpark/' + parkName, {name:parkName}).then(function(response){
+            console.log(response.data);
+            return response.data.map(function(item){
+                console.log(item.name);
+                return item.name;
+            });
+        });
+    };
+
+    //$scope.getLocation = function(val) {
+    //    return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
+    //        params: {
+    //            address: val,
+    //            sensor: false
+    //        }
+    //    }).then(function(response){
+    //        console.log(response.data);
+    //        return response.data.results.map(function(item){
+    //            console.log(item.formatted_address);
+    //            return item.formatted_address;
+    //        });
+    //    });
+    //};
+
+    //
     var originalMapOptions = {
         zoom: 12,
         scrollwheel: false,
