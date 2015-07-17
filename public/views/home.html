@@ -18,6 +18,7 @@
                 <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
 
                 <a id="findParks" ng-click="findPark(parkName)" class="btn btn-dark btn-lg" type="button">Find Parks</a>
+                <a id="findClosestPark" ng-click="findClosestPark()" class="btn btn-dark btn-lg" type="button">Find Closest Park</a>
                 <a id="findAdventure" ng-click="findRandomPark()" class="btn btn-dark btn-lg" type="button">I'm Feeling Adventurous</a>
 
             </div>
@@ -78,6 +79,15 @@
             }, 1000);
             //});
         });
+
+        $("#findClosestPark").click(function () {
+            //$(this).animate(function(){
+            $('html, body').animate({
+                scrollTop: $("#parkmap").offset().top
+            }, 1000);
+            //});
+        });
+
         $("#findAdventure").click(function () {
             //$(this).animate(function(){
             $('html, body').animate({
@@ -85,6 +95,9 @@
             }, 1000);
             //});
         });
+
+
+
 
         $("#searchBar").keyup(function(event){
             if(event.keyCode == 13){

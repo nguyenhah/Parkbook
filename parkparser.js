@@ -49,7 +49,7 @@ function getFacility(parkEntry) {
         }
     }
     catch (err) {
-        console.log("no facilities");
+      //  console.log("no facilities");
         facilityType[0] = "No facilities found";
     }
 
@@ -66,7 +66,7 @@ function getFeatures(parkEntry) {
         }
     }
     catch (err) {
-        console.log("no facilities");
+       // console.log("no facilities");
         features[0] = "No features found";
     }
 
@@ -83,7 +83,7 @@ function getWashroomLocation(parkEntry) {
         }
     }
     catch (err) {
-        console.log("no washrooms");
+     //   console.log("no washrooms");
         washroomLocation[0] = "No washrooms found";
     }
 
@@ -131,27 +131,44 @@ function createPark(parkEntry){
     });
     return park;
 }
-function parseData() {
-    //put this part in a new mapping function
 
+function xmltoJSON(path) {
+    var jsonresult = "";
     try {
-        var fileData = fs.readFileSync(filePath, 'ascii');
+        var fileData = fs.readFileSync(path, 'ascii');
 
         var parser = new xml2js.Parser();
-        parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
-            var file = 'data/temp/parks.json';
+        parser.parseString(fileData.substring(0, fileData.length), function (err, result){
+            jsonresult = result;
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+    return jsonresult;
+}
 
+function parseData() {
+
+
+    try {
+        //var fileData = fs.readFileSync(filePath, 'ascii');
+        //
+        //var parser = new xml2js.Parser();
+        //parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
+
+        var file = 'data/temp/parks.json';
+        var results = xmltoJSON(filePath);
             //jf.writeFile(file, result, function(err) {
             //    console.log(err)
             //});
-            //var fileJSON = writeFileLocal(file, result);
-            var count = 0;
-
-            var parkArray = result.COVParksFacilities.Park;
-            console.log(parkArray);
+        writeFileLocal(file, results);
+        var count = 0;
+        //console.log(results);
+        var parkArray = results.COVParksFacilities.Park;
+            //console.log(parkArray);
             for (var i=0; i< parkArray.length; i++) {
                 var parkEntry = parkArray[i];
-
                 //var parkName = parkEntry.Name[0];
                 //var parkID = parkEntry.$.ID;
                 //var streetNumber = parkEntry.StreetNumber[0];
@@ -183,7 +200,7 @@ function parseData() {
             }
             console.log("Added " + count + " parks");
 
-        });
+        //});
         console.log("File '" + filePath + "/ was successfully read.\n");
     } catch (ex) {
         console.log("Unable to read file '" + filePath + "'.");
@@ -195,5 +212,6 @@ module.exports = {
     downloadData : downloadData,
     parseData : parseData,
     createPark : createPark,
+    xmltoJSON : xmltoJSON,
     clearData : clearData
 };
