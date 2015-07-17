@@ -36,13 +36,18 @@ app.use('/', express.static(appRoot + '/public'));
 
 mongoose.connect('mongodb://pb:pb@ds041992.mongolab.com:41992/parkbook');
 
+/*
+Returns an array of all the parks in the park database
+ */
 app.get("/home", function (req, res) {
     parkModel.find(function (err, parks) {
         res.send(parks);
     });
 });
 
-//This is for the dynamic park linking
+/*
+Given a park name, find it in the database and return it
+ */
 app.get("/loadpark/:parkName", function (req, res) {
     var parkname = req.params.parkName;
     console.log(parkname + " inside server");
@@ -53,7 +58,9 @@ app.get("/loadpark/:parkName", function (req, res) {
     });
 });
 
-//This method needs an object {name:name,rating:[number],numRates:1}
+/*
+Given a park name and a rating for that park, add it to the rating database
+ */
 app.get("/addRating/:id/:rating", function(req, res) {
     console.log(req.params);
     try {
@@ -74,6 +81,9 @@ app.get("/addRating/:id/:rating", function(req, res) {
     }
 });
 
+/*
+Given an park name, return the rating for that park
+ */
 app.get("/getRating/:id", function(req, res) {
     var ID = req.params.id;
     console.log(ID);
@@ -84,7 +94,9 @@ app.get("/getRating/:id", function(req, res) {
     });
 });
 
-
+/*
+Add a new park to the database
+ */
 app.post("/add", function(req, res) {
     var name = req.body.name;
     console.log(req.body);
@@ -95,6 +107,9 @@ app.post("/add", function(req, res) {
     })
 });
 
+/*
+Register a user to be an admin and save it to admin database
+ */
 app.post("/views/register2", function(req, res) {
     var name = req.body.name;
     var password = req.body.password;
@@ -114,6 +129,9 @@ app.post("/views/register2", function(req, res) {
 
 });
 
+/*
+Import park data in XML, convert to json, and load to db
+ */
 app.get("/download", function(req, res) {
     parkparser.downloadData();
     parkparser.clearData();
@@ -128,7 +146,9 @@ app.get("/views/park2", function(req, res) {
 });
 
 
-
+/*
+Search for a park given the park name
+ */
 app.post("/search:parkName", function(req, res) {
     var name = req.body.name;
     console.log(req.body.name);
@@ -139,14 +159,10 @@ app.post("/search:parkName", function(req, res) {
     });
 });
 
-app.get("/searchall", function(req, res) {
-    Park.getAllParks(function (err, parks) {
-        if (err) return handleError(err);
-        console.log(parks);
-    });
-    res.send();
-});
 
+/*
+Get all parks
+ */
 app.post("/adventure", function(req, res) {
     Park.getRandomPark(function (err, park) {
         if (err) return handleError(err);
@@ -154,6 +170,9 @@ app.post("/adventure", function(req, res) {
     });
 });
 
+/*
+Given an authentication ID, return the admin user
+ */
 app.get("/auth:authID", function(req, res) {
     var auth = req.params.authID;
     userModel.findOne({fbID:auth}, function(err, adminuser) {

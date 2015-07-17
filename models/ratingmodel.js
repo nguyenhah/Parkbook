@@ -24,6 +24,9 @@ function Rating(rating){
     this.numRates = rating.numRates;
 }
 
+/*
+Saves a rating to the rating database
+ */
 Rating.prototype.save = function() {
     var rating = {
         ID: this.ID,
@@ -39,6 +42,9 @@ Rating.prototype.save = function() {
     });
 };
 
+/*
+Returns a rating given a park name called ID
+ */
 Rating.getRating = function(ID, callback) {
     ratingModel.find({ID: ID}, function(err, park) {
         if (err) {
@@ -46,13 +52,6 @@ Rating.getRating = function(ID, callback) {
         }
         callback(null, park);
     })
-};
-
-Rating.addRating = function(ID,rate, callback) {
-    var userRating = Rating.find(ID);
-    try {
-        if (userRating ){};
-    } catch(err){}
 };
 
 

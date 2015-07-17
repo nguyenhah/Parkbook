@@ -7,16 +7,14 @@ var homecontrol = angular.module("parkbook");
 
 homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', function ($scope, $http, ezfb, limitToFilter) {
 
-    $scope.savePark = function(newPark) {
-        $http.post("/add", {name:newPark}).success(function() {
-            loadParks();
-        })
-    };
-
-    //typeahead
-
+    /*
+    TypeAhead
+     */
     $scope.selected = undefined;
 
+    /*
+    Given a park name or part of a park name, search the server for names that match the park name
+     */
     $scope.getLocation = function(parkName) {
         return $http.get('/loadpark/' + parkName, {name:parkName}).then(function(response){
             console.log(response.data);
@@ -36,7 +34,9 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
 
     homeMap = new google.maps.Map(document.getElementById('map'), originalMapOptions);
 
-    // Try HTML5 geolocation
+    /*
+    Check if geolocation is supported by the browser
+     */
     function checkLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -62,18 +62,14 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
     }
 
 
+    /*
+    Initialize the controller with parks from the database, and check for user location
+     */
     function loadParks() {
         $http.get("/home").success(function (parks) {
             $scope.parks = parks;
 
-            var mapOptions = {
-                zoom: 12,
-                scrollwheel: false,
-                center: new google.maps.LatLng(49.246292, -123.116226),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            $scope.mymap = new google.maps.Map(document.getElementById('map'), mapOptions);
+            $scope.mymap = new google.maps.Map(document.getElementById('map'), originalMapOptions);
 
             google.maps.event.addDomListener(window, 'load', loadParks);
             checkLocation();
@@ -84,6 +80,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
 
     /*
      Geolocation error handler
+     Called when browser does not support geolocation
      */
     function handleNoGeolocation(errorFlag) {
         if (errorFlag) {
@@ -103,19 +100,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
     }
 
 
-
-
-    //this function is called inside HTML
-    //the http call is tagged with "/download" and sent to server.js
-    //server.js calls the app.get() with the "/download" tag
-    $scope.importParks = function() {
-        console.log("clicked import");
-        $http.get("/download").success(function() {
-            console.log("inside success");
-            loadParks();
-        })
-    };
-
     var prev_infowindow =false;
     var pos;
     var markersArray = [];
@@ -128,7 +112,9 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
         markersArray.length = 0;
     }
 
-    //Make Info windows for Maps
+    /*
+    Make infowindows for each marker on the map
+     */
     function makeInfoWindow(map, infowindow, marker) {
         return function() {
             if( prev_infowindow ) {
@@ -139,7 +125,9 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
         };
     }
 
-    //Make the markers for maps
+    /*
+    Make the markers for each park object
+     */
     function setMarkers(parkObjects) {
         for (var i = 0; i < parkObjects.length; i++) {
 
@@ -198,39 +186,45 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
 
             $scope.parksSearched = park;
 
-
-
+            //see if park exists
             try {
                 setMarkers(park);
                 $scope.mymap.panTo(markersArray[0].getPosition());
             } catch(err) {
+                //if park does not exist
                 alert("Sorry! We couldn't find a park named " + parkName);
             }
 
         })
     };
 
+    /*
+    Find all parks
+     */
     $scope.findAllParks = function() {
         directionsDisplay.setMap(homeMap);
-        $http.get("/searchall");
+        $http.get("/home");
     };
 
+    /*
+    Look for a random park
+     */
     $scope.findRandomPark = function() {
         directionsDisplay.setMap(homeMap);
-        $http.post("/adventure").success(function(parks) {
             clearOverlays();
 
-            $scope.allParks = parks;
-            var randNum = Math.floor((Math.random() * parks.length - 1));
-            var randPark = [parks[randNum]];
+            var randNum = Math.floor((Math.random() * $scope.parks.length - 1));
+            var randPark = [$scope.parks[randNum]];
             $scope.parksSearched = randPark;
 
             setMarkers(randPark);
             $scope.mymap.panTo(markersArray[0].getPosition());
 
-        });
     };
 
+    /*
+    Find the closest park to user
+     */
     $scope.findClosestPark = function() {
         directionsDisplay.setMap(homeMap);
 
@@ -247,13 +241,12 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
                 currentLat = position.coords.latitude;
                 currentLon = position.coords.longitude;
 
-                $http.get("/home").success(function(parks) {
                     clearOverlays();
                     console.log("ssup jr2");
-                    console.log(parks[3]);
-                    for(var w = 0; w < parks.length; w++) {
-                        parkLat[w] = parks[w].lat;
-                        parkLon[w] = parks[w].lon;
+                    console.log($scope.parks[3]);
+                    for(var w = 0; w < $scope.parks.length; w++) {
+                        parkLat[w] = $scope.parks[w].lat;
+                        parkLon[w] = $scope.parks[w].lon;
                         distanceToParks[w] = $scope.getDistance(currentLat, currentLon, parkLat[w], parkLon[w]);
                     }
 
@@ -262,15 +255,12 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
 
                     var closestParkIndex = distanceToParks.indexOf(Math.min.apply(Math, distanceToParks));
                     console.log(closestParkIndex);
-                    closestPark[0] = parks[closestParkIndex];
+                    closestPark[0] = $scope.parks[closestParkIndex];
                     console.log(closestPark);
                     $scope.parksSearched = closestPark;
 
                     setMarkers(closestPark);
                     $scope.mymap.panTo(markersArray[0].getPosition());
-
-
-                });
             }
 
             if(navigator.geolocation)
@@ -286,6 +276,9 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
     var directionsService = new google.maps.DirectionsService();
 
 
+    /*
+    Shows the route from the user's current location to their destination park
+     */
     function calcRoute() {
         directionsDisplay.setMap($scope.mymap);
         var h2 = new google.maps.LatLng(latitude, longitude);
@@ -302,6 +295,9 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
         });
     }
 
+    /*
+    Returns the shortest distance from two places
+     */
     $scope.getDistance = function(lat1, lon1, lat2, lon2, unit) {
         var radlat1 = Math.PI * lat1/180;
         var radlat2 = Math.PI * lat2/180;
@@ -316,13 +312,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
         if (unit=="K") { dist = dist * 1.609344; }
         if (unit=="N") { dist = dist * 0.8684; }
         return dist;
-    };
-
-    $scope.goToPark = function(parkID) {
-        console.log("going to park");
-        $http.get("/views/park.html", {_id:parkID}).success(function() {
-            console.log("inside success of go to park");
-        })
     };
 
 }]);

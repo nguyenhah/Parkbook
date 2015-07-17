@@ -5,23 +5,15 @@
 var parkbook = angular.module("parkbook");
 
 
-parkbook.factory('authService', function($http) {
-
-    var getData = function(authID) {
-
-        return $http({method:"GET", url:"/auth" + authID}).then(function(result){
-            return result.data;
-        });
-    };
-    return { getData: getData };
-});
-
 parkbook.controller("AdminCtrl", ['$http', '$scope','admin', 'authService', function ($http, $scope, admin, authService) {
 
     $scope.isAdmin = false;
 
     authenticate($scope, authService);
 
+    /*
+    Check if the current user is an Admin
+     */
     function authenticate($scope, authService) {
         try {
             var myDataPromise = authService.getData(admin.authResponse.userID);

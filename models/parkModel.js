@@ -32,6 +32,10 @@ function Park(park){
     this.features = park.features
 }
 
+
+/*
+Saves a defined park to the database
+ */
 Park.prototype.save = function() {
     var park = {
         name: this.name,
@@ -52,6 +56,9 @@ Park.prototype.save = function() {
     });
 };
 
+/*
+Searches for a park matching a regular expression with the name
+ */
 Park.getPark = function(name, callback) {
     parkModel.find({name: new RegExp('.*'+name+'.*', "i")}, function(err, park) {
         if (err) {
@@ -61,6 +68,9 @@ Park.getPark = function(name, callback) {
     })
 };
 
+/*
+Returns all parks
+ */
 Park.getAllParks = function(callback) {
     parkModel.find({}, function(err, parks) {
         if (err) {
@@ -70,6 +80,9 @@ Park.getAllParks = function(callback) {
     })
 };
 
+/*
+Finds a random park
+ */
 Park.getRandomPark = function(callback) {
     parkModel.find({}, function(err, park) {
         if (err) {
@@ -79,6 +92,9 @@ Park.getRandomPark = function(callback) {
     })
 };
 
+/*
+Deletes all parks from database
+ */
 Park.removeAllParks = function(callback) {
     parkModel.collection.drop(function(err) {
         if (err) {

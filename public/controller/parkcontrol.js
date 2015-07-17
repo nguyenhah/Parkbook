@@ -5,18 +5,6 @@
 var parkcontrol = angular.module("parkbook");
 
 
-parkcontrol.factory('myService', function($http) {
-
-    var getData = function(parkName) {
-        console.log(parkName);
-
-        return $http({method:"GET", url:"/getRating/" + parkName}).then(function(result){
-            return result.data;
-        });
-    };
-    return { getData: getData };
-});
-
 var parkInfo;
 parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', 'myService', function ($scope, $http, $stateParams , park, $location, myService) {
     console.log(park);
@@ -28,15 +16,21 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
     $scope.features = parkInfo.features;
 
 
-
     getAverage($scope, myService);
     $scope.rating1 = {};
     $scope.isReadonly = true;
+
+    /*
+    Updates rating selected
+     */
     $scope.rateFunction = function(rating) {
         console.log("Rating selected: " + rating);
     };
 
 
+    /*
+     Returns an average rating of stars for a given park
+     */
     function getAverage($scope, myService) {
         var myDataPromise = myService.getData($scope.name);
         myDataPromise.then(function(result) {  // this is only run after $http completes
@@ -61,7 +55,9 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
     var latitude;
     var longitude;
     var parkCenter;
-    // Try HTML5 geolocation
+    /*
+     Check if geolocation is supported by the browser
+     */
     function checkLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -80,6 +76,9 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
     }
 
 
+    /*
+    Display the map of the current park
+     */
     function loadPark() {
         var mapOptions = {
             zoom: 12,
@@ -174,6 +173,9 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
     var directionsDisplay = new google.maps.DirectionsRenderer();
     var directionsService = new google.maps.DirectionsService();
 
+    /*
+    Calculate the distance from the current location to the park
+     */
     function calcRoute() {
         directionsDisplay.setMap($scope.mymap2);
         var h2 = new google.maps.LatLng(parkInfo.lat, parkInfo.lon);
@@ -190,11 +192,17 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
         });
     }
 
+    /*
+    Return the current url address
+     */
     $scope.getLocation = function() {
         return $location.absUrl();
     }
 }]);
 
+/*
+Directive for the rating system
+ */
 parkcontrol.directive("starRating", function($http) {
     return {
         restrict : "EA",

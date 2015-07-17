@@ -24,6 +24,9 @@ function User(user) {
     this.reviews = user.reviews;
 }
 
+/*
+Saves an admin to the admin database
+ */
 User.prototype.save = function() {
     var user = {
         name: this.name,
