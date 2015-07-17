@@ -226,10 +226,59 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
         });
     };
 
-    ////var map = location_arr[LOCATION_ARR_MAP_OBJECT];
-    //var rendererOptions = {
-    //    map: $scope.mymap
-    //};
+    $scope.findClosestPark = function() {
+        console.log("ssup jr");
+        directionsDisplay.setMap(homeMap);
+
+            var parkLat = [];
+            var parkLon = [];
+            var currentLat;
+            var currentLon;
+            var distanceToParks = [];
+            var closestPark = [];
+
+
+
+
+            function onPositionUpdate(position)
+            {
+                currentLat = position.coords.latitude;
+                currentLon = position.coords.longitude;
+
+                $http.get(url + "/home").success(function(parks) {
+                    clearOverlays();
+                    console.log("ssup jr2");
+                    console.log(parks[3]);
+                    for(var w = 0; w < parks.length; w++) {
+                        parkLat[w] = parks[w].lat;
+                        parkLon[w] = parks[w].lon;
+                        distanceToParks[w] = $scope.getDistance(currentLat, currentLon, parkLat[w], parkLon[w]);
+                    }
+                    //console.log(currentLat, currentLon);
+                    console.log(parkLat[3], parkLon[3]);
+                    console.log(distanceToParks[5], distanceToParks[6]);
+
+                    var closestParkIndex = distanceToParks.indexOf(Math.min.apply(Math, distanceToParks));
+                    console.log(closestParkIndex);
+                    closestPark[0] = parks[closestParkIndex];
+                    console.log(closestPark);
+                    $scope.parksSearched = closestPark;
+
+                    setMarkers(closestPark);
+                    //setMarkers(closestPark[0].lat)
+                    $scope.mymap.panTo(closestPark.getPosition());
+
+
+                });
+            }
+
+            if(navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(onPositionUpdate);
+            else
+                alert("navigator.geolocation is not available");
+    };
+
+
 
 
     var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -251,6 +300,22 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
             }
         });
     }
+
+    $scope.getDistance = function(lat1, lon1, lat2, lon2, unit) {
+        var radlat1 = Math.PI * lat1/180;
+        var radlat2 = Math.PI * lat2/180;
+        var radlon1 = Math.PI * lon1/180;
+        var radlon2 = Math.PI * lon2/180;
+        var theta = lon1-lon2;
+        var radtheta = Math.PI * theta/180;
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        dist = Math.acos(dist);
+        dist = dist * 180/Math.PI;
+        dist = dist * 60 * 1.1515;
+        if (unit=="K") { dist = dist * 1.609344; }
+        if (unit=="N") { dist = dist * 0.8684; }
+        return dist;
+    };
 
     $scope.goToPark = function(parkID) {
         console.log("going to park");
