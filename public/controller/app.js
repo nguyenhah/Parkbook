@@ -2,7 +2,7 @@
  * Created by vincentchan on 15-06-10.
  */
 var parkbook = angular.module("parkbook", [
-    'ui.router', 'ezfb'
+    'ui.router', 'ezfb', 'ui.bootstrap'
 ]);
     parkbook.config(['$urlRouterProvider', '$stateProvider', 'ezfbProvider', function ($urlRouterProvider, $stateProvider, ezfbProvider) {
         $urlRouterProvider.otherwise('/');
