@@ -266,7 +266,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb', function ($scope, 
 
                     setMarkers(closestPark);
                     //setMarkers(closestPark[0].lat)
-                    $scope.mymap.panTo(closestPark.getPosition());
+                    $scope.mymap.panTo(markersArray[0].getPosition());
 
 
                 });
