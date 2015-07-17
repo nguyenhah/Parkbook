@@ -25,13 +25,17 @@ parkbook.controller("AdminCtrl", ['$http', '$scope','admin', 'authService', func
     authenticate($scope, authService);
 
     function authenticate($scope, authService) {
-        var myDataPromise = authService.getData(admin.authResponse.userID);
-        myDataPromise.then(function(result) {
-            $scope.data = result;
-            if (result.fbID == admin.authResponse.userID) {
-                $scope.isAdmin = true;
-            }
-        });
+        try {
+            var myDataPromise = authService.getData(admin.authResponse.userID);
+            myDataPromise.then(function (result) {
+                $scope.data = result;
+                if (result.fbID == admin.authResponse.userID) {
+                    $scope.isAdmin = true;
+                }
+            });
+        } catch (err) {
+            console.log("user not logged in");
+        }
     }
 
     //this function is called inside HTML
