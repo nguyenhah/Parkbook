@@ -12,6 +12,11 @@ body {
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+.custom-typeahead .dropdown-menu {
+    background-color: #fff;
+    min-width: 40vw;
+}
+
 #inner {
     width: 50%
     margin: 0 auto;
