@@ -24,26 +24,30 @@ describe("XMLtoJSON", function() {
 
 describe("GetInfoFromParks to Save", function() {
     it('this should return us a park in json format with parkModel Params', function (done){
-    //before(function () {
         var testjson = Parser.xmltoJSON(filePath);
-        var jsonstring = Parser.createPark(testjson.park);
-        expect(JSON.stringify(jsonstring)).to.equal( '{"name":"Arbutus Village Park","parkID":"1","streetNumber":"4202","streetName":"Valley Drive","lat":49.249783,"lon":-123.15525,"facilityType":["Playgrounds"],"washroomLocation":["No washrooms found"],"features":["No features found"]}');
+        var testpark = Parser.createPark(testjson.park);
+        expect(JSON.stringify(testpark)).to.equal( '{"name":"Arbutus Village Park","parkID":"1","streetNumber":' +
+            '"4202","streetName":"Valley Drive","lat":49.249783,"lon":-123.15525,"facilityType":["Playgrounds"],' +
+            '"washroomLocation":["No washrooms found"],"features":["No features found"]}');
+        describe("getFacility", function(){
+            it('get list of Facility', function (){
+                var listoffacility = Parser.getFacility(testpark);
+                expect(JSON.stringify(listoffacility)).to.equal('["No facilities found"]');
+            });
+        });
+        describe("getFeatures", function(){
+            it('get list of Features', function (){
+                var listoffeatures = Parser.getFeatures(testpark);
+                expect(JSON.stringify(listoffeatures)).to.equal('["No features found"]');
+            });
+        });
+        describe("getWashroomLocation", function(){
+            it('get list of WashroomLocation', function (){
+                var listofwashroomlocation = Parser.getWashroomLocation(testpark);
+                expect(JSON.stringify(listofwashroomlocation)).to.equal('["No washrooms found"]');
+            });
+        });
         done();
 
     });
-
-    //describe('Park.getPark', function() {
-    //    it('should show get parkinfo', function () {
-    //        Parser.createPark("Yves's Room",function (err, park) {
-    //            expect(err).to.eql(null);
-    //            expect(park.name).to.equal("Yves's Room");
-    //            expect(park.streetNumber).to.equal("6969");
-    //            expect(park.streetName).to.equal('Somewhere Richmond');
-    //            done();
-    //        });
-    //    });
-    //});
-
-
-
 });

@@ -213,5 +213,8 @@ module.exports = {
     parseData : parseData,
     createPark : createPark,
     xmltoJSON : xmltoJSON,
+    getFacility : getFacility,
+    getFeatures: getFeatures,
+    getWashroomLocation : getWashroomLocation,
     clearData : clearData
 };
