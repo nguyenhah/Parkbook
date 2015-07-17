@@ -7400,4 +7400,188 @@
 			<Facility>
 				<FacilityCount>1</FacilityCount>
 				<FacilityType>Water/Spray Parks</FacilityType>
-				<Fac
+				<FacilityURL></FacilityURL>
+			</Facility>
+			<Washroom></Washroom>
+		</Facilities>
+	</Park>
+	<Park ID="236">
+		<Name>Ebisu Park</Name>
+		<Official>0</Official>
+		<StreetNumber>8810</StreetNumber>
+		<StreetName>Olser Street</StreetName>
+		<EWStreet>W 72nd Avenue</EWStreet>
+		<NSStreet>Olser Street</NSStreet>
+		<GoogleMapDest>49.205468,-123.132836</GoogleMapDest>
+		<Hectare>0.4</Hectare>
+		<Neighbourhood>
+			<NeighbourhoodName>Marpole</NeighbourhoodName>
+			<NeighbourhoodURL>http://vancouver.ca/community_profiles/marpole/index.htm</NeighbourhoodURL>
+		</Neighbourhood>
+		<Advisories></Advisories>
+		<Facilities>
+			<Facility>
+				<FacilityCount>1</FacilityCount>
+				<FacilityType>Playgrounds</FacilityType>
+				<FacilityURL></FacilityURL>
+			</Facility>
+			<Washroom></Washroom>
+		</Facilities>
+	</Park>
+	<Park ID="237">
+		<Name>Yaletown Park</Name>
+		<Official>1</Official>
+		<StreetNumber>901</StreetNumber>
+		<StreetName>Mainland Street</StreetName>
+		<EWStreet>Mainland Street</EWStreet>
+		<NSStreet>Nelson Street</NSStreet>
+		<GoogleMapDest>49.277042,-123.118921</GoogleMapDest>
+		<Hectare>0.17</Hectare>
+		<Neighbourhood>
+			<NeighbourhoodName>Downtown</NeighbourhoodName>
+			<NeighbourhoodURL>http://vancouver.ca/community_profiles/downtown/index.htm</NeighbourhoodURL>
+		</Neighbourhood>
+		<Advisories></Advisories>
+		<Facilities>
+			<Washroom></Washroom>
+		</Facilities>
+	</Park>
+	<Park ID="238">
+		<Name>Carolina Park</Name>
+		<Official>1</Official>
+		<StreetNumber>2100</StreetNumber>
+		<StreetName>Carolina Street</StreetName>
+		<EWStreet>E 5th Avenue</EWStreet>
+		<NSStreet>Carolina Street</NSStreet>
+		<GoogleMapDest>49.266401,-123.090778</GoogleMapDest>
+		<Hectare>0.08</Hectare>
+		<Neighbourhood>
+			<NeighbourhoodName>Mount Pleasant</NeighbourhoodName>
+			<NeighbourhoodURL>http://vancouver.ca/community_profiles/mount_pleasant/index.htm</NeighbourhoodURL>
+		</Neighbourhood>
+		<Advisories></Advisories>
+		<Facilities>
+			<Washroom></Washroom>
+		</Facilities>
+	</Park>
+	<Park ID="240">
+		<Name>Park Site at South East False Creek</Name>
+		<Official>0</Official>
+		<StreetNumber>215</StreetNumber>
+		<StreetName>W 1st Avenue</StreetName>
+		<EWStreet>W 1st Avenue</EWStreet>
+		<NSStreet>Columbia Street</NSStreet>
+		<GoogleMapDest>49.270869,-123.110533</GoogleMapDest>
+		<Hectare>0.95</Hectare>
+		<Neighbourhood>
+			<NeighbourhoodName>Mount Pleasant</NeighbourhoodName>
+			<NeighbourhoodURL>http://vancouver.ca/community_profiles/mount_pleasant/index.htm</NeighbourhoodURL>
+		</Neighbourhood>
+		<Advisories></Advisories>
+		<Facilities>
+			<Facility>
+				<FacilityCount>1</FacilityCount>
+				<FacilityType>Playgrounds</FacilityType>
+				<FacilityURL></FacilityURL>
+			</Facility>
+			<Facility>
+				<FacilityCount>1</FacilityCount>
+				<FacilityType>Dogs Off-Leash Areas</FacilityType>
+				<FacilityURL></FacilityURL>
+			</Facility>
+			<Washroom></Washroom>
+		</Facilities>
+	</Park>
+	<Park ID="241">
+		<Name>Habitat Island</Name>
+		<Official>0</Official>
+		<StreetNumber>1616</StreetNumber>
+		<StreetName>Columbia Street</StreetName>
+		<EWStreet></EWStreet>
+		<NSStreet></NSStreet>
+		<GoogleMapDest>49.272210,-123.110791</GoogleMapDest>
+		<Hectare>0.6</Hectare>
+		<Neighbourhood>
+			<NeighbourhoodName>Mount Pleasant</NeighbourhoodName>
+			<NeighbourhoodURL>http://vancouver.ca/community_profiles/mount_pleasant/index.htm</NeighbourhoodURL>
+		</Neighbourhood>
+		<Advisories></Advisories>
+		<Facilities>
+			<Washroom></Washroom>
+		</Facilities>
+	</Park>
+	<Park ID="244">
+		<Name>Fraser River Trail</Name>
+		<Official>1</Official>
+		<StreetNumber>9149</StreetNumber>
+		<StreetName>Hudson Street</StreetName>
+		<EWStreet>SW Marine Drive</EWStreet>
+		<NSStreet>Hudson Street</NSStreet>
+		<GoogleMapDest>49.200357,-123.135862</GoogleMapDest>
+		<Hectare>0.35</Hectare>
+		<Neighbourhood>
+			<NeighbourhoodName>Marpole</NeighbourhoodName>
+			<NeighbourhoodURL>http://vancouver.ca/community_profiles/marpole/index.htm</NeighbourhoodURL>
+		</Neighbourhood>
+		<Advisories></Advisories>
+		<Facilities>
+			<Washroom></Washroom>
+		</Facilities>
+	</Park>
+	<Park ID="245">
+		<Name>Trillium Park</Name>
+		<Official>0</Official>
+		<StreetNumber>600</StreetNumber>
+		<StreetName>National Avenue</StreetName>
+		<EWStreet>National Avenue</EWStreet>
+		<NSStreet>Thornton Street</NSStreet>
+		<GoogleMapDest>49.275015,-123.093116</GoogleMapDest>
+		<Hectare>3.05</Hectare>
+		<Neighbourhood>
+			<NeighbourhoodName>Strathcona</NeighbourhoodName>
+			<NeighbourhoodURL>http://vancouver.ca/community_profiles/strathcona/index.htm</NeighbourhoodURL>
+		</Neighbourhood>
+		<Advisories></Advisories>
+		<Facilities>
+			<Facility>
+				<FacilityCount>2</FacilityCount>
+				<FacilityType>Soccer Fields</FacilityType>
+				<FacilityURL></FacilityURL>
+			</Facility>
+			<Facility>
+				<FacilityCount>2</FacilityCount>
+				<FacilityType>Field Hockey</FacilityType>
+				<FacilityURL></FacilityURL>
+			</Facility>
+			<Facility>
+				<FacilityCount>1</FacilityCount>
+				<FacilityType>Ultimate Fields</FacilityType>
+				<FacilityURL></FacilityURL>
+			</Facility>
+			<Washroom>
+				<Location></Location>
+				<Notes></Notes>
+				<SummerHours>Dawn to 10:15 pm</SummerHours>
+				<WinterHours>Dawn to 10:15 pm</WinterHours>
+			</Washroom>
+		</Facilities>
+	</Park>
+	<Park ID="246">
+		<Name>Creekway Park</Name>
+		<Official>1</Official>
+		<StreetNumber>2901</StreetNumber>
+		<StreetName>E Hastings Street</StreetName>
+		<EWStreet>McGill Street</EWStreet>
+		<NSStreet></NSStreet>
+		<GoogleMapDest>49.288336,-123.036982</GoogleMapDest>
+		<Hectare>8</Hectare>
+		<Neighbourhood>
+			<NeighbourhoodName>Hastings-Sunrise</NeighbourhoodName>
+			<NeighbourhoodURL>http://vancouver.ca/community_profiles/hastings-sunrise/index.htm</NeighbourhoodURL>
+		</Neighbourhood>
+		<Advisories></Advisories>
+		<Facilities>
+			<Washroom></Washroom>
+		</Facilities>
+	</Park>
+</COVParksFacilities>
