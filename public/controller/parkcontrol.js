@@ -243,7 +243,9 @@ parkcontrol.directive("starRating", function($http) {
                     } else {
                         $http.get('/addRating/' + parkInfo.name + '/' + scope.ratingValue + '/' + fbid)
                             .success(function(res) {
-                                if (res) {
+                                if (res == true) {
+                                    console.log("in addrating");
+                                    console.log(res);
                                     alert("You have already rated this park!");
                                 }
                             });
