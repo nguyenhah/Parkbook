@@ -57,7 +57,7 @@ var parkbook = angular.module("parkbook", [
             })
             .state('register', {
                 url: '/register',
-                templateUrl: 'views/register2.html',
+                templateUrl: 'views/register.html',
                 controller: 'RegCtrl'
             })
             //resolving passes certain variables into the controller, which you inject as a dependency to use
@@ -65,7 +65,7 @@ var parkbook = angular.module("parkbook", [
                 url: '/park/:parkName',
                 views: {
                     "": {
-                        templateUrl: 'views/park2.html',
+                        templateUrl: 'views/park.html',
                         controller: 'ParkCtrl',
                         resolve: {
                             park: ['$http', '$stateParams', function ($http, $stateParams) {
@@ -114,7 +114,7 @@ var parkbook = angular.module("parkbook", [
                     }
                 }
             });
-            //    templateUrl:'views/park2.html',
+            //    templateUrl:'views/park.html',
             //    controller:'ParkCtrl',
             //    resolve: {
             //        park:
