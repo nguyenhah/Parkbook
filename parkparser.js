@@ -17,10 +17,11 @@ var ftp = new JSFtp( {
 
 var filename = 'parkdata.xml';
 var localpath = appRoot + '/data/temp/' + filename;
+var file = 'data/temp/parks.json';
 
 var fs = require('fs'),
     xml2js = require('xml2js');
-var filePath = 'data/temp/parkdata.xml';
+
 
 function downloadData() {
     ftp.get('opendata/xml/parks_facilities.xml', localpath, function(err) {
@@ -145,12 +146,12 @@ function xmltoJSON(path) {
     return jsonresult;
 }
 
-function parseData() {
+function parseData(filePath) {
 
 
     try {
 
-        var file = 'data/temp/parks.json';
+
         var results = xmltoJSON(filePath);
 
         writeFileLocal(file, results);

@@ -58,7 +58,7 @@ describe("Park Tests", function() {
 
 });
 
-describe("Park Tests", function() {
+describe("Model Tests", function() {
     it('test park', function () {
         var park = new Park({
             name: "Yves's Room",

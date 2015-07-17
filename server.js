@@ -25,8 +25,9 @@ var port = Number(process.env.PORT || 3000);
 var path = require("path");
 app.set('port', port);
 
-
+var filePath = 'data/temp/parkdata.xml';
 var server = http.createServer(app);
+
 
 app.use(cors());
 app.use(bodyParser());
@@ -151,16 +152,10 @@ Import park data in XML, convert to json, and load to db
 app.get("/download", function(req, res) {
     parkparser.downloadData();
     parkparser.clearData();
-    parkparser.parseData();
+    parkparser.parseData(filePath);
     res.send();
 
 });
-
-app.get("/views/park2", function(req, res) {
-    res.send();
-
-});
-
 
 /*
 Search for a park given the park name
