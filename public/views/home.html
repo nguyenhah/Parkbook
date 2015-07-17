@@ -8,12 +8,7 @@
         <div class="container">
             <div class="col-lg-3"></div>
             <div class="col-lg-6">
-                <!--<button class="btn btn-dark btn-lg" ng-click="login()" ng-disabled="loginStatus.status == 'connected'">Login</button>-->
-                <!--<button class="btn btn-dark btn-lg" ng-click="logout()" ng-disabled="!loginStatus || loginStatus.status != 'connected'">Logout</button>-->
-                <!--<button class="btn btn-dark btn-lg" ng-click="share()">Share</button>-->
-                <!--<input id="searchBar" class="form-control" type="text" ng-model="parkName"/>-->
 
-                <!--<pre>Model: {{searchparks}}</pre>-->
                 <input id="searchBar" type="text" ng-model="parkName" placeholder="Enter Park Names" typeahead="name for name in getLocation($viewValue)" typeahead-loading="loadingLocations" class="form-control">
                 <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
 
@@ -55,14 +50,12 @@
         <tbody>
 
         <tr ng-repeat="park in parksSearched">
-            <td>{{ park.name }}</td>
+            <td><a ui-sref="park({parkName:park.name})">{{park.name}}</a></td>
             <td>{{ park.streetNumber + " " + park.streetName }}</td>
-            <td><div><a ui-sref="park({parkName:park.name})">Click to go to {{park.name}}</a></div></td>
+            <td>rating</td>
         </tr>
 
-
         </tbody>
-
 
     </table>
 </div>
@@ -95,9 +88,6 @@
             }, 1000);
             //});
         });
-
-
-
 
         $("#searchBar").keyup(function(event){
             if(event.keyCode == 13){
