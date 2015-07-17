@@ -1,106 +1,109 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
 
-    <!-- Mobile Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Parkbook - Better than Parkplace</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Yves' GMaps , replace bottom code with actual CSS later-->
-    <link href="../assets/css/theme.css" rel="stylesheet">
-
-    <!-- Main theme override -->
-    <link href="../assets/css/parkbooktheme.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script>
-        function initialize() {
-            var mapCanvas = document.getElementById('map-park-page');
-            var mapOptions = {
-                center: new google.maps.LatLng(49.270869, -123.110533),
-                zoom: 14,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-            var map = new google.maps.Map(mapCanvas, mapOptions)
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-
-</head>
-<body ng-app="parkbook" ng-controller="ParkCtrl as app">
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=485003794998932";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<!-- Navigation -->
-<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-<nav id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-        <li class="sidebar-brand">
-            <a href="#top"  onclick = $("#menu-close").click(); >ParkBook</a>
-        </li>
-        <li>
-            <a href="#top" onclick = $("#menu-close").click(); >Home</a>
-        </li>
-        <li>
-            <a href="#parkmap" onclick = $("#menu-close").click(); >Park Map</a>
-        </li>
-        <li>
-            <a href="#" onclick = $("#menu-close").click(); >Latest Reviews</a>
-        </li>
-        <li>
-            <a href="#" onclick = $("#menu-close").click(); >Login</a>
-        </li>
-        <li>
-            <a href="#" onclick = $("#menu-close").click(); >Register</a>
-        </li>
-    </ul>
-</nav>
-
-<!--<div class="container">-->
-    <!--<div class="row">-->
-        <!--<div class="col-lg-10 col-lg-offset-1 text-center">-->
-            <!--<h3 ng-init="app.loadName()"></h3>-->
-            <!--<hr class="small">-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<input id="parkname" type="text" placeholder="parkname" ng-model="app.parkName" />-->
-<!--<button class="btn-warning" ng-click="app.loadPark(app.parkName)">Show Park</button>-->
 <div>
-    <h1>PARK PAGE</h1>
-            <!--<div class="fb-like" data-href="http://localhost:3000/views/park.html" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>-->
-    <div>
-        <div id="map-park-page"></div>
+
+    <center>
+        <div class="park-head text-horizontal-center">
+         <h3>{{name}}</h3>
+         <h4>{{address}}</h4>
+         <div>
+            <div star-rating data-ng-model="rating1" max="5" on-rating-selected="rateFunction(rating)"></div>
+            <div><strong>Rating:</strong> {{rating1}}</div>
+         </div>
+
+        </div>
+
+
+    </center>
+
+        <div class="row">
+
+            <div id="map-park-page"></div>
+
+        </div>
+
+    <br>
+    <div class="container">
+        <div class="row">
+            <h2> General Information </h2>
+            <div class="fb-like" data-href="{{getLocation()}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+
+            <div class="col-md-2">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Facilities</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr ng-repeat="facility in facilityTypes track by $index">
+                        <td>{{ facility }}</td>
+                    </tr>
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+            <div class="col-md-2">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Washroom Locations</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr ng-repeat="washroom in washroomLocations track by $index">
+                        <td>{{ washroom }}</td>
+                    </tr>
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+            <div class="col-md-2">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Features</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr ng-repeat="feature in features track by $index">
+                        <td>{{ feature }}</td>
+                    </tr>
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+            <div class="col-md-6">
+                <h3>Reviews</h3>
+                <div class="fb-comments" data-href="{{getLocation()}}" data-numposts="10" data-colorscheme="light" data-width="580" id="commentbox"></div>
+            </div>
+        </div>
     </div>
 </div>
-<!--<div>-->
-    <!--<div class="fb-comments" data-href="http://localhost:3000/views/park.html" data-numposts="5"></div>-->
-<!--</div>-->
 
-<div ui-view></div>
-<!-- Scripts -->
-<script src="https://maps.google.com/maps/api/js?sensor=true"></script>
-<script src="../assets/js/jquery-1.11.3.min.js"></script>
-<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="../bower_components/angular/angular.js"></script>
-<script src="../controller/parkcontrol.js"></script>
-<script src="../assets/js/navigation.js"></script>
+<script>
+    $("#input-id").rating({showClear: false, showCaption: false, size:"xs"});
+</script>
+<script>
+    $('#input-id').on('rating.change', function(event, value, caption) {
+        console.log(value);
+    });
+</script>
 
-
-</body>
-</html>

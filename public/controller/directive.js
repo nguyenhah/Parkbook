@@ -15,21 +15,6 @@ parkbook.directive('dynFbCommentBox', function () {
     };
     });
 
-//We can make this a new JS by specifying it as a directive
-// Adding new directive for ngEnter
-//parkbook.directive('ngEnter', function () {
-//    return function (scope, element, attrs) {
-//        element.bind("keydown keypress", function (event) {
-//            if(event.which === 13) {
-//                scope.$apply(function (){
-//                    scope.$eval(attrs.ngEnter);
-//                });
-//
-//                event.preventDefault();
-//            }
-//        });
-//    };
-//});
 
 
 
