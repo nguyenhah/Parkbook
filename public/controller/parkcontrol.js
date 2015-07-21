@@ -8,7 +8,6 @@ var parkcontrol = angular.module("parkbook");
 var parkInfo;
 var fbid;
 parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$location', 'myService', 'admin', function ($scope, $http, $stateParams , park, $location, myService, admin) {
-    console.log(park);
     parkInfo = park.data[0];
     $scope.name = parkInfo.name;
     $scope.address = parkInfo.streetNumber + " " + parkInfo.streetName;
@@ -47,7 +46,7 @@ parkcontrol.controller("ParkCtrl", ['$scope','$http','$stateParams','park','$loc
                     sum += result[0].rating[i];
                 }
                 sum = sum / result[0].rating.length;
-                console.log($scope.data[0].rating[0]);
+
                 $scope.rating1 = sum;
             } catch (err) {
                 $scope.rating1 = "No ratings yet";

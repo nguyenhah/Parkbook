@@ -17,9 +17,7 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
      */
     $scope.getLocation = function(parkName) {
         return $http.get('/loadpark/' + parkName, {name:parkName}).then(function(response){
-            console.log(response.data);
             return limitToFilter(response.data.map(function(item){
-                console.log(item.name);
                 return (item.name);
             }), 10);
         });
@@ -160,10 +158,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
             google.maps.event.addListener(marker[i], "click", function () {
                 latitude = this.position.lat();
                 longitude = this.position.lng();
-                //alert(this.position);
-                console.log(latitude);
-                console.log(longitude);
-                console.log(pos);
             }); //end addListener
 
             google.maps.event.addListener(marker[i], 'click', makeInfoWindow($scope.mymap, infowindow[i], marker[i]));
@@ -242,7 +236,6 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
                 currentLon = position.coords.longitude;
 
                     clearOverlays();
-                    console.log("ssup jr2");
                     console.log($scope.parks[3]);
                     for(var w = 0; w < $scope.parks.length; w++) {
                         parkLat[w] = $scope.parks[w].lat;
@@ -250,13 +243,8 @@ homecontrol.controller("AppCtrl", ['$scope', '$http', 'ezfb','limitToFilter', fu
                         distanceToParks[w] = $scope.getDistance(currentLat, currentLon, parkLat[w], parkLon[w]);
                     }
 
-                    console.log(parkLat[3], parkLon[3]);
-                    console.log(distanceToParks[5], distanceToParks[6]);
-
                     var closestParkIndex = distanceToParks.indexOf(Math.min.apply(Math, distanceToParks));
-                    console.log(closestParkIndex);
                     closestPark[0] = $scope.parks[closestParkIndex];
-                    console.log(closestPark);
                     $scope.parksSearched = closestPark;
 
                     setMarkers(closestPark);

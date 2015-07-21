@@ -23,25 +23,18 @@ var parkbook = angular.module("parkbook", [
                                 ['ezfb', function(ezfb) {
                                       return ezfb.getLoginStatus(function (response) {
                                         if (response.status === 'connected') {
-                                            console.log("inside connected");
-                                            var uid = response.authResponse.userID;
-                                            var accessToken = response.authResponse.accessToken;
-                                            console.log(accessToken);
+                                            console.log("logged in and authorized");
+                                            //var uid = response.authResponse.userID;
+                                            //var accessToken = response.authResponse.accessToken;
 
-                                            //Don't need this
-                                            //return ezfb.api('/me', function(resp) {
-                                            //    console.log(resp);
-                                            //    return resp;
-                                            //});
 
                                         } else if (response.status === 'not_authorized') {
                                             // logged in but not authenticaed to app
-                                            console.log("inside not authorized");
-                                            console.log(response);
+                                            console.log("logged in and not authorized");
 
                                         } else {
                                             // not logged in
-                                            console.log("inside default");
+                                            console.log("not logged in");
                                         }
                                     });
 
@@ -67,8 +60,6 @@ var parkbook = angular.module("parkbook", [
                             park: ['$http', '$stateParams', function ($http, $stateParams) {
                                 //get park from server RESTFUL API
                                 return $http.get('/loadpark/' + $stateParams.parkName, {name: $stateParams.parkName}).success(function (response) {
-                                    console.log($stateParams);
-                                    console.log($stateParams.parkName + " inside app.js");
                                     return response;
                                 })
                             }],
@@ -77,15 +68,6 @@ var parkbook = angular.module("parkbook", [
                                     return ezfb.getLoginStatus(function (response) {
                                         if (response.status === 'connected') {
                                             console.log("inside connected");
-                                            var uid = response.authResponse.userID;
-                                            var accessToken = response.authResponse.accessToken;
-                                            console.log(accessToken);
-
-                                            //Don't need this
-                                            //return ezfb.api('/me', function(resp) {
-                                            //    console.log(resp);
-                                            //    return resp;
-                                            //});
 
                                         } else if (response.status === 'not_authorized') {
                                             // logged in but not authenticaed to app
@@ -110,19 +92,16 @@ var parkbook = angular.module("parkbook", [
                                 ['ezfb', function(ezfb) {
                                     return ezfb.getLoginStatus(function (response) {
                                         if (response.status === 'connected') {
-                                            console.log("inside connected");
-                                            var uid = response.authResponse.userID;
-                                            var accessToken = response.authResponse.accessToken;
-                                            console.log(accessToken);
+                                            console.log("logged in and authorized");
 
                                         } else if (response.status === 'not_authorized') {
                                             // logged in but not authenticaed to app
-                                            console.log("inside not authorized");
+                                            console.log("logged in and not authorized");
                                             console.log(response);
 
                                         } else {
                                             // not logged in
-                                            console.log("inside default");
+                                            console.log("not logged in");
                                         }
                                     });
 
