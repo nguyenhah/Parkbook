@@ -60,7 +60,7 @@ Park.prototype.save = function() {
 Searches for a park matching a regular expression with the name
  */
 Park.getPark = function(name, callback) {
-    parkModel.find({name: new RegExp('.*'+name+'.*', "i")}, function(err, park) {
+    parkModel.find({name: new RegExp('.*'+name.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")+'.*', "i")}, function(err, park) {
         if (err) {
             return callback(err);
         }
