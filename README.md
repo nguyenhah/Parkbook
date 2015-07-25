@@ -4,7 +4,7 @@ An app to get information about any park in the city of Vancouver, give it a rat
 
 Users can look for any park using the suggestive search bar, find the nearest or any random park.
 
-[ParkBook](parkbook.herokuapp.com)
+[ParkBook](https://parkbook.herokuapp.com)
 
 #### About
 
